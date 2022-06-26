@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Header } from "../components/Header";
-import ScreenName from "../components/ScreenName";
+import { View } from "react-native";
+import HolidaysCard from "../components/HolidaysCard";
+import globalStyles from "../constants/Styles";
 
 export default class HolidaysScreen extends React.Component {
   static navigationOptions = {};
@@ -9,20 +9,13 @@ export default class HolidaysScreen extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header></Header>
-        <View style={styles.container}>
-          <ScreenName name={"Nos Vacances"} />
+        <View style={globalStyles.container}>
+          <HolidaysCard
+            title="Nos vacances à Erquy"
+            navigation={this.props.navigation}
+          ></HolidaysCard>
         </View>
       </React.Fragment>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
-  },
-});
