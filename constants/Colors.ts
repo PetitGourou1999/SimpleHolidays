@@ -1,17 +1,19 @@
-const tintColorLight = "#2f95dc";
-const tintColorDark = "#fff";
-const primary = "#ff9f1C";
-const secondary = "#ffbf69";
-const tertiary = "#2ec4b6";
-const quaternary = "#cbf3f0";
+const tintColorLight = "#006D77";
+const tintColorDark = "#EDF6F9";
+
+const primary = "#006D77";
+const tertiary = "#83C5BE";
+const quaternary = "#FFDDD2";
+const secondary = "#E29578";
+
 const white = "#fff";
 const black = "#000";
-const grey = "#ccc";
+const grey = "#aaa";
 
 export default {
   light: {
-    text: black,
-    background: white,
+    text: primary,
+    background: "#EDF6F9",
     textBackground: "#eee",
     tint: tintColorLight,
     tabIconDefault: grey,
@@ -21,18 +23,8 @@ export default {
     secondary: secondary,
     tertiary: tertiary,
     quaternary: quaternary,
-  },
-  dark: {
-    text: white,
-    background: black,
-    textBackground: "#333",
-    tint: tintColorDark,
-    tabIconDefault: grey,
-    tabIconSelected: secondary,
-    selectedColor: white,
-    primary: primary,
-    secondary: secondary,
-    tertiary: tertiary,
-    quaternary: quaternary,
+    white: white,
+    black: black,
+    grey: grey,
   },
 };

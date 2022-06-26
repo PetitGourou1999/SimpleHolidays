@@ -4,15 +4,12 @@ import ScreenName from "../components/ScreenName";
 import globalStyles from "../constants/Styles";
 
 export default class HolidaysActivitiesScreen extends React.Component {
-  static navigationOptions = {};
-
+  private data = this.props.route;
   render() {
     return (
-      <React.Fragment>
-        <View style={globalStyles.container}>
-          <ScreenName name={"Nos Activités de Vacances"} />
-        </View>
-      </React.Fragment>
+      <View style={globalStyles.container}>
+        <ScreenName name={this.data.params.data.title} />
+      </View>
     );
   }
 }

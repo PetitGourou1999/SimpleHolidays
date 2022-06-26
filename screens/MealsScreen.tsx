@@ -4,8 +4,6 @@ import ScreenName from "../components/ScreenName";
 import globalStyles from "../constants/Styles";
 
 export default class MealsScreen extends React.Component {
-  static navigationOptions = {};
-
   render() {
     return (
       <React.Fragment>

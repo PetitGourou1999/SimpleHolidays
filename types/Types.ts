@@ -1,20 +1,26 @@
 export type Ingredient = {
-  name: string;
+  title: string;
   quantity: number;
 };
 
 export type Meal = {
-  name: string;
+  title: string;
   ingredients: Ingredient[];
 };
 
 export type Activity = {
-  name: string;
+  title: string;
   location: string;
 };
 
+export type Spending = {
+  title: string;
+  amount: number;
+};
+
 export type Holidays = {
-  name: string;
+  title: string;
   activities: Activity[];
   meals: Meal[];
+  spendings: Spending[];
 };

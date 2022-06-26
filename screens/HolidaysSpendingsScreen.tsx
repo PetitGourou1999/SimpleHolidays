@@ -3,12 +3,12 @@ import { View } from "react-native";
 import ScreenName from "../components/ScreenName";
 import globalStyles from "../constants/Styles";
 
-export default class MiscellaneousScreen extends React.Component {
+export default class HolidaysSpendingsScreen extends React.Component {
   render() {
     return (
       <React.Fragment>
         <View style={globalStyles.container}>
-          <ScreenName name={"Trucs à prendre"} />
+          <ScreenName name={"Dépenses"}></ScreenName>
         </View>
       </React.Fragment>
     );
