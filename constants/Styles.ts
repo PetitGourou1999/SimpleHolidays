@@ -8,6 +8,15 @@ const globalStyles = StyleSheet.create({
     backgroundColor: Colors.light.background,
   },
 
+  editableRow: {
+    width: "100%",
+    flexDirection: "row",
+    padding: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: Colors.light.background,
+  },
+
   inputStyle: {
     marginVertical: 10,
     width: 300,
@@ -45,6 +54,13 @@ const globalStyles = StyleSheet.create({
     flex: 0.5,
     backgroundColor: "white",
     borderRadius: 20,
+  },
+
+  overlayShadow: {
+    shadowRadius: 4,
+    shadowOffset: { height: 4, width: 0 },
+    shadowOpacity: 0.5,
+    shadowColor: Colors.light.black,
   },
 });
 

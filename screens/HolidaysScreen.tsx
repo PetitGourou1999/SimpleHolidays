@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
-import Bouchon from "../bouchon/Bouchon";
 import HolidaysForm from "../components/forms/HolidaysForm";
 import HolidaysCard from "../components/HolidaysCard";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
+import { Bouchon } from "../default/Bouchon";
 
 export default class HolidaysScreen extends React.Component {
   state = {
