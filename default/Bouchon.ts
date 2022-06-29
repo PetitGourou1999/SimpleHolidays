@@ -29,10 +29,16 @@ export const Bouchon: Holidays = {
     {
       title: "Piscine",
       amount: 20,
+      player: {
+        pseudo: "Antoine",
+      },
     },
     {
       title: "Restaurant",
       amount: 40,
+      player: {
+        pseudo: "Antoine",
+      },
     },
   ],
   meals: [

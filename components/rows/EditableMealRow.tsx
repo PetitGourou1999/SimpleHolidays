@@ -35,7 +35,7 @@ export default class EditableMealRow extends React.Component<Props> {
   render() {
     return (
       <View style={globalStyles.editableRow}>
-        <Text style={{ paddingRight: 10 }}>
+        <Text style={{ paddingRight: 10, minWidth: "33%" }}>
           {this.props.holidaysMeal.date.toLocaleDateString([], {
             weekday: "long",
             day: "numeric",

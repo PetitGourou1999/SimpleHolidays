@@ -31,6 +31,12 @@ export type Activity = {
 export type Spending = {
   title: string;
   amount: number;
+  player: Player;
+};
+
+export type PlayerSpendings = {
+  player: Player;
+  total: number;
 };
 
 export type Holidays = {

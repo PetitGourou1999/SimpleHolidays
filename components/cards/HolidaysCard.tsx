@@ -1,9 +1,9 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Card } from "react-native-elements";
-import Colors from "../constants/Colors";
-import globalStyles from "../constants/Styles";
-import { Holidays } from "../types/Types";
+import Colors from "../../constants/Colors";
+import globalStyles from "../../constants/Styles";
+import { Holidays } from "../../types/Types";
 
 interface Props {
   holidays: Holidays;

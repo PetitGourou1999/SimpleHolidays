@@ -51,7 +51,7 @@ const globalStyles = StyleSheet.create({
   },
 
   modal: {
-    flex: 0.5,
+    flex: 0.6,
     backgroundColor: "white",
     borderRadius: 20,
   },

@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
+import HolidaysCard from "../components/cards/HolidaysCard";
 import HolidaysForm from "../components/forms/HolidaysForm";
-import HolidaysCard from "../components/HolidaysCard";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import { Bouchon } from "../default/Bouchon";

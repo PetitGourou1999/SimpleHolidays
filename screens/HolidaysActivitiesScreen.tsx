@@ -5,6 +5,8 @@ import globalStyles from "../constants/Styles";
 
 export default class HolidaysActivitiesScreen extends React.Component {
   private data = this.props.route;
+  private activities = this.data.params.data.activities;
+
   render() {
     return (
       <View style={globalStyles.container}>
