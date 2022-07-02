@@ -12,6 +12,9 @@ export const Bouchon: Holidays = {
     {
       pseudo: "Antoine",
     },
+    {
+      pseudo: "Kristian",
+    },
   ],
   activities: [
     {

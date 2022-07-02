@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
+import Colors from "../../constants/Colors";
 import { diner, lunch } from "../../constants/data/MealTimes";
 import globalStyles from "../../constants/Styles";
 import { MealIdeas } from "../../default/Bouchon";
@@ -35,7 +36,14 @@ export default class EditableMealRow extends React.Component<Props> {
   render() {
     return (
       <View style={globalStyles.editableRow}>
-        <Text style={{ paddingRight: 10, minWidth: "33%" }}>
+        <Text
+          style={{
+            paddingRight: 10,
+            minWidth: "33%",
+            color: Colors.light.darkBlue,
+            fontWeight: "bold",
+          }}
+        >
           {this.props.holidaysMeal.date.toLocaleDateString([], {
             weekday: "long",
             day: "numeric",

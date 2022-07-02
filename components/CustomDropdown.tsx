@@ -87,7 +87,7 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
 
       <FontAwesome
         name="chevron-down"
-        size={20}
+        size={17}
         style={styles.icon}
       ></FontAwesome>
     </TouchableOpacity>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   icon: {
-    marginRight: 10,
+    color: Colors.light.darkBlue,
   },
   dropdown: {
     flex: 1,
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     borderBottomWidth: 1,
+    color: Colors.light.darkBlue,
   },
 });
 

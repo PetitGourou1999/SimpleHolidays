@@ -64,6 +64,9 @@ export default class SpendingsList extends React.Component<Props> {
           </View>
         </Modal>
         <TotalSpendingsCard holidays={this.props.holidays}></TotalSpendingsCard>
+        <Text style={{ marginVertical: 10, fontWeight: "bold", fontSize: 16 }}>
+          Détail
+        </Text>
         <FlatList
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
