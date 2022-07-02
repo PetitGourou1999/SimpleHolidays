@@ -62,6 +62,28 @@ const globalStyles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowColor: Colors.light.black,
   },
+
+  rowText: {
+    flex: 1,
+    textAlign: "center",
+    color: Colors.light.darkestBlue,
+    fontWeight: "bold",
+  },
+
+  rowHintText: {
+    flex: 0.15,
+    padding: 20,
+    paddingBottom: 0,
+    color: Colors.light.darkBlue,
+    fontSize: 12,
+  },
+
+  rowBorderStyle: {
+    width: "60%",
+    borderTopWidth: 0.5,
+    borderColor: Colors.light.primary,
+    paddingTop: 30,
+  },
 });
 
 export default globalStyles;

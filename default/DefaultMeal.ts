@@ -6,7 +6,6 @@ export const defaultLunch: Meal = {
     title: "",
     ingredients: [],
   },
-  date: new Date(),
   time: lunch,
 };
 
@@ -15,6 +14,5 @@ export const defaultDiner: Meal = {
     title: "",
     ingredients: [],
   },
-  date: new Date(),
   time: diner,
 };

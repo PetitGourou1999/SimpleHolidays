@@ -1,6 +1,6 @@
 import React from "react";
-import { View } from "react-native";
-import ScreenName from "../components/ScreenName";
+import { Text, View } from "react-native";
+import EditableActivityRow from "../components/rows/EditaleActivityRow";
 import globalStyles from "../constants/Styles";
 
 export default class HolidaysActivitiesScreen extends React.Component {
@@ -9,9 +9,27 @@ export default class HolidaysActivitiesScreen extends React.Component {
 
   render() {
     return (
-      <View style={globalStyles.container}>
-        <ScreenName name={this.data.params.data.title} />
-      </View>
+      <React.Fragment>
+        <View style={[globalStyles.container]}>
+          <Text style={[globalStyles.rowText, globalStyles.rowHintText]}>
+            Ici sont centralisées les activités à faire pendant les vacances
+          </Text>
+          <View style={globalStyles.rowBorderStyle}></View>
+          <View style={[globalStyles.editableRow]}>
+            <Text style={[globalStyles.rowText, { flex: 0, width: "25%" }]}>
+              Date
+            </Text>
+            <Text style={[globalStyles.rowText, { flex: 1 }]}>Activité</Text>
+          </View>
+          {this.activities.map((item: any, index: any) => {
+            return (
+              <EditableActivityRow
+                holidaysActivity={item}
+              ></EditableActivityRow>
+            );
+          })}
+        </View>
+      </React.Fragment>
     );
   }
 }

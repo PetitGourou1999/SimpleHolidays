@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import SpendingsList from "../components/SpendingsList";
+import SpendingsList from "../components/lists/SpendingsList";
 import globalStyles from "../constants/Styles";
 
 export default class HolidaysSpendingsScreen extends React.Component {

@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
-import Colors from "../constants/Colors";
-import globalStyles from "../constants/Styles";
-import { Holidays, Spending } from "../types/Types";
-import SpendingsCard from "./cards/SpendingsCard";
-import TotalSpendingsCard from "./cards/TotalSpendingsCard";
-import SpendingsForm from "./forms/SpendingsForm";
+import Colors from "../../constants/Colors";
+import globalStyles from "../../constants/Styles";
+import { Holidays, Spending } from "../../types/Types";
+import SpendingsCard from "../cards/SpendingsCard";
+import TotalSpendingsCard from "../cards/TotalSpendingsCard";
+import SpendingsForm from "../forms/SpendingsForm";
 
 interface Props {
   holidays: Holidays;

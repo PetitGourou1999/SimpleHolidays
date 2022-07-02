@@ -1,14 +1,15 @@
 import React from "react";
 import { View } from "react-native";
-import ScreenName from "../components/ScreenName";
+import MealsList from "../components/lists/MealsList";
 import globalStyles from "../constants/Styles";
+import { MealIdeas } from "../default/Bouchon";
 
 export default class MealsScreen extends React.Component {
   render() {
     return (
       <React.Fragment>
         <View style={globalStyles.container}>
-          <ScreenName name={"Idées Repas"} />
+          <MealsList mealIdeas={MealIdeas}></MealsList>
         </View>
       </React.Fragment>
     );
