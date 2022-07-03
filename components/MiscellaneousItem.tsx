@@ -11,10 +11,25 @@ interface Props {
 }
 
 export default class MiscellaneousItem extends React.Component<Props> {
+  state = {
+    checked: false,
+  };
+
+  componentDidMount = () => {
+    this.setState({ checked: this.props.item.checked });
+  };
+  checkItem = () => {
+    this.setState({ checked: !this.state.checked });
+  };
+
   render() {
     return (
       <View style={styles.taskContainer}>
-        <CheckBox title="" checked={this.props.item.checked} />
+        <CheckBox
+          title=""
+          checked={this.state.checked}
+          onPress={() => this.checkItem()}
+        />
         <Text style={styles.task}>{this.props.item.title}</Text>
         <Pressable onPress={() => this.props.deleteTask()}>
           <FontAwesome
@@ -45,8 +60,7 @@ const styles = StyleSheet.create({
   },
   task: {
     width: "90%",
-    color: Colors.light.secondary,
-    fontSize: 16,
+    color: Colors.light.primary,
     fontWeight: "bold",
   },
   delete: {

@@ -15,6 +15,7 @@ import MiscellaneousItem from "../MiscellaneousItem";
 
 export default class MiscellaneousList extends React.Component {
   state = {
+    refresh: false,
     arrayHolder: [],
     currentItem: "",
   };
@@ -32,6 +33,19 @@ export default class MiscellaneousList extends React.Component {
     this.setState({ currentItem: "" });
   };
 
+  handleRefresh = () => {
+    let tmpArray = this.state.arrayHolder;
+    for (let index = 0; index < tmpArray.length; index++) {
+      const element = tmpArray[index];
+      element.checked = false;
+    }
+    this.setState({ arrayHolder: [...tmpArray] });
+    this.setState({
+      refresh: !this.state.refresh,
+    });
+    //console.log(JSON.stringify(this.state.arrayHolder));
+  };
+
   render() {
     return (
       <KeyboardAvoidingView
@@ -46,8 +60,12 @@ export default class MiscellaneousList extends React.Component {
             placeholder={"Ajouter un truc utile..."}
             placeholderTextColor={Colors.light.primary}
           />
+
           <Pressable onPress={() => this.handleAddTask()}>
             <FontAwesome name="plus" size={20} color="black" />
+          </Pressable>
+          <Pressable onPress={() => this.handleRefresh()}>
+            <FontAwesome name="refresh" size={20} color="black" />
           </Pressable>
         </View>
         <FlatList
