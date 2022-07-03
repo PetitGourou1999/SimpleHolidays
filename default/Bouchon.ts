@@ -2,6 +2,7 @@ import { Holidays } from "../types/Types";
 import { MealIdea } from "./../types/Types";
 
 export const Bouchon: Holidays = {
+  storageKey: "Foo",
   title: "Nos Vancances à Erquy",
   dateStart: new Date("2019-01-16"),
   dateEnd: new Date("2019-01-18"),
@@ -49,6 +50,7 @@ export const Bouchon: Holidays = {
       meals: [
         {
           meal: {
+            storageKey: "Foo",
             title: "Galette Bretonne",
             ingredients: [
               {
@@ -65,6 +67,7 @@ export const Bouchon: Holidays = {
         },
         {
           meal: {
+            storageKey: "Foo",
             title: "Soupe",
             ingredients: [
               {
@@ -87,6 +90,7 @@ export const Bouchon: Holidays = {
       meals: [
         {
           meal: {
+            storageKey: "Foo",
             title: "Galette Bretonne",
             ingredients: [
               {
@@ -103,6 +107,7 @@ export const Bouchon: Holidays = {
         },
         {
           meal: {
+            storageKey: "Foo",
             title: "Soupe",
             ingredients: [
               {
@@ -125,6 +130,7 @@ export const Bouchon: Holidays = {
       meals: [
         {
           meal: {
+            storageKey: "Foo",
             title: "Galette Bretonne",
             ingredients: [
               {
@@ -141,6 +147,7 @@ export const Bouchon: Holidays = {
         },
         {
           meal: {
+            storageKey: "Foo",
             title: "Soupe",
             ingredients: [
               {
@@ -164,6 +171,7 @@ export const Bouchon: Holidays = {
 
 export const MealIdeas: MealIdea[] = [
   {
+    storageKey: "Foo",
     title: "Soupe",
     ingredients: [
       {
@@ -177,6 +185,7 @@ export const MealIdeas: MealIdea[] = [
     ],
   },
   {
+    storageKey: "Foo",
     title: "Galette Bretonne",
     ingredients: [
       {

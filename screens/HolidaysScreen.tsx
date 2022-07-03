@@ -1,15 +1,27 @@
 import React from "react";
-import { Button, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import HolidaysCard from "../components/cards/HolidaysCard";
 import HolidaysForm from "../components/forms/HolidaysForm";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
-import { Bouchon } from "../default/Bouchon";
+import storageHelper from "../storage/AsyncStorageHelper";
 
 export default class HolidaysScreen extends React.Component {
   state = {
     isModalVisible: false,
+    allHolidays: [],
+  };
+
+  componentDidMount = () => {
+    storageHelper.getAllItems().then(
+      (value) => {
+        this.setState({ allHolidays: value });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   toggleModal = (visible: boolean) => {
@@ -37,18 +49,25 @@ export default class HolidaysScreen extends React.Component {
           </Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
-          <View style={globalStyles.modal}>
-            <HolidaysForm />
-            <Button
-              title="Hide modal"
-              onPress={() => this.toggleModal(false)}
-            />
+          <View style={[globalStyles.modal, { flex: 0.7 }]}>
+            <HolidaysForm onCancel={() => this.toggleModal(false)} />
           </View>
         </Modal>
-        <HolidaysCard
-          holidays={Bouchon}
-          navigation={this.props.navigation}
-        ></HolidaysCard>
+        <FlatList
+          data={this.state.allHolidays}
+          extraData={this.state.allHolidays}
+          keyExtractor={(index: any) => index.toString()}
+          renderItem={({ item, index }) => (
+            <HolidaysCard
+              holidays={item}
+              navigation={this.props.navigation}
+            ></HolidaysCard>
+          )}
+          style={{
+            paddingLeft: 3,
+            width: "100%",
+          }}
+        />
       </View>
     );
   }

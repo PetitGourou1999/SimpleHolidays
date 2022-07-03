@@ -54,8 +54,6 @@ export default class TotalSpendingsCard extends React.Component<Props> {
       }
     }
 
-    console.log(JSON.stringify(totalsForPlayersToPay));
-
     return {
       total: total,
       totalsForPlayers: totalsForPlayers,

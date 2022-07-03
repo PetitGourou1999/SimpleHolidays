@@ -3,6 +3,7 @@ export type Player = {
 };
 
 export type Miscellaneous = {
+  storageKey: string;
   title: string;
   checked: boolean;
 };
@@ -13,6 +14,7 @@ export type Ingredient = {
 };
 
 export type MealIdea = {
+  storageKey: string;
   title: string;
   ingredients: Ingredient[];
 };
@@ -51,6 +53,7 @@ export type PlayerDebt = {
 };
 
 export type Holidays = {
+  storageKey: string;
   title: string;
   dateStart: Date;
   dateEnd: Date;

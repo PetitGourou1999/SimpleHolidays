@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Colors from "../constants/Colors";
+import globalStyles from "../constants/Styles";
 
 interface Props {
   initialDate: Date;
@@ -27,7 +28,7 @@ export default class CustomDatePicker extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[styles.datePickerContainer]}>
+      <View style={[globalStyles.inputStyle, styles.datePickerContainer]}>
         <DateTimePickerModal
           isVisible={this.state.isDatePickerVisible}
           mode="datetime"
@@ -64,7 +65,6 @@ export default class CustomDatePicker extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   datePickerContainer: {
-    width: "80%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignContent: "center",
