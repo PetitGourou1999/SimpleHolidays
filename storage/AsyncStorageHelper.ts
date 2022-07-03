@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-class StorageHelper {
+class AsyncStorageHelper {
   public makeid(length: number) {
     var result = "";
     var characters =
@@ -76,5 +76,5 @@ class StorageHelper {
   };
 }
 
-const storageHelper = new StorageHelper();
+const storageHelper = new AsyncStorageHelper();
 export default storageHelper;

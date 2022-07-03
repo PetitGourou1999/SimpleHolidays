@@ -63,6 +63,13 @@ const globalStyles = StyleSheet.create({
     shadowColor: Colors.light.black,
   },
 
+  rowView: {
+    width: "90%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
   rowText: {
     flex: 1,
     textAlign: "center",

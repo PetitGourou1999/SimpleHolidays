@@ -15,7 +15,7 @@ export default class EditableActivityRow extends React.Component<Props> {
         <Text
           style={{
             paddingRight: 10,
-            minWidth: "25%",
+            minWidth: "33%",
             color: Colors.light.darkBlue,
             fontWeight: "bold",
           }}
@@ -25,7 +25,7 @@ export default class EditableActivityRow extends React.Component<Props> {
             day: "numeric",
           })}
         </Text>
-        <TextInput style={[globalStyles.inputStyle, { width: "70%" }]} />
+        <TextInput style={[globalStyles.inputStyle, { width: "66%" }]} />
       </View>
     );
   }

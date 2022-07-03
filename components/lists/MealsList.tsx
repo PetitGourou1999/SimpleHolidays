@@ -5,7 +5,7 @@ import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import { MealIdea } from "../../types/Types";
 import MealCard from "../cards/MealCard";
-import SpendingsForm from "../forms/SpendingsForm";
+import MealForm from "../forms/MealForm";
 
 interface Props {
   mealIdeas: MealIdea[];
@@ -55,7 +55,7 @@ export default class MealsList extends React.Component<Props> {
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
           <View style={globalStyles.modal}>
-            <SpendingsForm />
+            <MealForm />
             <Button
               title="Hide modal"
               onPress={() => this.toggleModal(false)}
@@ -66,7 +66,6 @@ export default class MealsList extends React.Component<Props> {
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
           keyExtractor={(index: any) => index.toString()}
-          //ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={({ item }) => <MealCard mealIdea={item}></MealCard>}
           style={{
             width: "90%",

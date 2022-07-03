@@ -2,6 +2,11 @@ export type Player = {
   pseudo: string;
 };
 
+export type Miscellaneous = {
+  title: string;
+  checked: boolean;
+};
+
 export type Ingredient = {
   title: string;
   quantity: number;

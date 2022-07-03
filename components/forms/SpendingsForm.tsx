@@ -9,6 +9,10 @@ export default class SpendingsForm extends React.Component {
     amount: 0,
   };
 
+  setType = (type: string) => {
+    this.setState({ type: type });
+  };
+
   setAmount = (amount: number | null) => {
     this.setState({ amount: amount });
   };
@@ -17,7 +21,10 @@ export default class SpendingsForm extends React.Component {
     return (
       <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
         <Text>Nom / Type</Text>
-        <TextInput style={globalStyles.inputStyle} />
+        <TextInput
+          style={globalStyles.inputStyle}
+          onChangeText={(text) => this.setType(text)}
+        />
         <Text>Montant</Text>
         <CurrencyInput
           value={this.state.amount}
