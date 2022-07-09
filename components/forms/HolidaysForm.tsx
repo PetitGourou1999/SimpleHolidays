@@ -194,7 +194,13 @@ export default class HolidaysForm extends React.Component<Props> {
           keysForTag={", "}
         />
         <View
-          style={[globalStyles.editableRow, { justifyContent: "space-evenly" }]}
+          style={[
+            globalStyles.editableRow,
+            {
+              justifyContent: "space-evenly",
+              marginTop: "auto",
+            },
+          ]}
         >
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>

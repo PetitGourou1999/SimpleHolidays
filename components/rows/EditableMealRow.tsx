@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { diner, lunch } from "../../constants/data/MealTimes";
 import globalStyles from "../../constants/Styles";
-import { MealIdeas } from "../../default/Bouchon";
 import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
+import storageHelper from "../../storage/AsyncStorageHelper";
 import { MealsOfTheDay } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
 
@@ -13,6 +13,30 @@ interface Props {
 }
 
 export default class EditableMealRow extends React.Component<Props> {
+  componentDidMount = () => {
+    storageHelper.getAllItems().then(
+      (value) => {
+        if (value !== undefined) {
+          value.forEach((element) => {
+            if (element.ingredients !== undefined) {
+              this.setState({
+                allMealIdeas: [...this.state.allMealIdeas, element],
+              });
+            }
+            this.setState({
+              items: this.state.allMealIdeas.map((item, index) => {
+                return { label: item.title, value: item };
+              }),
+            });
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
   findMealByTime = (time: string) => {
     let foundValue = this.props.holidaysMeal.meals.find((meal) => {
       return meal.time === time;
@@ -28,9 +52,8 @@ export default class EditableMealRow extends React.Component<Props> {
     valueLunch: this.findMealByTime(lunch),
     valueDiner: this.findMealByTime(diner),
     //TODO : load meal ideas componentDidMount
-    items: MealIdeas.map((item, index) => {
-      return { label: item.title, value: item };
-    }),
+    allMealIdeas: [],
+    items: [],
   };
 
   render() {

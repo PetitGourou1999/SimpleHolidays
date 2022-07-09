@@ -1,6 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import {
+  Alert,
   FlatList,
   Pressable,
   StyleSheet,
@@ -11,13 +12,46 @@ import {
 import NumericInput from "react-native-numeric-input";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
-import { Ingredient } from "../../types/Types";
+import storageHelper from "../../storage/AsyncStorageHelper";
+import { Ingredient, MealIdea } from "../../types/Types";
 
-export default class MealForm extends React.Component {
+interface Props {
+  onCancel: any;
+  onSave: any;
+}
+
+export default class MealForm extends React.Component<Props> {
   state = {
     title: "",
     ingredientName: "",
     ingredients: [],
+  };
+
+  saveMealIdea = () => {
+    if (this.state.title.trim() == "") {
+      Alert.alert("Veuillez saisir un intitulé pour ce repas");
+      return;
+    }
+    if (this.state.ingredients.length == 0) {
+      Alert.alert("Veuillez ajouter des ingrédients");
+      return;
+    }
+
+    let newMealIdea: MealIdea = {
+      storageKey: storageHelper.makeid(8),
+      ingredients: [...this.state.ingredients],
+      title: this.state.title,
+    };
+
+    storageHelper.storeData(newMealIdea.storageKey, newMealIdea).then(
+      () => {
+        this.props.onSave();
+        this.props.onCancel();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   setTitle = (title: string) => {
@@ -34,6 +68,7 @@ export default class MealForm extends React.Component {
       quantity: 1,
     };
     this.setState({ ingredients: [...this.state.ingredients, newIngredient] });
+    this.setState;
   };
 
   setIngredientQuantity = (index: number, quantity: number) => {
@@ -54,7 +89,7 @@ export default class MealForm extends React.Component {
           onChangeText={(text) => this.setTitle(text)}
         />
         <Text>Ajouter des Ingrédients</Text>
-        <View style={styles.rowView}>
+        <View style={globalStyles.rowView}>
           <TextInput
             style={[globalStyles.inputStyle, { width: "70%" }]}
             onChangeText={(text) => this.setIngredientName(text)}
@@ -97,6 +132,26 @@ export default class MealForm extends React.Component {
             width: "90%",
           }}
         />
+        <View
+          style={[
+            globalStyles.editableRow,
+            {
+              justifyContent: "space-evenly",
+              marginTop: "auto",
+            },
+          ]}
+        >
+          <Pressable onPress={() => this.props.onCancel()}>
+            <View style={[globalStyles.buttonPrimary]}>
+              <Text style={{ color: Colors.light.white }}>Cancel</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => this.saveMealIdea()}>
+            <View style={[globalStyles.buttonPrimary]}>
+              <Text style={{ color: Colors.light.white }}>Save</Text>
+            </View>
+          </Pressable>
+        </View>
       </View>
     );
   }

@@ -42,7 +42,6 @@ class AsyncStorageHelper {
     let keys = [];
     try {
       keys = await AsyncStorage.getAllKeys();
-      console.log(keys);
       return keys;
     } catch (e) {
       console.log(e);

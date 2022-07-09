@@ -22,7 +22,11 @@ export default class MealCard extends React.Component<Props> {
         </Card.Title>
         <Card.Divider color={Colors.light.secondary} />
         {this.props.mealIdea.ingredients.map((item, index) => {
-          return <Text>{item.title + " : " + item.quantity}</Text>;
+          return (
+            <Text style={{ alignSelf: "center" }}>
+              {item.title + " : " + item.quantity}
+            </Text>
+          );
         })}
       </Card>
     );

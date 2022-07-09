@@ -1,17 +1,14 @@
 import React from "react";
-import { Button, FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
+import storageHelper from "../../storage/AsyncStorageHelper";
 import { MealIdea } from "../../types/Types";
 import MealCard from "../cards/MealCard";
 import MealForm from "../forms/MealForm";
 
-interface Props {
-  mealIdeas: MealIdea[];
-}
-
-export default class MealsList extends React.Component<Props> {
+export default class MealsList extends React.Component {
   state = {
     isModalVisible: false,
     arrayHolder: [],
@@ -19,9 +16,32 @@ export default class MealsList extends React.Component<Props> {
     textInputHolderPlayer: "",
   };
 
-  componentDidMount() {
-    this.setState({ arrayHolder: [...this.props.mealIdeas] });
-  }
+  loadData = () => {
+    storageHelper.getAllItems().then(
+      (value) => {
+        if (value !== undefined) {
+          this.setState({
+            arrayHolder: [],
+          });
+          value.forEach((element) => {
+            if (element.ingredients !== undefined) {
+              console.log(JSON.stringify(element));
+              this.setState({
+                arrayHolder: [...this.state.arrayHolder, element],
+              });
+            }
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  componentDidMount = () => {
+    this.loadData();
+  };
 
   toggleModal = (visible: boolean) => {
     this.setState({ isModalVisible: visible });
@@ -55,10 +75,9 @@ export default class MealsList extends React.Component<Props> {
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
           <View style={globalStyles.modal}>
-            <MealForm />
-            <Button
-              title="Hide modal"
-              onPress={() => this.toggleModal(false)}
+            <MealForm
+              onCancel={() => this.toggleModal(false)}
+              onSave={() => this.loadData()}
             />
           </View>
         </Modal>
