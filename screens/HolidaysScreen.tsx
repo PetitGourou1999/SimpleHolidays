@@ -17,6 +17,7 @@ export default class HolidaysScreen extends React.Component {
     storageHelper.getAllItems().then(
       (value) => {
         this.setState({ allHolidays: value });
+        console.log(JSON.stringify(value));
       },
       (error) => {
         console.log(error);

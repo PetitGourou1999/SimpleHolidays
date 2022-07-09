@@ -31,7 +31,7 @@ export default class CustomDatePicker extends React.Component<Props> {
       <View style={[globalStyles.inputStyle, styles.datePickerContainer]}>
         <DateTimePickerModal
           isVisible={this.state.isDatePickerVisible}
-          mode="datetime"
+          mode="date"
           onConfirm={(date) => this.onDateChange(date)}
           onCancel={(date) => this.onDateChange(date)}
           minimumDate={new Date()}
@@ -42,8 +42,6 @@ export default class CustomDatePicker extends React.Component<Props> {
             year: "numeric",
             month: "numeric",
             day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
           })}
         </Text>
         <TouchableOpacity

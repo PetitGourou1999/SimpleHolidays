@@ -3,6 +3,7 @@ import { Meal } from "../types/Types";
 
 export const defaultLunch: Meal = {
   meal: {
+    storageKey: "DEFAULTLUNCH",
     title: "",
     ingredients: [],
   },
@@ -11,6 +12,7 @@ export const defaultLunch: Meal = {
 
 export const defaultDiner: Meal = {
   meal: {
+    storageKey: "DEFAULTDINNER",
     title: "",
     ingredients: [],
   },

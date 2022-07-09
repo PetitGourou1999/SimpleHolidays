@@ -20,7 +20,7 @@ export default class EditableActivityRow extends React.Component<Props> {
             fontWeight: "bold",
           }}
         >
-          {this.props.holidaysActivity.date.toLocaleDateString([], {
+          {new Date(this.props.holidaysActivity.date).toLocaleDateString([], {
             weekday: "long",
             day: "numeric",
           })}

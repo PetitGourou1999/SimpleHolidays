@@ -44,7 +44,7 @@ export default class EditableMealRow extends React.Component<Props> {
             fontWeight: "bold",
           }}
         >
-          {this.props.holidaysMeal.date.toLocaleDateString([], {
+          {new Date(this.props.holidaysMeal.date).toLocaleDateString([], {
             weekday: "long",
             day: "numeric",
           })}

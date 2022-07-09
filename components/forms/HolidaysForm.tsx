@@ -11,8 +11,9 @@ import {
 import TagInput from "react-native-tags-input";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
+import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
 import storageHelper from "../../storage/AsyncStorageHelper";
-import { Holidays, Player } from "../../types/Types";
+import { Activity, Holidays, MealsOfTheDay, Player } from "../../types/Types";
 import CustomDatePicker from "../CustomDatePicker";
 
 interface Props {
@@ -30,14 +31,26 @@ export default class HolidaysForm extends React.Component<Props> {
     },
   };
 
+  getDates(startDate: Date, stopDate: Date) {
+    let dateArray = [];
+    let currentDate = new Date(startDate);
+    while (currentDate <= stopDate) {
+      dateArray.push(new Date(currentDate));
+      currentDate = new Date(currentDate).setDate(
+        new Date(currentDate).getDate() + 1
+      );
+    }
+    return dateArray;
+  }
+
   saveHolidays = () => {
     if (this.state.location.trim() == "") {
       Alert.alert("Veuillez saisir une destination pour les vacances");
       return;
     }
     if (
-      this.state.selectedDateStart.getTime() >
-      this.state.selectedDateEnd.getTime()
+      new Date(this.state.selectedDateStart).getDate() >
+      new Date(this.state.selectedDateEnd).getDate()
     ) {
       Alert.alert("La date de début doit se situer avant la date de fin");
       return;
@@ -48,6 +61,9 @@ export default class HolidaysForm extends React.Component<Props> {
     }
 
     let players: Player[] = [];
+    let defaultMeals: MealsOfTheDay[] = [];
+    let defaultActivities: Activity[] = [];
+
     let holidays: Holidays = {
       storageKey: storageHelper.makeid(8),
       title: this.state.location,
@@ -59,6 +75,7 @@ export default class HolidaysForm extends React.Component<Props> {
       spendings: [],
     };
 
+    // Fill player
     for (let index = 0; index < this.state.tags.tagsArray.length; index++) {
       const element = this.state.tags.tagsArray[index];
       players.push({
@@ -67,6 +84,36 @@ export default class HolidaysForm extends React.Component<Props> {
     }
 
     holidays.players = players;
+
+    // Fill Meals
+    let allDates = this.getDates(
+      this.state.selectedDateStart,
+      this.state.selectedDateEnd
+    );
+
+    for (let index = 0; index < allDates.length; index++) {
+      const myDate = allDates[index];
+      let mealsOfTheDay: MealsOfTheDay = {
+        date: myDate,
+        meals: [defaultLunch, defaultDiner],
+      };
+      defaultMeals.push(mealsOfTheDay);
+    }
+
+    holidays.meals = defaultMeals;
+
+    // Fill Activities
+    for (let index = 0; index < allDates.length; index++) {
+      const myDate = allDates[index];
+      let activity: Activity = {
+        title: "",
+        date: myDate,
+        location: this.state.location,
+      };
+      defaultActivities.push(activity);
+    }
+
+    holidays.activities = defaultActivities;
 
     storageHelper.storeData(holidays.storageKey, holidays).then(
       () => {
@@ -107,12 +154,12 @@ export default class HolidaysForm extends React.Component<Props> {
         <Text style={{ paddingTop: 30 }}>Date de début</Text>
         <CustomDatePicker
           initialDate={this.state.selectedDateStart}
-          onChange={() => (date: Date) => this.setSelectedDateStart(date)}
+          onChange={(date: Date) => this.setSelectedDateStart(date)}
         />
         <Text style={{ paddingTop: 20 }}>Date de fin</Text>
         <CustomDatePicker
-          initialDate={this.state.selectedDateStart}
-          onChange={() => (date: Date) => this.setSelectedDateEnd(date)}
+          initialDate={this.state.selectedDateEnd}
+          onChange={(date: Date) => this.setSelectedDateEnd(date)}
         />
         <Text style={{ paddingTop: 30 }}>Participants</Text>
         <TagInput

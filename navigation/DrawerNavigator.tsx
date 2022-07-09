@@ -3,6 +3,7 @@ import React from "react";
 import Colors from "../constants/Colors";
 import MealsScreen from "../screens/MealsScreen";
 import MiscellaneousScreen from "../screens/MiscellaneousScreen";
+import ResetScreen from "../screens/ResetScreen";
 import { MainStackNavigator } from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();
@@ -24,6 +25,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Vacances" component={MainStackNavigator} />
       <Drawer.Screen name="Idées Repas" component={MealsScreen} />
       <Drawer.Screen name="Trucs Utiles" component={MiscellaneousScreen} />
+      <Drawer.Screen name="Reset" component={ResetScreen} />
     </Drawer.Navigator>
   );
 };
