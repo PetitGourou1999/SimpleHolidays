@@ -68,7 +68,7 @@ export default class MealForm extends React.Component<Props> {
       quantity: 1,
     };
     this.setState({ ingredients: [...this.state.ingredients, newIngredient] });
-    this.setState;
+    this.setState({ ingredientName: "" });
   };
 
   setIngredientQuantity = (index: number, quantity: number) => {
@@ -91,6 +91,7 @@ export default class MealForm extends React.Component<Props> {
         <Text>Ajouter des Ingrédients</Text>
         <View style={globalStyles.rowView}>
           <TextInput
+            value={this.state.ingredientName}
             style={[globalStyles.inputStyle, { width: "70%" }]}
             onChangeText={(text) => this.setIngredientName(text)}
           />
