@@ -26,6 +26,7 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
   const [selected, setSelected] = useState(undefined);
   const [dropdownTop, setDropdownTop] = useState(0);
   const [dropdownLeft, setDropdownLeft] = useState(0);
+  const [dropdownWidth, setDropdownWidth] = useState(0);
 
   const toggleDropdown = (): void => {
     visible ? setVisible(false) : openDropdown();
@@ -36,6 +37,7 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
       (fx: any, fy: any, w: any, h: any, px: any, py: any) => {
         setDropdownTop(py + h);
         setDropdownLeft(px);
+        setDropdownWidth(w);
       }
     );
     setVisible(true);
@@ -49,7 +51,7 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
 
   const renderItem = ({ item }: any): ReactElement<any, any> => (
     <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
-      <Text>{item.label}</Text>
+      <Text style={{ textAlign: "center" }}>{item.label}</Text>
     </TouchableOpacity>
   );
 
@@ -61,7 +63,10 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
           onPress={() => setVisible(false)}
         >
           <View
-            style={[styles.dropdown, { top: dropdownTop, left: dropdownLeft }]}
+            style={[
+              styles.dropdown,
+              { top: dropdownTop, left: dropdownLeft, width: dropdownWidth },
+            ]}
           >
             <FlatList
               data={data}

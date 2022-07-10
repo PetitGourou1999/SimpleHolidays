@@ -5,14 +5,49 @@ import { diner, lunch } from "../../constants/data/MealTimes";
 import globalStyles from "../../constants/Styles";
 import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
 import storageHelper from "../../storage/AsyncStorageHelper";
-import { MealsOfTheDay } from "../../types/Types";
+import { Meal, MealIdea, MealsOfTheDay } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
+
+/*export type Meal = {
+  meal: MealIdea;
+  time: string;
+};
+
+export type Meal = {
+  meal: MealIdea;
+  time: string;
+};
+
+export type MealsOfTheDay = {
+  date: Date;
+  meals: Meal[];
+};*/
 
 interface Props {
   holidaysMeal: MealsOfTheDay;
+  onLunchChange(meal: Meal): any;
+  onDinerChange(meal: Meal): any;
 }
 
 export default class EditableMealRow extends React.Component<Props> {
+  findMealByTime = (time: string) => {
+    let foundValue = this.props.holidaysMeal.meals.find((meal) => {
+      return meal.time === time;
+    });
+    return foundValue === undefined
+      ? time === lunch
+        ? defaultLunch
+        : defaultDiner
+      : foundValue;
+  };
+
+  state = {
+    valueLunch: this.findMealByTime(lunch) /*(Meal)*/,
+    valueDiner: this.findMealByTime(diner) /*(Meal)*/,
+    allMealIdeas: [],
+    items: [],
+  };
+
   componentDidMount = () => {
     storageHelper.getAllItems().then(
       (value) => {
@@ -37,23 +72,24 @@ export default class EditableMealRow extends React.Component<Props> {
     );
   };
 
-  findMealByTime = (time: string) => {
-    let foundValue = this.props.holidaysMeal.meals.find((meal) => {
-      return meal.time === time;
-    });
-    return foundValue === undefined
-      ? time === lunch
-        ? defaultLunch
-        : defaultDiner
-      : foundValue;
+  setValueLunch = (item: MealIdea) => {
+    let myLunch: Meal = {
+      meal: item,
+      time: lunch,
+    };
+
+    this.setState({ valueLunch: myLunch });
+    this.props.onLunchChange(myLunch);
   };
 
-  state = {
-    valueLunch: this.findMealByTime(lunch),
-    valueDiner: this.findMealByTime(diner),
-    //TODO : load meal ideas componentDidMount
-    allMealIdeas: [],
-    items: [],
+  setValuDinner = (item: MealIdea) => {
+    let myDiner: Meal = {
+      meal: item,
+      time: diner,
+    };
+
+    this.setState({ valueDiner: myDiner });
+    this.props.onDinerChange(myDiner);
   };
 
   render() {
@@ -74,15 +110,15 @@ export default class EditableMealRow extends React.Component<Props> {
         </Text>
         <CustomDropdown
           style={{ marginRight: 10 }}
-          label={""}
+          label={this.state.valueLunch.meal.title}
           data={this.state.items}
-          onSelect={() => {}}
+          onSelect={(item) => this.setValueLunch(item.value)}
         ></CustomDropdown>
         <CustomDropdown
           style={{}}
-          label={""}
+          label={this.state.valueDiner.meal.title}
           data={this.state.items}
-          onSelect={() => {}}
+          onSelect={(item) => this.setValuDinner(item.value)}
         ></CustomDropdown>
       </View>
     );

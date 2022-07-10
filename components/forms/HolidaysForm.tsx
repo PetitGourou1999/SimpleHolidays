@@ -18,6 +18,7 @@ import CustomDatePicker from "../CustomDatePicker";
 
 interface Props {
   onCancel: any;
+  onSave: any;
 }
 
 export default class HolidaysForm extends React.Component<Props> {
@@ -117,6 +118,7 @@ export default class HolidaysForm extends React.Component<Props> {
 
     storageHelper.storeData(holidays.storageKey, holidays).then(
       () => {
+        this.props.onSave();
         this.props.onCancel();
       },
       (error) => {

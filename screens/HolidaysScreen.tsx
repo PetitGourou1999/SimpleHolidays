@@ -12,8 +12,7 @@ export default class HolidaysScreen extends React.Component {
     isModalVisible: false,
     allHolidays: [],
   };
-
-  componentDidMount = () => {
+  loadData = () => {
     storageHelper.getAllItems().then(
       (value) => {
         if (value !== undefined) {
@@ -30,6 +29,9 @@ export default class HolidaysScreen extends React.Component {
         console.log(error);
       }
     );
+  };
+  componentDidMount = () => {
+    this.loadData();
   };
 
   toggleModal = (visible: boolean) => {
@@ -58,7 +60,10 @@ export default class HolidaysScreen extends React.Component {
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
           <View style={[globalStyles.modal, { flex: 0.7 }]}>
-            <HolidaysForm onCancel={() => this.toggleModal(false)} />
+            <HolidaysForm
+              onSave={() => this.loadData()}
+              onCancel={() => this.toggleModal(false)}
+            />
           </View>
         </Modal>
         <FlatList

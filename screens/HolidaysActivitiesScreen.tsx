@@ -34,14 +34,12 @@ export default class HolidaysActivitiesScreen extends React.Component {
 
     this.holidays.activities = holidaysActivities;
 
-    storageHelper
-      .storeData(this.holidays.storageKey, this.holidays.activities)
-      .then(
-        () => {},
-        (error) => {
-          console.log(error);
-        }
-      );
+    storageHelper.storeData(this.holidays.storageKey, this.holidays).then(
+      () => {},
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   render() {

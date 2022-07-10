@@ -1,19 +1,95 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import EditableMealRow from "../components/rows/EditableMealRow";
+import { diner, lunch } from "../constants/data/MealTimes";
 import globalStyles from "../constants/Styles";
+import storageHelper from "../storage/AsyncStorageHelper";
+import { Meal, MealsOfTheDay } from "../types/Types";
+
+/*export type Meal = {
+  meal: MealIdea;
+  time: string;
+};
+
+export type Meal = {
+  meal: MealIdea;
+  time: string;
+};
+
+export type MealsOfTheDay = {
+  date: Date;
+  meals: Meal[];
+};*/
 
 export default class HolidaysMealsScreen extends React.Component {
   state = {
-    arrayHolder: [],
+    arrayHolder: [] /*(MealsOfTheDay)*/,
+    holidays: {},
   };
 
   private data = this.props.route;
-  private meals = this.data.params.data.meals;
+  private holidays = this.data.params.data;
 
   componentDidMount() {
-    this.setState({ arrayHolder: [...this.meals] });
+    this.setState({ arrayHolder: [...this.holidays.meals] });
+    this.setState({ holidays: this.holidays });
   }
+
+  onLunchChange = (item: MealsOfTheDay, meal: Meal) => {
+    let holidaysMeals: MealsOfTheDay[] = [...this.state.holidays.meals];
+
+    let foundIndexDate = holidaysMeals.findIndex(
+      (obj) => obj.date === item.date
+    );
+
+    let mealsOfTheDate: Meal[] = [...holidaysMeals[foundIndexDate].meals];
+
+    let foundIndexLunch = mealsOfTheDate.findIndex((obj) => obj.time == lunch);
+
+    mealsOfTheDate[foundIndexLunch] = meal;
+
+    holidaysMeals[foundIndexDate] = {
+      date: holidaysMeals[foundIndexDate].date,
+      meals: mealsOfTheDate,
+    };
+
+    this.holidays.meals = holidaysMeals;
+
+    storageHelper.storeData(this.holidays.storageKey, this.holidays).then(
+      () => {},
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  onDinerChange = (item: MealsOfTheDay, meal: Meal) => {
+    let holidaysMeals: MealsOfTheDay[] = [...this.state.holidays.meals];
+
+    let foundIndexDate = holidaysMeals.findIndex(
+      (obj) => obj.date === item.date
+    );
+
+    let mealsOfTheDate: Meal[] = [...holidaysMeals[foundIndexDate].meals];
+
+    let foundIndexDinner = mealsOfTheDate.findIndex((obj) => obj.time == diner);
+
+    mealsOfTheDate[foundIndexDinner] = meal;
+
+    holidaysMeals[foundIndexDate] = {
+      date: holidaysMeals[foundIndexDate].date,
+      meals: mealsOfTheDate,
+    };
+
+    this.holidays.meals = holidaysMeals;
+
+    storageHelper.storeData(this.holidays.storageKey, this.holidays).then(
+      () => {},
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 
   render() {
     return (
@@ -35,7 +111,11 @@ export default class HolidaysMealsScreen extends React.Component {
             extraData={this.state.arrayHolder}
             keyExtractor={(index: any) => index.toString()}
             renderItem={({ item }) => (
-              <EditableMealRow holidaysMeal={item}></EditableMealRow>
+              <EditableMealRow
+                holidaysMeal={item}
+                onLunchChange={(meal) => this.onLunchChange(item, meal)}
+                onDinerChange={(meal) => this.onDinerChange(item, meal)}
+              ></EditableMealRow>
             )}
             style={{
               height: "0%",
