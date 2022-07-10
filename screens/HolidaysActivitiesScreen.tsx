@@ -2,18 +2,47 @@ import React from "react";
 import { FlatList, Text, View } from "react-native";
 import EditableActivityRow from "../components/rows/EditableActivityRow";
 import globalStyles from "../constants/Styles";
+import storageHelper from "../storage/AsyncStorageHelper";
+import { Activity } from "../types/Types";
 
 export default class HolidaysActivitiesScreen extends React.Component {
   state = {
     arrayHolder: [],
+    holidays: {},
   };
 
   private data = this.props.route;
-  private activities = this.data.params.data.activities;
+  private holidays = this.data.params.data;
 
   componentDidMount() {
-    this.setState({ arrayHolder: [...this.activities] });
+    this.setState({ arrayHolder: [...this.holidays.activities] });
+    this.setState({ holidays: this.holidays });
   }
+
+  onActivityChange = (activity: Activity, text: string) => {
+    let holidaysActivities: Activity[] = [...this.state.holidays.activities];
+    let foundIndex = holidaysActivities.findIndex(
+      (obj) => obj.date === activity.date
+    );
+
+    // Update Activity
+    holidaysActivities[foundIndex] = {
+      date: holidaysActivities[foundIndex].date,
+      location: holidaysActivities[foundIndex].location,
+      title: text,
+    };
+
+    this.holidays.activities = holidaysActivities;
+
+    storageHelper
+      .storeData(this.holidays.storageKey, this.holidays.activities)
+      .then(
+        () => {},
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
 
   render() {
     return (
@@ -34,7 +63,10 @@ export default class HolidaysActivitiesScreen extends React.Component {
           extraData={this.state.arrayHolder}
           keyExtractor={(index: any) => index.toString()}
           renderItem={({ item }) => (
-            <EditableActivityRow holidaysActivity={item}></EditableActivityRow>
+            <EditableActivityRow
+              holidaysActivity={item}
+              onTextChange={(text) => this.onActivityChange(item, text)}
+            ></EditableActivityRow>
           )}
           style={{
             height: "0%",

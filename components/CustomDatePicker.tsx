@@ -7,7 +7,7 @@ import globalStyles from "../constants/Styles";
 
 interface Props {
   initialDate: Date;
-  onChange(date: Date): void;
+  onChange(date: Date): any;
 }
 
 export default class CustomDatePicker extends React.Component<Props> {
