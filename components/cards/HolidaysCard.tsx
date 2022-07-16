@@ -1,3 +1,4 @@
+import * as Font from "expo-font";
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Card } from "react-native-elements";
@@ -11,6 +12,21 @@ interface Props {
 }
 
 export default class HolidaysCard extends React.Component<Props> {
+  state = {
+    loaded: false,
+  };
+
+  _loadFontsAsync = async () => {
+    let isLoaded = await Font.loadAsync({
+      WorkSans: require("../../assets/fonts/WorkSans-Bold.ttf"),
+    });
+    this.setState({ loaded: isLoaded });
+  };
+
+  componentDidMount = () => {
+    this._loadFontsAsync();
+  };
+
   onPressButton = (screenName: string) => {
     this.props.navigation.navigate(screenName, { data: this.props.holidays });
   };
@@ -21,9 +37,7 @@ export default class HolidaysCard extends React.Component<Props> {
         wrapperStyle={styles.cardWrapper}
         containerStyle={styles.cardContainer}
       >
-        <Card.Title
-          style={{ color: Colors.light.secondary, fontWeight: "bold" }}
-        >
+        <Card.Title style={globalStyles.cardTitle}>
           {this.props.holidays.title}
         </Card.Title>
         <Card.Divider color={Colors.light.secondary} />
@@ -70,5 +84,7 @@ const styles = StyleSheet.create({
   pressableText: {
     color: Colors.light.white,
     fontWeight: "bold",
+    fontFamily: "WorkSans",
+    fontSize: 15,
   },
 });

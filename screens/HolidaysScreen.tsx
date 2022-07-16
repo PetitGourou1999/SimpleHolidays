@@ -1,3 +1,4 @@
+import * as Font from "expo-font";
 import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
@@ -11,7 +12,16 @@ export default class HolidaysScreen extends React.Component {
   state = {
     isModalVisible: false,
     allHolidays: [],
+    loaded: false,
   };
+
+  _loadFontsAsync = async () => {
+    let isLoaded = await Font.loadAsync({
+      WorkSans: require("../assets/fonts/WorkSans-Bold.ttf"),
+    });
+    this.setState({ loaded: isLoaded });
+  };
+
   loadData = () => {
     storageHelper.getAllItems().then(
       (value) => {
@@ -30,6 +40,7 @@ export default class HolidaysScreen extends React.Component {
       }
     );
   };
+
   componentDidMount = () => {
     this.loadData();
   };
@@ -52,7 +63,8 @@ export default class HolidaysScreen extends React.Component {
             style={{
               color: Colors.light.white,
               fontWeight: "bold",
-              fontSize: 16,
+              fontSize: 17,
+              fontFamily: "WorkSans",
             }}
           >
             Nouvelles Vacances !

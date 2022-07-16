@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
+import globalStyles from "../../constants/Styles";
 import { Holidays, PlayerDebt, PlayerSpendings } from "../../types/Types";
 
 interface Props {
@@ -69,18 +70,42 @@ export default class TotalSpendingsCard extends React.Component<Props> {
         containerStyle={styles.cardContainer}
       >
         <Card.Title
-          style={{ color: Colors.light.darkBlue, fontWeight: "bold" }}
+          style={[globalStyles.cardTitle, { color: Colors.light.darkBlue }]}
         >
           {"Total : " + theTotals.total.toString() + " €"}
         </Card.Title>
         <Card.Divider color={Colors.light.darkBlue} />
         {theTotals.totalsForPlayers.map((item, index) => {
-          return <Text>{item.player.pseudo + " : " + item.total + " €"}</Text>;
+          return (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginBottom: 5,
+              }}
+            >
+              <Text style={globalStyles.cardText}>
+                {item.player.pseudo + " : "}
+              </Text>
+              <Text
+                style={[
+                  globalStyles.cardText,
+                  {
+                    minWidth: "10%",
+                    justifyContent: "flex-end",
+                    textAlign: "right",
+                  },
+                ]}
+              >
+                {item.total + " €"}
+              </Text>
+            </View>
+          );
         })}
         <Text style={{ marginBottom: 5 }}>{""}</Text>
         <Card.Divider color={Colors.light.darkBlue} />
         <Card.Title
-          style={{ color: Colors.light.darkBlue, fontWeight: "bold" }}
+          style={[globalStyles.cardTitle, { color: Colors.light.darkBlue }]}
         >
           {"Redevances"}
         </Card.Title>
@@ -88,13 +113,29 @@ export default class TotalSpendingsCard extends React.Component<Props> {
         {theTotals.totalsForPlayersToPay.map((item, index) => {
           if (item.debt > 0) {
             return (
-              <Text>
-                {item.player.pseudo +
-                  " doit " +
-                  item.debt +
-                  " € à " +
-                  item.otherPlayer.pseudo}
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 5,
+                }}
+              >
+                <Text style={globalStyles.cardText}>
+                  {item.player.pseudo + " doit " + item.debt + " €"}
+                </Text>
+                <Text
+                  style={[
+                    globalStyles.cardText,
+                    {
+                      minWidth: "10%",
+                      justifyContent: "flex-end",
+                      textAlign: "right",
+                    },
+                  ]}
+                >
+                  {"à " + item.otherPlayer.pseudo}
+                </Text>
+              </View>
             );
           }
         })}
@@ -104,6 +145,11 @@ export default class TotalSpendingsCard extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    ...globalStyles.cardText,
+    marginBottom: 5,
+  },
+
   cardWrapper: {
     backgroundColor: Colors.light.lightBlue,
     width: "100%",

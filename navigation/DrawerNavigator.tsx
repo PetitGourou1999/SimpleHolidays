@@ -1,4 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useFonts } from "expo-font";
 import React from "react";
 import Colors from "../constants/Colors";
 import MealsScreen from "../screens/MealsScreen";
@@ -9,17 +10,29 @@ import { MainStackNavigator } from "./StackNavigator";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
+  const customFonts = {
+    WorkSans: require("../assets/fonts/WorkSans-Bold.ttf"),
+  };
+
+  const [isLoaded] = useFonts(customFonts);
+
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerTintColor: Colors.light.quaternary,
+        headerTintColor: Colors.light.white,
         headerStyle: {
-          backgroundColor: Colors.light.secondary,
+          backgroundColor: Colors.light.primary,
+          shadowColor: "transparent",
         },
-        drawerActiveBackgroundColor: Colors.light.quaternary,
-        drawerActiveTintColor: Colors.light.secondary,
+        headerTitleStyle: {
+          fontFamily: "WorkSans",
+          fontSize: 18,
+        },
+        drawerActiveBackgroundColor: Colors.light.tertiary,
+        drawerActiveTintColor: Colors.light.primary,
         drawerInactiveTintColor: Colors.light.primary,
-        drawerContentStyle: { backgroundColor: Colors.light.background },
+        drawerContentStyle: { backgroundColor: Colors.light.white },
+        drawerLabelStyle: { fontFamily: "WorkSans", fontSize: 18 },
       }}
     >
       <Drawer.Screen name="Vacances" component={MainStackNavigator} />

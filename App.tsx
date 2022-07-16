@@ -1,10 +1,10 @@
-import { useFonts, WorkSans_400Regular } from "@expo-google-fonts/work-sans";
 import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
 } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
 import React from "react";
 import { useColorScheme } from "react-native";
 import DrawerNavigator from "./navigation/DrawerNavigator";
@@ -12,11 +12,14 @@ import DrawerNavigator from "./navigation/DrawerNavigator";
 export default function App() {
   const colorScheme = useColorScheme();
 
-  let [fontsLoaded] = useFonts({
-    WorkSans_400Regular,
-  });
+  const customFonts = {
+    WorkSans: require("./assets/fonts/WorkSans-Bold.ttf"),
+    WorkSansRegular: require("./assets/fonts/WorkSans-Regular.ttf"),
+  };
 
-  if (!fontsLoaded) {
+  const [isLoaded] = useFonts(customFonts);
+
+  if (!isLoaded) {
     return <AppLoading />;
   }
 

@@ -15,9 +15,14 @@ const MainStackNavigator = () => {
       initialRouteName="Nos Vacances"
       screenOptions={{
         headerBackTitle: "Back",
-        headerTintColor: Colors.light.secondary,
+        headerTintColor: Colors.light.primary,
         headerStyle: {
-          backgroundColor: Colors.light.quaternary,
+          backgroundColor: Colors.light.white,
+          shadowColor: "transparent",
+        },
+        headerTitleStyle: {
+          fontFamily: "WorkSans",
+          fontSize: 18,
         },
       }}
     >

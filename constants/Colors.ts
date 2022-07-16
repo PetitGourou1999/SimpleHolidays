@@ -3,7 +3,7 @@ const tintColorDark = "#EDF6F9";
 
 const white = "#fff";
 const black = "#000";
-const grey = "#aaa";
+const grey = "#555";
 
 const primary = "#006D77";
 const tertiary = "#83C5BE";

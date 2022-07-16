@@ -91,6 +91,19 @@ const globalStyles = StyleSheet.create({
     borderColor: Colors.light.primary,
     paddingTop: 30,
   },
+
+  cardTitle: {
+    color: Colors.light.secondary,
+    fontWeight: "bold",
+    fontFamily: "WorkSans",
+    fontSize: 19,
+  },
+
+  cardText: {
+    fontFamily: "WorkSansRegular",
+    fontSize: 16,
+    color: Colors.light.grey,
+  },
 });
 
 export default globalStyles;
