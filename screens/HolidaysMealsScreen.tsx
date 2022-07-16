@@ -80,7 +80,13 @@ export default class HolidaysMealsScreen extends React.Component {
     return (
       <React.Fragment>
         <View style={[globalStyles.container]}>
-          <Text style={[globalStyles.rowText, globalStyles.rowHintText]}>
+          <Text
+            style={[
+              globalStyles.rowText,
+              globalStyles.rowHintText,
+              globalStyles.text,
+            ]}
+          >
             Pour pouvoir ajouter des repas, il faut ajouter des Idées Repas
             depuis la page dédiée
           </Text>

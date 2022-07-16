@@ -32,6 +32,7 @@ export default class EditableActivityRow extends React.Component<Props> {
             minWidth: "33%",
             color: Colors.light.darkBlue,
             fontWeight: "bold",
+            ...globalStyles.text,
           }}
         >
           {new Date(this.props.holidaysActivity.date).toLocaleDateString([], {

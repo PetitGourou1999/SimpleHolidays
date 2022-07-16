@@ -8,6 +8,22 @@ const globalStyles = StyleSheet.create({
     backgroundColor: Colors.light.background,
   },
 
+  text: {
+    fontFamily: "WorkSans",
+  },
+
+  inputText: {
+    fontFamily: "WorkSansRegular",
+  },
+
+  formTitle: {
+    fontFamily: "WorkSans",
+    color: Colors.light.primary,
+    fontSize: 17,
+    paddingBottom: 20,
+    paddingTop: 10,
+  },
+
   editableRow: {
     width: "100%",
     flexDirection: "row",
@@ -18,6 +34,7 @@ const globalStyles = StyleSheet.create({
   },
 
   inputStyle: {
+    fontFamily: "WorkSansRegular",
     marginVertical: 10,
     width: 300,
     height: 40,
@@ -33,12 +50,20 @@ const globalStyles = StyleSheet.create({
   },
 
   buttonPrimary: {
+    minWidth: 100,
     backgroundColor: Colors.light.primary,
     color: Colors.light.white,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
     padding: 10,
+  },
+
+  bigButtonText: {
+    color: Colors.light.white,
+    fontWeight: "bold",
+    fontSize: 16,
+    fontFamily: "WorkSans",
   },
 
   buttonSecondary: {
@@ -75,10 +100,11 @@ const globalStyles = StyleSheet.create({
     textAlign: "center",
     color: Colors.light.darkestBlue,
     fontWeight: "bold",
+    fontFamily: "WorkSans",
   },
 
   rowHintText: {
-    flex: 0.15,
+    flex: 0.1,
     padding: 20,
     paddingBottom: 0,
     color: Colors.light.darkBlue,

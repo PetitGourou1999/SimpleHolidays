@@ -81,12 +81,13 @@ export default class SpendingsForm extends React.Component<Props> {
   render() {
     return (
       <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
-        <Text>Nom / Type</Text>
+        <Text style={[globalStyles.formTitle]}>Nouvelle dépense :</Text>
+        <Text style={[globalStyles.text, { paddingTop: 10 }]}>Nom / Type</Text>
         <TextInput
           style={globalStyles.inputStyle}
           onChangeText={(text) => this.setType(text)}
         />
-        <Text>Montant</Text>
+        <Text style={[globalStyles.text, { paddingTop: 10 }]}>Montant</Text>
         <CurrencyInput
           value={this.state.amount}
           onChangeValue={(value) => this.setAmount(value)}
@@ -96,7 +97,7 @@ export default class SpendingsForm extends React.Component<Props> {
           separator=","
           precision={2}
         />
-        <Text>Payé par : </Text>
+        <Text style={[globalStyles.text, { paddingTop: 10 }]}>Payé par : </Text>
         <View style={globalStyles.editableRow}>
           <CustomDropdown
             style={globalStyles.inputStyle}
@@ -116,12 +117,16 @@ export default class SpendingsForm extends React.Component<Props> {
         >
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>
-              <Text style={{ color: Colors.light.white }}>Cancel</Text>
+              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+                Annuler
+              </Text>
             </View>
           </Pressable>
           <Pressable onPress={() => this.saveSpending()}>
             <View style={[globalStyles.buttonPrimary]}>
-              <Text style={{ color: Colors.light.white }}>Save</Text>
+              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+                Ajouter
+              </Text>
             </View>
           </Pressable>
         </View>

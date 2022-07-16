@@ -86,6 +86,7 @@ export default class EditableMealRow extends React.Component<Props> {
             minWidth: "33%",
             color: Colors.light.darkBlue,
             fontWeight: "bold",
+            ...globalStyles.text,
           }}
         >
           {new Date(this.props.holidaysMeal.date).toLocaleDateString([], {

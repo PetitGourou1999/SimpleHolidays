@@ -45,7 +45,13 @@ export default class HolidaysActivitiesScreen extends React.Component {
   render() {
     return (
       <View style={[globalStyles.container]}>
-        <Text style={[globalStyles.rowText, globalStyles.rowHintText]}>
+        <Text
+          style={[
+            globalStyles.rowText,
+            globalStyles.rowHintText,
+            globalStyles.text,
+          ]}
+        >
           Ici sont centralisées les activités à faire pendant les vacances
         </Text>
         <View style={globalStyles.rowBorderStyle}></View>

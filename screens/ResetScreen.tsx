@@ -21,7 +21,13 @@ export default class ResetScreen extends React.Component {
         <View style={[globalStyles.container, { justifyContent: "center" }]}>
           <Pressable onPress={() => this.deleteAllData()}>
             <View style={globalStyles.buttonSecondary}>
-              <Text style={{ color: Colors.light.white, fontWeight: "bold" }}>
+              <Text
+                style={{
+                  color: Colors.light.white,
+                  fontWeight: "bold",
+                  fontFamily: "WorkSans",
+                }}
+              >
                 Supprimer toutes les données
               </Text>
             </View>

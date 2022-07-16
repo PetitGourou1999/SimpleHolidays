@@ -4,7 +4,6 @@ import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import HolidaysCard from "../components/cards/HolidaysCard";
 import HolidaysForm from "../components/forms/HolidaysForm";
-import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/AsyncStorageHelper";
 
@@ -59,16 +58,7 @@ export default class HolidaysScreen extends React.Component {
           ]}
           onPress={() => this.toggleModal(true)}
         >
-          <Text
-            style={{
-              color: Colors.light.white,
-              fontWeight: "bold",
-              fontSize: 17,
-              fontFamily: "WorkSans",
-            }}
-          >
-            Nouvelles Vacances !
-          </Text>
+          <Text style={globalStyles.bigButtonText}>Nouvelles Vacances !</Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
           <View style={[globalStyles.modal, { flex: 0.7 }]}>

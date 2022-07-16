@@ -51,7 +51,9 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
 
   const renderItem = ({ item }: any): ReactElement<any, any> => (
     <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
-      <Text style={{ textAlign: "center" }}>{item.label}</Text>
+      <Text style={{ fontFamily: "WorkSansRegular", textAlign: "center" }}>
+        {item.label}
+      </Text>
     </TouchableOpacity>
   );
 
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
   buttonText: {
     flex: 1,
     textAlign: "center",
+    fontFamily: "WorkSansRegular",
   },
   icon: {
     color: Colors.light.darkBlue,
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     position: "absolute",
     backgroundColor: Colors.light.white,
+    borderRadius: 5,
     ...globalStyles.overlayShadow,
   },
   overlay: {
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     borderBottomWidth: 1,
-    color: Colors.light.darkBlue,
+    borderColor: Colors.light.grey,
   },
 });
 

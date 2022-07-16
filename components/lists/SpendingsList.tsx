@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
-import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import { Holidays, Spending } from "../../types/Types";
 import SpendingsCard from "../cards/SpendingsCard";
@@ -49,15 +48,7 @@ export default class SpendingsList extends React.Component<Props> {
           ]}
           onPress={() => this.toggleModal(true)}
         >
-          <Text
-            style={{
-              color: Colors.light.white,
-              fontWeight: "bold",
-              fontSize: 16,
-            }}
-          >
-            Ajouter une dépense
-          </Text>
+          <Text style={globalStyles.bigButtonText}>Ajouter une dépense</Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
           <View style={globalStyles.modal}>

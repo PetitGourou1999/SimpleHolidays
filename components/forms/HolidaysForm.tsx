@@ -148,22 +148,27 @@ export default class HolidaysForm extends React.Component<Props> {
   render() {
     return (
       <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
-        <Text>Lieu</Text>
+        <Text style={[globalStyles.formTitle]}>Détails des vacances</Text>
+        <Text style={globalStyles.text}>Lieu</Text>
         <TextInput
           onChangeText={(text) => this.setLocation(text)}
-          style={globalStyles.inputStyle}
+          style={[globalStyles.inputStyle]}
         />
-        <Text style={{ paddingTop: 30 }}>Date de début</Text>
+        <Text style={[globalStyles.text, { paddingTop: 10 }]}>
+          Date de début
+        </Text>
         <CustomDatePicker
           initialDate={this.state.selectedDateStart}
           onChange={(date: Date) => this.setSelectedDateStart(date)}
         />
-        <Text style={{ paddingTop: 20 }}>Date de fin</Text>
+        <Text style={[globalStyles.text, { paddingTop: 20 }]}>Date de fin</Text>
         <CustomDatePicker
           initialDate={this.state.selectedDateEnd}
           onChange={(date: Date) => this.setSelectedDateEnd(date)}
         />
-        <Text style={{ paddingTop: 30 }}>Participants</Text>
+        <Text style={[globalStyles.text, { paddingTop: 10 }]}>
+          Participants
+        </Text>
         <TagInput
           updateState={this.updateTagState}
           tags={this.state.tags}
@@ -177,7 +182,7 @@ export default class HolidaysForm extends React.Component<Props> {
           leftElementContainerStyle={{ marginLeft: 3 }}
           containerStyle={{ paddingTop: 5 }}
           inputContainerStyle={[globalStyles.inputStyle]}
-          inputStyle={{ color: Colors.light.primary }}
+          inputStyle={[globalStyles.inputText, { color: Colors.light.primary }]}
           onFocus={() =>
             this.setState({
               tagsColor: Colors.light.white,
@@ -206,12 +211,16 @@ export default class HolidaysForm extends React.Component<Props> {
         >
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>
-              <Text style={{ color: Colors.light.white }}>Cancel</Text>
+              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+                Annuler
+              </Text>
             </View>
           </Pressable>
           <Pressable onPress={() => this.saveHolidays()}>
             <View style={[globalStyles.buttonPrimary]}>
-              <Text style={{ color: Colors.light.white }}>Save</Text>
+              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+                Ajouter
+              </Text>
             </View>
           </Pressable>
         </View>
@@ -226,5 +235,6 @@ const styles = StyleSheet.create({
   },
   tagText: {
     color: Colors.light.primary,
+    fontFamily: "WorkSansRegular",
   },
 });

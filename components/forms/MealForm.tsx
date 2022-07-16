@@ -72,7 +72,7 @@ export default class MealForm extends React.Component<Props> {
   };
 
   setIngredientQuantity = (index: number, quantity: number) => {
-    let tmpArray = this.state.ingredients;
+    let tmpArray: Ingredient[] = this.state.ingredients;
     tmpArray[index] = {
       title: tmpArray[index].title,
       quantity: quantity,
@@ -83,16 +83,17 @@ export default class MealForm extends React.Component<Props> {
   render() {
     return (
       <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
-        <Text>Intitulé</Text>
+        <Text style={[globalStyles.formTitle]}>Nouvelle idée repas :</Text>
+        <Text style={globalStyles.text}>Intitulé</Text>
         <TextInput
           style={globalStyles.inputStyle}
           onChangeText={(text) => this.setTitle(text)}
         />
-        <Text>Ajouter des Ingrédients</Text>
+        <Text style={globalStyles.text}>Ajouter des Ingrédients</Text>
         <View style={globalStyles.rowView}>
           <TextInput
             value={this.state.ingredientName}
-            style={[globalStyles.inputStyle, { width: "70%" }]}
+            style={[globalStyles.inputStyle, { width: "88%" }]}
             onChangeText={(text) => this.setIngredientName(text)}
           />
           <Pressable onPress={() => this.addIngredient()}>
@@ -114,17 +115,18 @@ export default class MealForm extends React.Component<Props> {
                 { width: "100%", paddingVertical: 5 },
               ]}
             >
-              <Text>{item.title}</Text>
+              <Text style={globalStyles.inputText}>{item.title}</Text>
               <NumericInput
                 onChange={(value) => this.setIngredientQuantity(index, value)}
                 value={item.quantity}
-                totalHeight={30}
-                totalWidth={100}
+                totalHeight={35}
+                totalWidth={70}
                 minValue={1}
                 rounded
                 rightButtonBackgroundColor={Colors.light.mediumBlue}
                 leftButtonBackgroundColor={Colors.light.lightBlue}
-                borderColor={Colors.light.lighterBlue}
+                borderColor={"transparent"}
+                inputStyle={{ backgroundColor: Colors.light.white }}
               />
             </View>
           )}
@@ -144,12 +146,16 @@ export default class MealForm extends React.Component<Props> {
         >
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>
-              <Text style={{ color: Colors.light.white }}>Cancel</Text>
+              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+                Annuler
+              </Text>
             </View>
           </Pressable>
           <Pressable onPress={() => this.saveMealIdea()}>
             <View style={[globalStyles.buttonPrimary]}>
-              <Text style={{ color: Colors.light.white }}>Save</Text>
+              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+                Ajouter
+              </Text>
             </View>
           </Pressable>
         </View>

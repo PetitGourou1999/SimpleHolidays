@@ -37,7 +37,7 @@ export default class CustomDatePicker extends React.Component<Props> {
           minimumDate={new Date()}
           locale="fr-FR"
         />
-        <Text>
+        <Text style={{ fontFamily: "WorkSansRegular" }}>
           {this.state.selectedDate.toLocaleTimeString([], {
             year: "numeric",
             month: "numeric",

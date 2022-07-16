@@ -3,6 +3,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Colors from "../constants/Colors";
+import globalStyles from "../constants/Styles";
 import { Miscellaneous } from "../types/Types";
 
 interface Props {
@@ -61,7 +62,8 @@ const styles = StyleSheet.create({
   task: {
     width: "90%",
     color: Colors.light.primary,
-    fontWeight: "bold",
+    ...globalStyles.text,
+    fontSize: 16,
   },
   delete: {
     marginLeft: 10,
