@@ -8,21 +8,6 @@ import storageHelper from "../../storage/AsyncStorageHelper";
 import { Meal, MealIdea, MealsOfTheDay } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
 
-/*export type Meal = {
-  meal: MealIdea;
-  time: string;
-};
-
-export type Meal = {
-  meal: MealIdea;
-  time: string;
-};
-
-export type MealsOfTheDay = {
-  date: Date;
-  meals: Meal[];
-};*/
-
 interface Props {
   holidaysMeal: MealsOfTheDay;
   onLunchChange(meal: Meal): any;

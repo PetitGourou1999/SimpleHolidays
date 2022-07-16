@@ -6,21 +6,6 @@ import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/AsyncStorageHelper";
 import { Meal, MealsOfTheDay } from "../types/Types";
 
-/*export type Meal = {
-  meal: MealIdea;
-  time: string;
-};
-
-export type Meal = {
-  meal: MealIdea;
-  time: string;
-};
-
-export type MealsOfTheDay = {
-  date: Date;
-  meals: Meal[];
-};*/
-
 export default class HolidaysMealsScreen extends React.Component {
   state = {
     arrayHolder: [] /*(MealsOfTheDay)*/,

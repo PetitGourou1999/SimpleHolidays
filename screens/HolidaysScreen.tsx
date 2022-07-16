@@ -55,7 +55,7 @@ export default class HolidaysScreen extends React.Component {
               fontSize: 16,
             }}
           >
-            Nouvelles Vancances !
+            Nouvelles Vacances !
           </Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>

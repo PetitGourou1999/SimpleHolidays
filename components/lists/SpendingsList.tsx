@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
@@ -20,8 +20,11 @@ export default class SpendingsList extends React.Component<Props> {
     textInputHolderPlayer: "",
   };
 
-  componentDidMount() {
+  loadData = () => {
     this.setState({ arrayHolder: [...this.props.holidays.spendings] });
+  };
+  componentDidMount() {
+    this.loadData();
   }
 
   toggleModal = (visible: boolean) => {
@@ -33,6 +36,8 @@ export default class SpendingsList extends React.Component<Props> {
     tmpArray.push(spending);
     this.setState({ arrayHolder: [...tmpArray] });
   };
+
+  onSave = () => {};
 
   render() {
     return (
@@ -56,10 +61,10 @@ export default class SpendingsList extends React.Component<Props> {
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
           <View style={globalStyles.modal}>
-            <SpendingsForm />
-            <Button
-              title="Hide modal"
-              onPress={() => this.toggleModal(false)}
+            <SpendingsForm
+              holidays={this.props.holidays}
+              onCancel={() => this.toggleModal(false)}
+              onSave={() => this.toggleModal(false)}
             />
           </View>
         </Modal>
