@@ -77,13 +77,17 @@ export default class HolidaysScreen extends React.Component {
           keyExtractor={(index: any) => index.toString()}
           renderItem={({ item, index }) => (
             <HolidaysCard
+              onDelete={() => this.loadData()}
               holidays={item}
               navigation={this.props.navigation}
             ></HolidaysCard>
           )}
           style={{
-            paddingLeft: 3,
+            paddingLeft: 5,
             width: "100%",
+          }}
+          contentContainerStyle={{
+            justifyContent: "center",
           }}
         />
       </View>

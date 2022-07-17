@@ -118,6 +118,14 @@ const globalStyles = StyleSheet.create({
     paddingTop: 30,
   },
 
+  cardHeader: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    alignItems: "center",
+  },
+
   cardTitle: {
     color: Colors.light.secondary,
     fontWeight: "bold",

@@ -1,23 +1,53 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
+import storageHelper from "../../storage/AsyncStorageHelper";
 import { MealIdea } from "../../types/Types";
 
 interface Props {
   mealIdea: MealIdea;
+  onDelete: any;
 }
 
 export default class MealCard extends React.Component<Props> {
+  onDelete = () => {
+    storageHelper.removeData(this.props.mealIdea.storageKey).then(
+      () => {
+        this.props.onDelete();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
   render() {
     return (
       <Card
         wrapperStyle={styles.cardWrapper}
         containerStyle={styles.cardContainer}
       >
-        <Card.Title style={globalStyles.cardTitle}>
-          {this.props.mealIdea.title}
+        <Card.Title>
+          <View style={globalStyles.cardHeader}>
+            <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
+              {this.props.mealIdea.title}
+            </Text>
+            <Pressable
+              style={{
+                marginLeft: "auto",
+              }}
+              onPress={() => this.onDelete()}
+            >
+              <FontAwesome
+                name="trash"
+                size={20}
+                color={Colors.light.secondary}
+              />
+            </Pressable>
+          </View>
         </Card.Title>
         <Card.Divider color={Colors.light.secondary} />
         {this.props.mealIdea.ingredients.map((item, index) => {
@@ -35,7 +65,7 @@ export default class MealCard extends React.Component<Props> {
                   globalStyles.cardText,
                   {
                     minWidth: "10%",
-                    textAlign: "center",
+                    textAlign: "right",
                   },
                 ]}
               >
@@ -58,6 +88,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     borderColor: Colors.light.secondary,
     backgroundColor: Colors.light.quaternary,
-    width: "90%",
+    width: "91%",
   },
 });

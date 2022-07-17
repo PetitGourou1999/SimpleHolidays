@@ -73,9 +73,14 @@ export default class MealsList extends React.Component {
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
           keyExtractor={(index: any) => index.toString()}
-          renderItem={({ item }) => <MealCard mealIdea={item}></MealCard>}
+          renderItem={({ item }) => (
+            <MealCard
+              onDelete={() => this.loadData()}
+              mealIdea={item}
+            ></MealCard>
+          )}
           style={{
-            width: "90%",
+            width: "100%",
             paddingLeft: 5,
           }}
         />

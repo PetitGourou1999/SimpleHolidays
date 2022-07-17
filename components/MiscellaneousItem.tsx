@@ -32,7 +32,14 @@ export default class MiscellaneousItem extends React.Component<Props> {
             checked={this.state.checked}
             onPress={() => this.checkItem()}
           />
-          <Text style={globalStyles.text}>{this.props.item.title}</Text>
+          <Text
+            style={[
+              globalStyles.text,
+              { fontSize: 16, color: Colors.light.primary },
+            ]}
+          >
+            {this.props.item.title}
+          </Text>
         </View>
         <Pressable onPress={() => this.props.deleteTask()}>
           <FontAwesome

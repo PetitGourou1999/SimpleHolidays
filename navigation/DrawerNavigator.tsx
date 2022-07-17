@@ -5,7 +5,6 @@ import React from "react";
 import Colors from "../constants/Colors";
 import MealsScreen from "../screens/MealsScreen";
 import MiscellaneousScreen from "../screens/MiscellaneousScreen";
-import ResetScreen from "../screens/ResetScreen";
 import { MainStackNavigator } from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();
@@ -75,16 +74,6 @@ const DrawerNavigator = () => {
               size={size}
               color={Colors.light.primary}
             />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Reset"
-        component={ResetScreen}
-        options={{
-          title: "Reset",
-          drawerIcon: ({ focused, size }) => (
-            <FontAwesome5 name="cog" size={size} color={Colors.light.primary} />
           ),
         }}
       />
