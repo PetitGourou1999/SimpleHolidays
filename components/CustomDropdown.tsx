@@ -14,13 +14,20 @@ import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 
 interface Props {
+  iconLeft?: string;
   style: StyleProp<ViewStyle> | undefined;
   label: string;
   data: Array<{ label: string; value: any }>;
   onSelect: (item: { label: string; value: any }) => void;
 }
 
-const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
+const CustomDropdown: FC<Props> = ({
+  iconLeft,
+  style,
+  label,
+  data,
+  onSelect,
+}) => {
   const DropdownButton = useRef();
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(undefined);
@@ -47,6 +54,18 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
     setSelected(item);
     onSelect(item);
     setVisible(false);
+  };
+
+  const renderIconLeft = () => {
+    if (iconLeft !== undefined) {
+      return (
+        <FontAwesome
+          name={iconLeft}
+          size={17}
+          style={styles.icon}
+        ></FontAwesome>
+      );
+    }
   };
 
   const renderItem = ({ item }: any): ReactElement<any, any> => (
@@ -87,6 +106,7 @@ const CustomDropdown: FC<Props> = ({ style, label, data, onSelect }) => {
       style={[styles.button, style]}
       onPress={toggleDropdown}
     >
+      {renderIconLeft()}
       {renderDropdown()}
       <Text style={styles.buttonText}>
         {(selected && selected.label) || label}

@@ -94,18 +94,22 @@ export default class EditableMealRow extends React.Component<Props> {
             day: "numeric",
           })}
         </Text>
-        <CustomDropdown
-          style={{ marginRight: 10 }}
-          label={this.state.valueLunch.meal.title}
-          data={this.state.items}
-          onSelect={(item) => this.setValueLunch(item.value)}
-        ></CustomDropdown>
-        <CustomDropdown
-          style={{}}
-          label={this.state.valueDiner.meal.title}
-          data={this.state.items}
-          onSelect={(item) => this.setValuDinner(item.value)}
-        ></CustomDropdown>
+        <View style={globalStyles.container}>
+          <CustomDropdown
+            iconLeft="sun-o"
+            style={{ marginBottom: 10 }}
+            label={this.state.valueLunch.meal.title}
+            data={this.state.items}
+            onSelect={(item) => this.setValueLunch(item.value)}
+          ></CustomDropdown>
+          <CustomDropdown
+            iconLeft="moon-o"
+            style={{}}
+            label={this.state.valueDiner.meal.title}
+            data={this.state.items}
+            onSelect={(item) => this.setValuDinner(item.value)}
+          ></CustomDropdown>
+        </View>
       </View>
     );
   }

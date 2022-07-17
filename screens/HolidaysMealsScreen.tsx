@@ -92,9 +92,10 @@ export default class HolidaysMealsScreen extends React.Component {
           </Text>
           <View style={globalStyles.rowBorderStyle}></View>
           <View style={[globalStyles.editableRow]}>
-            <Text style={globalStyles.rowText}>Date</Text>
-            <Text style={globalStyles.rowText}>Midi</Text>
-            <Text style={globalStyles.rowText}>Soir</Text>
+            <Text style={[globalStyles.rowText, { flex: 0, width: "33%" }]}>
+              Date
+            </Text>
+            <Text style={[globalStyles.rowText, { flex: 1 }]}>Repas</Text>
           </View>
 
           <FlatList
