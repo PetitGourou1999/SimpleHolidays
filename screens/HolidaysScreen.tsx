@@ -25,6 +25,9 @@ export default class HolidaysScreen extends React.Component {
     storageHelper.getAllItems().then(
       (value) => {
         if (value !== undefined) {
+          this.setState({
+            allHolidays: [],
+          });
           value.forEach((element) => {
             if (element.players !== undefined) {
               this.setState({

@@ -63,12 +63,16 @@ export default class MealForm extends React.Component<Props> {
   };
 
   addIngredient = () => {
-    let newIngredient: Ingredient = {
-      title: this.state.ingredientName,
-      quantity: 1,
-    };
-    this.setState({ ingredients: [...this.state.ingredients, newIngredient] });
-    this.setState({ ingredientName: "" });
+    if (this.state.ingredientName.trim() !== "") {
+      let newIngredient: Ingredient = {
+        title: this.state.ingredientName,
+        quantity: 1,
+      };
+      this.setState({
+        ingredients: [...this.state.ingredients, newIngredient],
+      });
+      this.setState({ ingredientName: "" });
+    }
   };
 
   setIngredientQuantity = (index: number, quantity: number) => {

@@ -3,7 +3,6 @@ import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
-import { MealIdea } from "../../types/Types";
 import MealCard from "../cards/MealCard";
 import MealForm from "../forms/MealForm";
 
@@ -24,7 +23,6 @@ export default class MealsList extends React.Component {
           });
           value.forEach((element) => {
             if (element.ingredients !== undefined) {
-              console.log(JSON.stringify(element));
               this.setState({
                 arrayHolder: [...this.state.arrayHolder, element],
               });
@@ -46,10 +44,9 @@ export default class MealsList extends React.Component {
     this.setState({ isModalVisible: visible });
   };
 
-  joinData = (meal: MealIdea) => {
-    var tmpArray: MealIdea[] = [...this.state.arrayHolder];
-    tmpArray.push(meal);
-    this.setState({ arrayHolder: [...tmpArray] });
+  onSave = () => {
+    this.toggleModal(false);
+    this.loadData();
   };
 
   render() {
@@ -68,7 +65,7 @@ export default class MealsList extends React.Component {
           <View style={globalStyles.modal}>
             <MealForm
               onCancel={() => this.toggleModal(false)}
-              onSave={() => this.loadData()}
+              onSave={() => this.onSave()}
             />
           </View>
         </Modal>

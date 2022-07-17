@@ -26,18 +26,20 @@ export default class MiscellaneousItem extends React.Component<Props> {
   render() {
     return (
       <View style={styles.taskContainer}>
-        <CheckBox
-          title=""
-          checked={this.state.checked}
-          onPress={() => this.checkItem()}
-        />
-        <Text style={styles.task}>{this.props.item.title}</Text>
+        <View style={[globalStyles.rowView, { justifyContent: "flex-start" }]}>
+          <CheckBox
+            title=""
+            checked={this.state.checked}
+            onPress={() => this.checkItem()}
+          />
+          <Text style={globalStyles.text}>{this.props.item.title}</Text>
+        </View>
         <Pressable onPress={() => this.props.deleteTask()}>
           <FontAwesome
             style={styles.delete}
             name="trash"
             size={20}
-            color={Colors.light.white}
+            color={Colors.light.primary}
           />
         </Pressable>
       </View>
@@ -47,23 +49,15 @@ export default class MiscellaneousItem extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   taskContainer: {
-    width: "95%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    alignSelf: "center",
+    ...globalStyles.rowView,
+    flex: 1,
+    width: "100%",
     borderRadius: 10,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
+    padding: 5,
+    paddingRight: 20,
     marginVertical: 5,
     minHeight: 40,
     backgroundColor: Colors.light.white,
-  },
-  task: {
-    width: "90%",
-    color: Colors.light.primary,
-    ...globalStyles.text,
-    fontSize: 16,
   },
   delete: {
     marginLeft: 10,

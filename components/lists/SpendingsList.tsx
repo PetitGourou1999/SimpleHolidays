@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import globalStyles from "../../constants/Styles";
-import { Holidays, Spending } from "../../types/Types";
+import { Holidays } from "../../types/Types";
 import SpendingsCard from "../cards/SpendingsCard";
 import TotalSpendingsCard from "../cards/TotalSpendingsCard";
 import SpendingsForm from "../forms/SpendingsForm";
@@ -22,6 +22,7 @@ export default class SpendingsList extends React.Component<Props> {
   loadData = () => {
     this.setState({ arrayHolder: [...this.props.holidays.spendings] });
   };
+
   componentDidMount() {
     this.loadData();
   }
@@ -30,13 +31,10 @@ export default class SpendingsList extends React.Component<Props> {
     this.setState({ isModalVisible: visible });
   };
 
-  joinData = (spending: Spending) => {
-    var tmpArray: Spending[] = [...this.state.arrayHolder];
-    tmpArray.push(spending);
-    this.setState({ arrayHolder: [...tmpArray] });
+  onSave = () => {
+    this.toggleModal(false);
+    this.loadData();
   };
-
-  onSave = () => {};
 
   render() {
     return (
@@ -55,7 +53,7 @@ export default class SpendingsList extends React.Component<Props> {
             <SpendingsForm
               holidays={this.props.holidays}
               onCancel={() => this.toggleModal(false)}
-              onSave={() => this.toggleModal(false)}
+              onSave={() => this.onSave()}
             />
           </View>
         </Modal>
