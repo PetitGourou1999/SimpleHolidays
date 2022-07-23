@@ -1,5 +1,4 @@
 import { FontAwesome } from "@expo/vector-icons";
-import * as Font from "expo-font";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
@@ -7,6 +6,7 @@ import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays } from "../../types/Types";
+import DeletionModal from "../DeletionModal";
 
 interface Props {
   holidays: Holidays;
@@ -17,27 +17,26 @@ interface Props {
 export default class HolidaysCard extends React.Component<Props> {
   state = {
     loaded: false,
+    isModalVisible: false,
   };
 
-  _loadFontsAsync = async () => {
-    let isLoaded = await Font.loadAsync({
-      WorkSans: require("../../assets/fonts/WorkSans-Bold.ttf"),
-    });
-    this.setState({ loaded: isLoaded });
-  };
-
-  componentDidMount = () => {
-    this._loadFontsAsync();
+  toggleModal = (visible: boolean) => {
+    this.setState({ isModalVisible: visible });
   };
 
   onPressButton = (screenName: string) => {
     this.props.navigation.navigate(screenName, { data: this.props.holidays });
   };
 
+  onCancel = () => {
+    this.toggleModal(false);
+  };
+
   onDelete = () => {
     storageHelper.removeData(this.props.holidays.storageKey).then(
       () => {
         this.props.onDelete();
+        this.toggleModal(false);
       },
       (error) => {
         console.log(error);
@@ -47,49 +46,57 @@ export default class HolidaysCard extends React.Component<Props> {
 
   render() {
     return (
-      <Card
-        wrapperStyle={styles.cardWrapper}
-        containerStyle={styles.cardContainer}
-      >
-        <Card.Title>
-          <View style={globalStyles.cardHeader}>
-            <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
-              {this.props.holidays.title}
-            </Text>
-            <Pressable
-              style={{
-                marginLeft: "auto",
-              }}
-              onPress={() => this.onDelete()}
-            >
-              <FontAwesome
-                name="trash"
-                size={20}
-                color={Colors.light.secondary}
-              />
-            </Pressable>
-          </View>
-        </Card.Title>
-        <Card.Divider color={Colors.light.secondary} />
-        <Pressable
-          style={[styles.pressable]}
-          onPress={() => this.onPressButton("Activités des Vacances")}
+      <React.Fragment>
+        <Card
+          wrapperStyle={styles.cardWrapper}
+          containerStyle={styles.cardContainer}
         >
-          <Text style={styles.pressableText}>Activités</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.pressable]}
-          onPress={() => this.onPressButton("Repas des Vacances")}
-        >
-          <Text style={styles.pressableText}>Repas</Text>
-        </Pressable>
-        <Pressable
-          style={[styles.pressable]}
-          onPress={() => this.onPressButton("Dépenses des Vacances")}
-        >
-          <Text style={styles.pressableText}>Dépenses</Text>
-        </Pressable>
-      </Card>
+          <Card.Title>
+            <View style={globalStyles.cardHeader}>
+              <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
+                {this.props.holidays.title}
+              </Text>
+              <Pressable
+                style={{
+                  marginLeft: "auto",
+                }}
+                onPress={() => this.toggleModal(true)}
+              >
+                <FontAwesome
+                  name="trash"
+                  size={20}
+                  color={Colors.light.secondary}
+                />
+              </Pressable>
+            </View>
+          </Card.Title>
+          <Card.Divider color={Colors.light.secondary} />
+          <Pressable
+            style={[styles.pressable]}
+            onPress={() => this.onPressButton("Activités des Vacances")}
+          >
+            <Text style={styles.pressableText}>Activités</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.pressable]}
+            onPress={() => this.onPressButton("Repas des Vacances")}
+          >
+            <Text style={styles.pressableText}>Repas</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.pressable]}
+            onPress={() => this.onPressButton("Dépenses des Vacances")}
+          >
+            <Text style={styles.pressableText}>Dépenses</Text>
+          </Pressable>
+        </Card>
+        <DeletionModal
+          isVisible={this.state.isModalVisible}
+          label={"Voulez-vous vraiment supprimer ces vacances ?"}
+          onDelete={() => this.onDelete()}
+          onCancel={() => this.toggleModal(false)}
+        ></DeletionModal>
+      </React.Fragment>
     );
   }
 }

@@ -16,6 +16,8 @@ const mediumBlue = "#00B4D8";
 const lightBlue = "#90E0EF";
 const lighterBlue = "#CAF0F8";
 
+const softRed = "#e76f51";
+
 export default {
   light: {
     white: white,
@@ -35,5 +37,6 @@ export default {
     mediumBlue: mediumBlue,
     lightBlue: lightBlue,
     lighterBlue: lighterBlue,
+    softRed: softRed,
   },
 };
