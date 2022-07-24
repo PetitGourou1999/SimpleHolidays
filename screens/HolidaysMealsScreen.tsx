@@ -1,10 +1,10 @@
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import EditableMealRow from "../components/rows/EditableMealRow";
 import { diner, lunch } from "../constants/data/MealTimes";
 import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/AsyncStorageHelper";
-import { Meal, MealsOfTheDay } from "../types/Types";
+import { Holidays, Ingredient, Meal, MealsOfTheDay } from "../types/Types";
 
 export default class HolidaysMealsScreen extends React.Component {
   state = {
@@ -13,7 +13,7 @@ export default class HolidaysMealsScreen extends React.Component {
   };
 
   private data = this.props.route;
-  private holidays = this.data.params.data;
+  private holidays: Holidays = this.data.params.data;
 
   componentDidMount() {
     this.setState({ arrayHolder: [...this.holidays.meals] });
@@ -22,6 +22,7 @@ export default class HolidaysMealsScreen extends React.Component {
 
   onLunchChange = (item: MealsOfTheDay, meal: Meal) => {
     let holidaysMeals: MealsOfTheDay[] = [...this.state.holidays.meals];
+    let holidaysGroceries: Ingredient[] = [...this.state.holidays.groceries];
 
     let foundIndexDate = holidaysMeals.findIndex(
       (obj) => obj.date === item.date
@@ -40,8 +41,31 @@ export default class HolidaysMealsScreen extends React.Component {
 
     this.holidays.meals = holidaysMeals;
 
+    for (let k = 0; k < meal.meal.ingredients.length; k++) {
+      let foundIndex = holidaysGroceries.findIndex(
+        (ingredient) => ingredient.title === meal.meal.ingredients[k].title
+      );
+      if (foundIndex != -1) {
+        holidaysGroceries[foundIndex] = {
+          title: holidaysGroceries[foundIndex].title,
+          quantity:
+            holidaysGroceries[foundIndex].quantity +
+            meal.meal.ingredients[k].quantity,
+          checked: holidaysGroceries[foundIndex].checked,
+        };
+      } else {
+        if (meal.meal.ingredients[k].title !== "") {
+          holidaysGroceries.push(meal.meal.ingredients[k]);
+        }
+      }
+    }
+
+    this.holidays.groceries = [...holidaysGroceries];
+
     storageHelper.storeData(this.holidays.storageKey, this.holidays).then(
-      () => {},
+      () => {
+        this.setState({ holidays: this.holidays });
+      },
       (error) => {
         console.log(error);
       }
@@ -50,6 +74,7 @@ export default class HolidaysMealsScreen extends React.Component {
 
   onDinerChange = (item: MealsOfTheDay, meal: Meal) => {
     let holidaysMeals: MealsOfTheDay[] = [...this.state.holidays.meals];
+    let holidaysGroceries: Ingredient[] = [...this.state.holidays.groceries];
 
     let foundIndexDate = holidaysMeals.findIndex(
       (obj) => obj.date === item.date
@@ -68,8 +93,31 @@ export default class HolidaysMealsScreen extends React.Component {
 
     this.holidays.meals = holidaysMeals;
 
+    for (let k = 0; k < meal.meal.ingredients.length; k++) {
+      let foundIndex = holidaysGroceries.findIndex(
+        (ingredient) => ingredient.title === meal.meal.ingredients[k].title
+      );
+      if (foundIndex != -1) {
+        holidaysGroceries[foundIndex] = {
+          title: holidaysGroceries[foundIndex].title,
+          quantity:
+            holidaysGroceries[foundIndex].quantity +
+            meal.meal.ingredients[k].quantity,
+          checked: holidaysGroceries[foundIndex].checked,
+        };
+      } else {
+        if (meal.meal.ingredients[k].title !== "") {
+          holidaysGroceries.push(meal.meal.ingredients[k]);
+        }
+      }
+    }
+
+    this.holidays.groceries = [...holidaysGroceries];
+
     storageHelper.storeData(this.holidays.storageKey, this.holidays).then(
-      () => {},
+      () => {
+        this.setState({ holidays: this.holidays });
+      },
       (error) => {
         console.log(error);
       }
@@ -80,17 +128,21 @@ export default class HolidaysMealsScreen extends React.Component {
     return (
       <React.Fragment>
         <View style={[globalStyles.container]}>
-          <Text
+          <Pressable
             style={[
-              globalStyles.rowText,
-              globalStyles.rowHintText,
-              globalStyles.text,
+              globalStyles.buttonPrimary,
+              { marginVertical: 20, width: "90%" },
             ]}
+            onPress={() =>
+              this.props.navigation.navigate("Liste de Courses", {
+                data: this.state.holidays,
+              })
+            }
           >
-            Pour pouvoir ajouter des repas, il faut ajouter des Idées Repas
-            depuis la page dédiée
-          </Text>
-          <View style={globalStyles.rowBorderStyle}></View>
+            <Text style={globalStyles.bigButtonText}>
+              Voir la liste de courses
+            </Text>
+          </Pressable>
           <View style={[globalStyles.editableRow]}>
             <Text style={[globalStyles.rowText, { flex: 0, width: "33%" }]}>
               Date

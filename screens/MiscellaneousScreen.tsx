@@ -8,15 +8,6 @@ export default class MiscellaneousScreen extends React.Component {
     currentItem: "",
   };
 
-  setCurrentItem = (currentItem: string) => {
-    this.setState({ currentItem: currentItem });
-  };
-
-  handleAddTask = () => {
-    //props.addTask(value);
-    this.setState({ currentItem: "" });
-  };
-
   render() {
     return (
       <View style={globalStyles.container}>

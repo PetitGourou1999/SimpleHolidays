@@ -3,7 +3,7 @@ import { FlatList, Text, View } from "react-native";
 import EditableActivityRow from "../components/rows/EditableActivityRow";
 import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/AsyncStorageHelper";
-import { Activity } from "../types/Types";
+import { Activity, Holidays } from "../types/Types";
 
 export default class HolidaysActivitiesScreen extends React.Component {
   state = {
@@ -12,7 +12,7 @@ export default class HolidaysActivitiesScreen extends React.Component {
   };
 
   private data = this.props.route;
-  private holidays = this.data.params.data;
+  private holidays: Holidays = this.data.params.data;
 
   componentDidMount() {
     this.setState({ arrayHolder: [...this.holidays.activities] });

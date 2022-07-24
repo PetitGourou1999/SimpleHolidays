@@ -3,6 +3,7 @@ import React from "react";
 import Colors from "../constants/Colors";
 
 import HolidaysActivitiesScreen from "../screens/HolidaysActivitiesScreen";
+import HolidaysGroceriesScreen from "../screens/HolidaysGroceriesScreen";
 import HolidaysMealsScreen from "../screens/HolidaysMealsScreen";
 import HolidaysScreen from "../screens/HolidaysScreen";
 import HolidaysSpendingsScreen from "../screens/HolidaysSpendingsScreen";
@@ -35,6 +36,10 @@ const MainStackNavigator = () => {
       <Stack.Screen
         name="Dépenses des Vacances"
         component={HolidaysSpendingsScreen}
+      />
+      <Stack.Screen
+        name="Liste de Courses"
+        component={HolidaysGroceriesScreen}
       />
     </Stack.Navigator>
   );

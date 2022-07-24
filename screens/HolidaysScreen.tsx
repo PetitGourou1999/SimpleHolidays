@@ -1,4 +1,3 @@
-import * as Font from "expo-font";
 import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import Modal from "react-native-modal";
@@ -12,13 +11,6 @@ export default class HolidaysScreen extends React.Component {
     isModalVisible: false,
     allHolidays: [],
     loaded: false,
-  };
-
-  _loadFontsAsync = async () => {
-    let isLoaded = await Font.loadAsync({
-      WorkSans: require("../assets/fonts/WorkSans-Bold.ttf"),
-    });
-    this.setState({ loaded: isLoaded });
   };
 
   loadData = () => {

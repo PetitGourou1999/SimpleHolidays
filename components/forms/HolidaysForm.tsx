@@ -73,6 +73,7 @@ export default class HolidaysForm extends React.Component<Props> {
       players: [],
       activities: [],
       meals: [],
+      groceries: [],
       spendings: [],
     };
 

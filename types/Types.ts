@@ -11,6 +11,7 @@ export type Miscellaneous = {
 export type Ingredient = {
   title: string;
   quantity: number;
+  checked: boolean;
 };
 
 export type MealIdea = {
@@ -60,5 +61,6 @@ export type Holidays = {
   players: Player[];
   activities: Activity[];
   meals: MealsOfTheDay[];
+  groceries: Ingredient[];
   spendings: Spending[];
 };

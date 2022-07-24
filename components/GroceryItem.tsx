@@ -1,23 +1,21 @@
-import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
-import { Miscellaneous } from "../types/Types";
+import { Ingredient } from "../types/Types";
 
 interface Props {
-  item: Miscellaneous;
-  deleteTask: any;
+  item: Ingredient;
 }
 
-export default class MiscellaneousItem extends React.Component<Props> {
+export default class GroceryItem extends React.Component<Props> {
   state = {
     checked: false,
   };
 
   componentDidMount = () => {
-    this.setState({ checked: this.props.item.checked });
+    //this.setState({ checked: this.props.item.checked });
   };
 
   checkItem = () => {
@@ -33,23 +31,25 @@ export default class MiscellaneousItem extends React.Component<Props> {
             checked={this.state.checked}
             onPress={() => this.checkItem()}
           />
-          <Text
-            style={[
-              globalStyles.text,
-              { fontSize: 16, color: Colors.light.primary },
-            ]}
-          >
-            {this.props.item.title}
-          </Text>
+          <View style={[globalStyles.rowView]}>
+            <Text
+              style={[
+                globalStyles.text,
+                { fontSize: 16, color: Colors.light.primary },
+              ]}
+            >
+              {this.props.item.title}
+            </Text>
+            <Text
+              style={[
+                globalStyles.text,
+                { fontSize: 16, color: Colors.light.primary },
+              ]}
+            >
+              {this.props.item.quantity}
+            </Text>
+          </View>
         </View>
-        <Pressable onPress={() => this.props.deleteTask()}>
-          <FontAwesome
-            style={styles.delete}
-            name="trash"
-            size={20}
-            color={Colors.light.primary}
-          />
-        </Pressable>
       </View>
     );
   }
