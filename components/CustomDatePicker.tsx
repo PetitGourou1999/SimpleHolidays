@@ -38,9 +38,10 @@ export default class CustomDatePicker extends React.Component<Props> {
           locale="fr-FR"
         />
         <Text style={{ fontFamily: "WorkSansRegular" }}>
-          {this.state.selectedDate.toLocaleTimeString([], {
+          {this.state.selectedDate.toLocaleString([], {
+            weekday: "long",
             year: "numeric",
-            month: "numeric",
+            month: "long",
             day: "numeric",
           })}
         </Text>

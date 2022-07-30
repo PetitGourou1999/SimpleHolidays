@@ -53,10 +53,12 @@ export default class HolidaysMealsScreen extends React.Component {
     // Update Groceries : add Ingredients
     for (let k = 0; k < meal.meal.ingredients.length; k++) {
       let foundIndex = holidaysGroceries.findIndex(
-        (ingredient) => ingredient.title === meal.meal.ingredients[k].title
+        (ingredient) =>
+          ingredient.title === meal.meal.ingredients[k].title &&
+          ingredient.checked === false
       );
 
-      if (foundIndex != -1 && !holidaysGroceries[foundIndex].checked) {
+      if (foundIndex != -1) {
         holidaysGroceries[foundIndex] = {
           index: holidaysGroceries[foundIndex].index,
           title: holidaysGroceries[foundIndex].title,
