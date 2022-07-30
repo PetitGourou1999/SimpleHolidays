@@ -145,15 +145,7 @@ export default class MealForm extends React.Component<Props> {
             width: "90%",
           }}
         />
-        <View
-          style={[
-            globalStyles.editableRow,
-            {
-              justifyContent: "space-evenly",
-              marginTop: "auto",
-            },
-          ]}
-        >
+        <View style={[globalStyles.editableRow, styles.buttonBar]}>
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>
               <Text style={[globalStyles.text, { color: Colors.light.white }]}>
@@ -176,4 +168,9 @@ export default class MealForm extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   icon: {},
+
+  buttonBar: {
+    justifyContent: "space-evenly",
+    marginTop: "auto",
+  },
 });

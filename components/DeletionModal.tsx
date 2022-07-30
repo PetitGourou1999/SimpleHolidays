@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
@@ -23,42 +23,11 @@ export default class DeletionModal extends React.Component<Props> {
   render() {
     return (
       <Modal isVisible={this.props.isVisible}>
-        <View
-          style={[
-            globalStyles.modal,
-            {
-              flex: 0.2,
-              alignContent: "center",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          ]}
-        >
-          <Text
-            style={[
-              globalStyles.cardText,
-              {
-                width: "100%",
-                textAlign: "center",
-                marginTop: 40,
-                paddingHorizontal: 10,
-              },
-            ]}
-          >
+        <View style={[globalStyles.modal, styles.modalStyle]}>
+          <Text style={[globalStyles.cardText, styles.titleText]}>
             {this.props.label}
           </Text>
-          <View
-            style={[
-              globalStyles.editableRow,
-              {
-                justifyContent: "space-evenly",
-                marginTop: "auto",
-                backgroundColor: Colors.light.white,
-                borderBottomLeftRadius: 20,
-                borderBottomRightRadius: 20,
-              },
-            ]}
-          >
+          <View style={[globalStyles.editableRow, styles.buttonBar]}>
             <Pressable onPress={() => this.onCancel()}>
               <View style={[globalStyles.buttonPrimary]}>
                 <Text
@@ -88,3 +57,27 @@ export default class DeletionModal extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  modalStyle: {
+    flex: 0.2,
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  titleText: {
+    width: "100%",
+    textAlign: "center",
+    marginTop: 40,
+    paddingHorizontal: 10,
+  },
+
+  buttonBar: {
+    justifyContent: "space-evenly",
+    marginTop: "auto",
+    backgroundColor: Colors.light.white,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+});

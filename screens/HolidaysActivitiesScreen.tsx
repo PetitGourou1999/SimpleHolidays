@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import EditableActivityRow from "../components/rows/EditableActivityRow";
 import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/AsyncStorageHelper";
@@ -72,14 +72,18 @@ export default class HolidaysActivitiesScreen extends React.Component {
               onTextChange={(text) => this.onActivityChange(item, text)}
             ></EditableActivityRow>
           )}
-          style={{
-            height: "0%",
-            width: "90%",
-            paddingHorizontal: 5,
-            marginBottom: 50,
-          }}
+          style={styles.listStyles}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  listStyles: {
+    height: "0%",
+    width: "90%",
+    paddingHorizontal: 5,
+    marginBottom: 50,
+  },
+});

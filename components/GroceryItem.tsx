@@ -26,9 +26,7 @@ export default class GroceryItem extends React.Component<Props> {
     this.setState({ item: this.props.item });
   };
 
-  checkItem = () => {
-    console.log(JSON.stringify(this.state.item));
-
+  editItem = (value: number, editType: string) => {
     let holidaysFromState: Holidays = this.state.holidays;
     let holidayGroceries = holidaysFromState.groceries;
 
@@ -40,8 +38,14 @@ export default class GroceryItem extends React.Component<Props> {
       holidayGroceries[foundIndexOfItem] = {
         index: holidayGroceries[foundIndexOfItem].index,
         title: holidayGroceries[foundIndexOfItem].title,
-        quantity: holidayGroceries[foundIndexOfItem].quantity,
-        checked: !this.state.checked,
+        quantity:
+          editType === "quantity"
+            ? value
+            : holidayGroceries[foundIndexOfItem].quantity,
+        checked:
+          editType === "checked"
+            ? !this.state.checked
+            : holidayGroceries[foundIndexOfItem].checked,
         addedManually: holidayGroceries[foundIndexOfItem].addedManually,
       };
 
@@ -50,38 +54,9 @@ export default class GroceryItem extends React.Component<Props> {
         .then(
           () => {
             this.setState({ holidays: holidaysFromState });
-            this.setState({ checked: !this.state.checked });
-            this.setState({ item: holidayGroceries[foundIndexOfItem] });
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    }
-  };
-
-  setIngredientQuantity = (value: number) => {
-    let holidaysFromState: Holidays = this.state.holidays;
-    let holidayGroceries = holidaysFromState.groceries;
-
-    let foundIndexOfItem = holidayGroceries.findIndex(
-      (groceriesItem) => groceriesItem.index === this.state.item.index
-    );
-
-    if (foundIndexOfItem != -1) {
-      holidayGroceries[foundIndexOfItem] = {
-        index: holidayGroceries[foundIndexOfItem].index,
-        title: holidayGroceries[foundIndexOfItem].title,
-        quantity: value,
-        checked: holidayGroceries[foundIndexOfItem].checked,
-        addedManually: holidayGroceries[foundIndexOfItem].addedManually,
-      };
-
-      storageHelper
-        .storeData(this.state.holidays.storageKey, this.state.holidays)
-        .then(
-          () => {
-            this.setState({ holidays: holidaysFromState });
+            if (editType === "checked") {
+              this.setState({ checked: !this.state.checked });
+            }
             this.setState({ item: holidayGroceries[foundIndexOfItem] });
           },
           (error) => {
@@ -102,7 +77,7 @@ export default class GroceryItem extends React.Component<Props> {
           <CheckBox
             title=""
             checked={this.state.checked}
-            onPress={() => this.checkItem()}
+            onPress={() => this.editItem(0, "checked")}
           />
           <View style={[globalStyles.rowView]}>
             <Text
@@ -114,7 +89,7 @@ export default class GroceryItem extends React.Component<Props> {
               {this.props.item.title}
             </Text>
             <NumericInput
-              onChange={(value) => this.setIngredientQuantity(value)}
+              onChange={(value) => this.editItem(value, "quantity")}
               value={this.state.item.quantity}
               totalHeight={35}
               totalWidth={70}

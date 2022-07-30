@@ -29,37 +29,13 @@ export default class SpendingsCard extends React.Component<Props> {
           }}
         >
           <Text style={globalStyles.cardText}>{"Montant : "}</Text>
-          <Text
-            style={[
-              globalStyles.cardText,
-              {
-                minWidth: "10%",
-                justifyContent: "flex-end",
-                textAlign: "right",
-              },
-            ]}
-          >
+          <Text style={[globalStyles.cardText, styles.amountStyle]}>
             {this.props.spending.amount + " €"}
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 5,
-          }}
-        >
+        <View style={styles.itemRow}>
           <Text style={globalStyles.cardText}>{"Payé par : "}</Text>
-          <Text
-            style={[
-              globalStyles.cardText,
-              {
-                minWidth: "10%",
-                justifyContent: "flex-end",
-                textAlign: "right",
-              },
-            ]}
-          >
+          <Text style={[globalStyles.cardText, styles.pseudoStyle]}>
             {this.props.spending.player.pseudo}
           </Text>
         </View>
@@ -83,5 +59,23 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.secondary,
     backgroundColor: Colors.light.quaternary,
     width: "90%",
+  },
+
+  amountStyle: {
+    minWidth: "10%",
+    justifyContent: "flex-end",
+    textAlign: "right",
+  },
+
+  pseudoStyle: {
+    minWidth: "10%",
+    justifyContent: "flex-end",
+    textAlign: "right",
+  },
+
+  itemRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
   },
 });

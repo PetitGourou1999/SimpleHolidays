@@ -71,17 +71,7 @@ export default class MealCard extends React.Component<Props> {
                 }}
               >
                 <Text style={globalStyles.cardText}>{item.title + " : "}</Text>
-                <Text
-                  style={[
-                    globalStyles.cardText,
-                    {
-                      minWidth: "10%",
-                      textAlign: "right",
-                    },
-                  ]}
-                >
-                  {item.quantity}
-                </Text>
+                <Text style={styles.itemRow}>{item.quantity}</Text>
               </View>
             );
           })}
@@ -107,5 +97,11 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.secondary,
     backgroundColor: Colors.light.quaternary,
     width: "91%",
+  },
+
+  itemRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
   },
 });

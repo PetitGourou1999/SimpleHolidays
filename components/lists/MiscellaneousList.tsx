@@ -139,7 +139,6 @@ export default class MiscellaneousList extends React.Component {
           )}
           style={{
             width: "90%",
-            //paddingLeft: 5,
           }}
         />
       </KeyboardAvoidingView>

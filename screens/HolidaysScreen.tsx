@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import HolidaysCard from "../components/cards/HolidaysCard";
 import HolidaysForm from "../components/forms/HolidaysForm";
@@ -47,10 +47,7 @@ export default class HolidaysScreen extends React.Component {
     return (
       <View style={globalStyles.container}>
         <Pressable
-          style={[
-            globalStyles.buttonPrimary,
-            { marginVertical: 20, width: "90%" },
-          ]}
+          style={[globalStyles.buttonPrimary, styles.buttonStyle]}
           onPress={() => this.toggleModal(true)}
         >
           <Text style={globalStyles.bigButtonText}>Nouvelles Vacances !</Text>
@@ -86,3 +83,10 @@ export default class HolidaysScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    marginVertical: 20,
+    width: "90%",
+  },
+});

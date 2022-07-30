@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
@@ -53,10 +53,7 @@ export default class MealsList extends React.Component {
     return (
       <View style={[globalStyles.container, { width: "100%" }]}>
         <Pressable
-          style={[
-            globalStyles.buttonPrimary,
-            { marginVertical: 20, width: "90%" },
-          ]}
+          style={[globalStyles.buttonPrimary, styles.buttonStyle]}
           onPress={() => this.toggleModal(true)}
         >
           <Text style={globalStyles.bigButtonText}>Ajouter une Idée Repas</Text>
@@ -79,12 +76,21 @@ export default class MealsList extends React.Component {
               mealIdea={item}
             ></MealCard>
           )}
-          style={{
-            width: "100%",
-            paddingLeft: 5,
-          }}
+          style={styles.listStyle}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    marginVertical: 20,
+    width: "90%",
+  },
+
+  listStyle: {
+    width: "100%",
+    paddingLeft: 5,
+  },
+});

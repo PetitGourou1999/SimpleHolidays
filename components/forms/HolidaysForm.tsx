@@ -205,15 +205,7 @@ export default class HolidaysForm extends React.Component<Props> {
           tagTextStyle={styles.tagText}
           keysForTag={", "}
         />
-        <View
-          style={[
-            globalStyles.editableRow,
-            {
-              justifyContent: "space-evenly",
-              marginTop: "auto",
-            },
-          ]}
-        >
+        <View style={[globalStyles.editableRow, styles.buttonBar]}>
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>
               <Text style={[globalStyles.text, { color: Colors.light.white }]}>
@@ -241,5 +233,9 @@ const styles = StyleSheet.create({
   tagText: {
     color: Colors.light.primary,
     fontFamily: "WorkSansRegular",
+  },
+  buttonBar: {
+    justifyContent: "space-evenly",
+    marginTop: "auto",
   },
 });

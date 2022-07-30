@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import EditableMealRow from "../components/rows/EditableMealRow";
 import { diner, lunch } from "../constants/data/MealTimes";
 import globalStyles from "../constants/Styles";
@@ -117,10 +117,7 @@ export default class HolidaysMealsScreen extends React.Component {
       <React.Fragment>
         <View style={[globalStyles.container]}>
           <Pressable
-            style={[
-              globalStyles.buttonPrimary,
-              { marginVertical: 20, width: "90%" },
-            ]}
+            style={[globalStyles.buttonPrimary, styles.buttonStyle]}
             onPress={() =>
               this.props.navigation.navigate("Liste de Courses", {
                 data: this.state.holidays,
@@ -149,15 +146,24 @@ export default class HolidaysMealsScreen extends React.Component {
                 onDinerChange={(meal) => this.onMealChange(item, meal, diner)}
               ></EditableMealRow>
             )}
-            style={{
-              height: "0%",
-              width: "90%",
-              paddingHorizontal: 5,
-              marginBottom: 50,
-            }}
+            style={styles.listStyles}
           />
         </View>
       </React.Fragment>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    marginVertical: 20,
+    width: "90%",
+  },
+
+  listStyles: {
+    height: "0%",
+    width: "90%",
+    paddingHorizontal: 5,
+    marginBottom: 50,
+  },
+});
