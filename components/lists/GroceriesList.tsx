@@ -21,7 +21,17 @@ interface Props {
 
 export default class GroceriesList extends React.Component<Props> {
   state = {
-    holidays: {},
+    holidays: {
+      storageKey: "",
+      title: "",
+      dateStart: new Date(),
+      dateEnd: new Date(),
+      players: [],
+      activities: [],
+      meals: [],
+      groceries: [],
+      spendings: [],
+    },
     arrayHolder: [],
     currentItem: "",
   };
@@ -38,6 +48,10 @@ export default class GroceriesList extends React.Component<Props> {
   handleAddTask = () => {
     if (this.state.currentItem.trim() != "") {
       let newItem: Ingredient = {
+        index:
+          this.state.arrayHolder.length === 0
+            ? 0
+            : Math.max(...this.state.arrayHolder.map((o) => o.index)) + 1,
         title: this.state.currentItem,
         quantity: 1,
         checked: false,
@@ -66,12 +80,8 @@ export default class GroceriesList extends React.Component<Props> {
     let holidaysFromState: Holidays = this.state.holidays;
     let holidayGroceries = holidaysFromState.groceries;
 
-    console.log(JSON.stringify(item));
-
     let foundIndexOfItem = holidayGroceries.findIndex(
-      (groceriesItem) =>
-        groceriesItem.title === item.title &&
-        groceriesItem.quantity == item.quantity
+      (groceriesItem) => groceriesItem.index === item.index
     );
 
     holidayGroceries.splice(foundIndexOfItem, 1);
@@ -123,6 +133,7 @@ export default class GroceriesList extends React.Component<Props> {
           keyExtractor={(index: any) => index.toString()}
           renderItem={({ item }) => (
             <GroceryItem
+              holidays={this.state.holidays}
               item={item}
               deleteItem={() => this.handleDeleteTask(item)}
             ></GroceryItem>

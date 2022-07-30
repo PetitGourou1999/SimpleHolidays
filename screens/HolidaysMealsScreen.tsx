@@ -32,6 +32,8 @@ export default class HolidaysMealsScreen extends React.Component {
 
     let foundIndexTime = mealsOfTheDate.findIndex((obj) => obj.time == theTime);
 
+    let savedMeal = mealsOfTheDate[foundIndexTime];
+
     mealsOfTheDate[foundIndexTime] = meal;
 
     holidaysMeals[foundIndexDate] = {
@@ -41,12 +43,22 @@ export default class HolidaysMealsScreen extends React.Component {
 
     this.holidays.meals = holidaysMeals;
 
+    let indexCount =
+      holidaysGroceries.length === 0
+        ? 0
+        : Math.max(
+            ...this.state.holidays.groceries.map((o: Ingredient) => o.index)
+          ) + 1;
+
+    // Update Groceries : add Ingredients
     for (let k = 0; k < meal.meal.ingredients.length; k++) {
       let foundIndex = holidaysGroceries.findIndex(
         (ingredient) => ingredient.title === meal.meal.ingredients[k].title
       );
-      if (foundIndex != -1) {
+
+      if (foundIndex != -1 && !holidaysGroceries[foundIndex].checked) {
         holidaysGroceries[foundIndex] = {
+          index: holidaysGroceries[foundIndex].index,
           title: holidaysGroceries[foundIndex].title,
           quantity:
             holidaysGroceries[foundIndex].quantity +
@@ -56,7 +68,32 @@ export default class HolidaysMealsScreen extends React.Component {
         };
       } else {
         if (meal.meal.ingredients[k].title !== "") {
-          holidaysGroceries.push(meal.meal.ingredients[k]);
+          let ingredientToAdd = meal.meal.ingredients[k];
+          ingredientToAdd.index = indexCount;
+          holidaysGroceries.push(ingredientToAdd);
+          indexCount++;
+        }
+      }
+    }
+
+    // Update Groceries : delete Ingredients
+    for (let k = 0; k < savedMeal.meal.ingredients.length; k++) {
+      let foundIndex = holidaysGroceries.findIndex(
+        (ingredient) => ingredient.title === savedMeal.meal.ingredients[k].title
+      );
+      if (foundIndex != -1) {
+        holidaysGroceries[foundIndex] = {
+          index: holidaysGroceries[foundIndex].index,
+          title: holidaysGroceries[foundIndex].title,
+          quantity:
+            holidaysGroceries[foundIndex].quantity -
+            savedMeal.meal.ingredients[k].quantity,
+          checked: holidaysGroceries[foundIndex].checked,
+          addedManually: false,
+        };
+
+        if (holidaysGroceries[foundIndex].quantity <= 0) {
+          holidaysGroceries.splice(foundIndex, 1);
         }
       }
     }

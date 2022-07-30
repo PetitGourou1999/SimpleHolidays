@@ -65,6 +65,7 @@ export default class MealForm extends React.Component<Props> {
   addIngredient = () => {
     if (this.state.ingredientName.trim() !== "") {
       let newIngredient: Ingredient = {
+        index: this.state.ingredients.length,
         title: this.state.ingredientName,
         quantity: 1,
         checked: false,
@@ -80,6 +81,7 @@ export default class MealForm extends React.Component<Props> {
   setIngredientQuantity = (index: number, quantity: number) => {
     let tmpArray: Ingredient[] = this.state.ingredients;
     tmpArray[index] = {
+      index: tmpArray[index].index,
       title: tmpArray[index].title,
       quantity: quantity,
       checked: false,

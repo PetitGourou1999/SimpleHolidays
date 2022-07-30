@@ -1,12 +1,14 @@
-import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
+import NumericInput from "react-native-numeric-input";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
-import { Ingredient } from "../types/Types";
+import storageHelper from "../storage/AsyncStorageHelper";
+import { Holidays, Ingredient } from "../types/Types";
 
 interface Props {
+  holidays: Holidays;
   item: Ingredient;
   deleteItem: any;
 }
@@ -14,14 +16,79 @@ interface Props {
 export default class GroceryItem extends React.Component<Props> {
   state = {
     checked: false,
+    holidays: {},
+    item: {},
   };
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.setState({ checked: this.props.item.checked });
+    this.setState({ holidays: this.props.holidays });
+    this.setState({ item: this.props.item });
   };
 
   checkItem = () => {
-    this.setState({ checked: !this.state.checked });
+    console.log(JSON.stringify(this.state.item));
+
+    let holidaysFromState: Holidays = this.state.holidays;
+    let holidayGroceries = holidaysFromState.groceries;
+
+    let foundIndexOfItem = holidayGroceries.findIndex(
+      (groceriesItem) => groceriesItem.index === this.state.item.index
+    );
+
+    if (foundIndexOfItem != -1) {
+      holidayGroceries[foundIndexOfItem] = {
+        index: holidayGroceries[foundIndexOfItem].index,
+        title: holidayGroceries[foundIndexOfItem].title,
+        quantity: holidayGroceries[foundIndexOfItem].quantity,
+        checked: !this.state.checked,
+        addedManually: holidayGroceries[foundIndexOfItem].addedManually,
+      };
+
+      storageHelper
+        .storeData(this.state.holidays.storageKey, this.state.holidays)
+        .then(
+          () => {
+            this.setState({ holidays: holidaysFromState });
+            this.setState({ checked: !this.state.checked });
+            this.setState({ item: holidayGroceries[foundIndexOfItem] });
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+  };
+
+  setIngredientQuantity = (value: number) => {
+    let holidaysFromState: Holidays = this.state.holidays;
+    let holidayGroceries = holidaysFromState.groceries;
+
+    let foundIndexOfItem = holidayGroceries.findIndex(
+      (groceriesItem) => groceriesItem.index === this.state.item.index
+    );
+
+    if (foundIndexOfItem != -1) {
+      holidayGroceries[foundIndexOfItem] = {
+        index: holidayGroceries[foundIndexOfItem].index,
+        title: holidayGroceries[foundIndexOfItem].title,
+        quantity: value,
+        checked: holidayGroceries[foundIndexOfItem].checked,
+        addedManually: holidayGroceries[foundIndexOfItem].addedManually,
+      };
+
+      storageHelper
+        .storeData(this.state.holidays.storageKey, this.state.holidays)
+        .then(
+          () => {
+            this.setState({ holidays: holidaysFromState });
+            this.setState({ item: holidayGroceries[foundIndexOfItem] });
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   };
 
   deleteItem = () => {
@@ -46,37 +113,18 @@ export default class GroceryItem extends React.Component<Props> {
             >
               {this.props.item.title}
             </Text>
-            <View
-              style={[
-                globalStyles.rowView,
-                {
-                  justifyContent: "flex-end",
-                  width: "auto",
-                  alignItems: "baseline",
-                },
-              ]}
-            >
-              <Text
-                style={[
-                  globalStyles.text,
-                  { fontSize: 16, color: Colors.light.primary },
-                ]}
-              >
-                {this.props.item.quantity}
-              </Text>
-              {this.props.item.addedManually ? (
-                <Pressable onPress={() => this.deleteItem()}>
-                  <FontAwesome
-                    style={styles.delete}
-                    name="trash"
-                    size={20}
-                    color={Colors.light.primary}
-                  />
-                </Pressable>
-              ) : (
-                <View style={{ width: 0 }}></View>
-              )}
-            </View>
+            <NumericInput
+              onChange={(value) => this.setIngredientQuantity(value)}
+              value={this.state.item.quantity}
+              totalHeight={35}
+              totalWidth={70}
+              minValue={0}
+              rounded
+              rightButtonBackgroundColor={Colors.light.mediumBlue}
+              leftButtonBackgroundColor={Colors.light.lightBlue}
+              borderColor={"transparent"}
+              inputStyle={{ backgroundColor: Colors.light.white }}
+            />
           </View>
         </View>
       </View>

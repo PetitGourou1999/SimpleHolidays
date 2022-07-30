@@ -9,6 +9,7 @@ export type Miscellaneous = {
 };
 
 export type Ingredient = {
+  index: number;
   title: string;
   quantity: number;
   checked: boolean;
