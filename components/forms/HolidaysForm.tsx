@@ -51,7 +51,11 @@ export default class HolidaysForm extends React.Component<Props> {
     }
     if (
       new Date(this.state.selectedDateStart).getDate() >
-      new Date(this.state.selectedDateEnd).getDate()
+        new Date(this.state.selectedDateEnd).getDate() &&
+      new Date(this.state.selectedDateStart).getMonth() >
+        new Date(this.state.selectedDateEnd).getMonth() &&
+      new Date(this.state.selectedDateStart).getFullYear() >
+        new Date(this.state.selectedDateEnd).getFullYear()
     ) {
       Alert.alert("La date de début doit se situer avant la date de fin");
       return;

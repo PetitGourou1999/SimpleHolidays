@@ -1,5 +1,6 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
@@ -7,6 +8,7 @@ import { Ingredient } from "../types/Types";
 
 interface Props {
   item: Ingredient;
+  deleteItem: any;
 }
 
 export default class GroceryItem extends React.Component<Props> {
@@ -15,11 +17,15 @@ export default class GroceryItem extends React.Component<Props> {
   };
 
   componentDidMount = () => {
-    //this.setState({ checked: this.props.item.checked });
+    this.setState({ checked: this.props.item.checked });
   };
 
   checkItem = () => {
     this.setState({ checked: !this.state.checked });
+  };
+
+  deleteItem = () => {
+    this.props.deleteItem();
   };
 
   render() {
@@ -40,14 +46,37 @@ export default class GroceryItem extends React.Component<Props> {
             >
               {this.props.item.title}
             </Text>
-            <Text
+            <View
               style={[
-                globalStyles.text,
-                { fontSize: 16, color: Colors.light.primary },
+                globalStyles.rowView,
+                {
+                  justifyContent: "flex-end",
+                  width: "auto",
+                  alignItems: "baseline",
+                },
               ]}
             >
-              {this.props.item.quantity}
-            </Text>
+              <Text
+                style={[
+                  globalStyles.text,
+                  { fontSize: 16, color: Colors.light.primary },
+                ]}
+              >
+                {this.props.item.quantity}
+              </Text>
+              {this.props.item.addedManually ? (
+                <Pressable onPress={() => this.deleteItem()}>
+                  <FontAwesome
+                    style={styles.delete}
+                    name="trash"
+                    size={20}
+                    color={Colors.light.primary}
+                  />
+                </Pressable>
+              ) : (
+                <View style={{ width: 0 }}></View>
+              )}
+            </View>
           </View>
         </View>
       </View>

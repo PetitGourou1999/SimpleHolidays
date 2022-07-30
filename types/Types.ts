@@ -12,6 +12,7 @@ export type Ingredient = {
   title: string;
   quantity: number;
   checked: boolean;
+  addedManually: boolean;
 };
 
 export type MealIdea = {

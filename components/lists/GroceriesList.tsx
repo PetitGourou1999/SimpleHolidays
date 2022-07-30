@@ -41,6 +41,7 @@ export default class GroceriesList extends React.Component<Props> {
         title: this.state.currentItem,
         quantity: 1,
         checked: false,
+        addedManually: true,
       };
 
       let holidaysFromState: Holidays = this.state.holidays;
@@ -59,6 +60,35 @@ export default class GroceriesList extends React.Component<Props> {
           }
         );
     }
+  };
+
+  handleDeleteTask = (item: Ingredient) => {
+    let holidaysFromState: Holidays = this.state.holidays;
+    let holidayGroceries = holidaysFromState.groceries;
+
+    console.log(JSON.stringify(item));
+
+    let foundIndexOfItem = holidayGroceries.findIndex(
+      (groceriesItem) =>
+        groceriesItem.title === item.title &&
+        groceriesItem.quantity == item.quantity
+    );
+
+    holidayGroceries.splice(foundIndexOfItem, 1);
+
+    holidaysFromState.groceries = [...holidayGroceries];
+
+    storageHelper
+      .storeData(this.state.holidays.storageKey, this.state.holidays)
+      .then(
+        () => {
+          this.setState({ holidays: holidaysFromState });
+          this.setState({ arrayHolder: [...holidaysFromState.groceries] });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
 
   render() {
@@ -91,10 +121,14 @@ export default class GroceriesList extends React.Component<Props> {
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
           keyExtractor={(index: any) => index.toString()}
-          renderItem={({ item }) => <GroceryItem item={item}></GroceryItem>}
+          renderItem={({ item }) => (
+            <GroceryItem
+              item={item}
+              deleteItem={() => this.handleDeleteTask(item)}
+            ></GroceryItem>
+          )}
           style={{
             width: "90%",
-            //paddingLeft: 5,
           }}
         />
       </KeyboardAvoidingView>

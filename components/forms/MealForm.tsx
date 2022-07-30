@@ -68,6 +68,7 @@ export default class MealForm extends React.Component<Props> {
         title: this.state.ingredientName,
         quantity: 1,
         checked: false,
+        addedManually: false,
       };
       this.setState({
         ingredients: [...this.state.ingredients, newIngredient],
@@ -82,6 +83,7 @@ export default class MealForm extends React.Component<Props> {
       title: tmpArray[index].title,
       quantity: quantity,
       checked: false,
+      addedManually: false,
     };
     this.setState({ ingredients: [...tmpArray] });
   };

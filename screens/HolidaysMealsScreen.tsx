@@ -20,7 +20,7 @@ export default class HolidaysMealsScreen extends React.Component {
     this.setState({ holidays: this.holidays });
   }
 
-  onLunchChange = (item: MealsOfTheDay, meal: Meal) => {
+  onMealChange = (item: MealsOfTheDay, meal: Meal, theTime: string) => {
     let holidaysMeals: MealsOfTheDay[] = [...this.state.holidays.meals];
     let holidaysGroceries: Ingredient[] = [...this.state.holidays.groceries];
 
@@ -30,9 +30,9 @@ export default class HolidaysMealsScreen extends React.Component {
 
     let mealsOfTheDate: Meal[] = [...holidaysMeals[foundIndexDate].meals];
 
-    let foundIndexLunch = mealsOfTheDate.findIndex((obj) => obj.time == lunch);
+    let foundIndexTime = mealsOfTheDate.findIndex((obj) => obj.time == theTime);
 
-    mealsOfTheDate[foundIndexLunch] = meal;
+    mealsOfTheDate[foundIndexTime] = meal;
 
     holidaysMeals[foundIndexDate] = {
       date: holidaysMeals[foundIndexDate].date,
@@ -52,58 +52,7 @@ export default class HolidaysMealsScreen extends React.Component {
             holidaysGroceries[foundIndex].quantity +
             meal.meal.ingredients[k].quantity,
           checked: holidaysGroceries[foundIndex].checked,
-        };
-      } else {
-        if (meal.meal.ingredients[k].title !== "") {
-          holidaysGroceries.push(meal.meal.ingredients[k]);
-        }
-      }
-    }
-
-    this.holidays.groceries = [...holidaysGroceries];
-
-    storageHelper.storeData(this.holidays.storageKey, this.holidays).then(
-      () => {
-        this.setState({ holidays: this.holidays });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
-
-  onDinerChange = (item: MealsOfTheDay, meal: Meal) => {
-    let holidaysMeals: MealsOfTheDay[] = [...this.state.holidays.meals];
-    let holidaysGroceries: Ingredient[] = [...this.state.holidays.groceries];
-
-    let foundIndexDate = holidaysMeals.findIndex(
-      (obj) => obj.date === item.date
-    );
-
-    let mealsOfTheDate: Meal[] = [...holidaysMeals[foundIndexDate].meals];
-
-    let foundIndexDinner = mealsOfTheDate.findIndex((obj) => obj.time == diner);
-
-    mealsOfTheDate[foundIndexDinner] = meal;
-
-    holidaysMeals[foundIndexDate] = {
-      date: holidaysMeals[foundIndexDate].date,
-      meals: mealsOfTheDate,
-    };
-
-    this.holidays.meals = holidaysMeals;
-
-    for (let k = 0; k < meal.meal.ingredients.length; k++) {
-      let foundIndex = holidaysGroceries.findIndex(
-        (ingredient) => ingredient.title === meal.meal.ingredients[k].title
-      );
-      if (foundIndex != -1) {
-        holidaysGroceries[foundIndex] = {
-          title: holidaysGroceries[foundIndex].title,
-          quantity:
-            holidaysGroceries[foundIndex].quantity +
-            meal.meal.ingredients[k].quantity,
-          checked: holidaysGroceries[foundIndex].checked,
+          addedManually: false,
         };
       } else {
         if (meal.meal.ingredients[k].title !== "") {
@@ -157,8 +106,8 @@ export default class HolidaysMealsScreen extends React.Component {
             renderItem={({ item }) => (
               <EditableMealRow
                 holidaysMeal={item}
-                onLunchChange={(meal) => this.onLunchChange(item, meal)}
-                onDinerChange={(meal) => this.onDinerChange(item, meal)}
+                onLunchChange={(meal) => this.onMealChange(item, meal, lunch)}
+                onDinerChange={(meal) => this.onMealChange(item, meal, diner)}
               ></EditableMealRow>
             )}
             style={{
