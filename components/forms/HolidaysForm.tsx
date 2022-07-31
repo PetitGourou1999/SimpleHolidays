@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TagInput from "react-native-tags-input";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
@@ -152,7 +153,10 @@ export default class HolidaysForm extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={globalStyles.container}
+        style={[{ borderRadius: 20 }]}
+      >
         <Text style={[globalStyles.formTitle]}>Détails des vacances</Text>
         <Text style={globalStyles.text}>Lieu</Text>
         <TextInput
@@ -174,37 +178,42 @@ export default class HolidaysForm extends React.Component<Props> {
         <Text style={[globalStyles.text, { paddingTop: 10 }]}>
           Participants
         </Text>
-        <TagInput
-          updateState={this.updateTagState}
-          tags={this.state.tags}
-          leftElement={
-            <FontAwesome
-              name="user"
-              size={25}
-              color={Colors.light.text}
-            ></FontAwesome>
-          }
-          leftElementContainerStyle={{ marginLeft: 3 }}
-          containerStyle={{ paddingTop: 5 }}
-          inputContainerStyle={[globalStyles.inputStyle]}
-          inputStyle={[globalStyles.inputText, { color: Colors.light.primary }]}
-          onFocus={() =>
-            this.setState({
-              tagsColor: Colors.light.white,
-              tagsText: Colors.light.primary,
-            })
-          }
-          onBlur={() =>
-            this.setState({
-              tagsColor: Colors.light.primary,
-              tagsText: Colors.light.white,
-            })
-          }
-          autoCorrect={false}
-          tagStyle={styles.tag}
-          tagTextStyle={styles.tagText}
-          keysForTag={", "}
-        />
+        <View>
+          <TagInput
+            updateState={this.updateTagState}
+            tags={this.state.tags}
+            leftElement={
+              <FontAwesome
+                name="user"
+                size={25}
+                color={Colors.light.text}
+              ></FontAwesome>
+            }
+            leftElementContainerStyle={{ marginLeft: 3 }}
+            containerStyle={{ paddingTop: 5 }}
+            inputContainerStyle={[globalStyles.inputStyle, { paddingLeft: 10 }]}
+            inputStyle={[
+              globalStyles.inputText,
+              { color: Colors.light.primary },
+            ]}
+            onFocus={() =>
+              this.setState({
+                tagsColor: Colors.light.white,
+                tagsText: Colors.light.primary,
+              })
+            }
+            onBlur={() =>
+              this.setState({
+                tagsColor: Colors.light.primary,
+                tagsText: Colors.light.white,
+              })
+            }
+            autoCorrect={false}
+            tagStyle={styles.tag}
+            tagTextStyle={styles.tagText}
+            keysForTag={", "}
+          />
+        </View>
         <View style={[globalStyles.editableRow, styles.buttonBar]}>
           <Pressable onPress={() => this.props.onCancel()}>
             <View style={[globalStyles.buttonPrimary]}>
@@ -221,7 +230,7 @@ export default class HolidaysForm extends React.Component<Props> {
             </View>
           </Pressable>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import EditableActivityRow from "../components/rows/EditableActivityRow";
 import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/AsyncStorageHelper";
@@ -62,7 +63,7 @@ export default class HolidaysActivitiesScreen extends React.Component {
           <Text style={[globalStyles.rowText, { flex: 1 }]}>Activité</Text>
         </View>
 
-        <FlatList
+        <KeyboardAwareFlatList
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
           keyExtractor={(index: any) => index.toString()}

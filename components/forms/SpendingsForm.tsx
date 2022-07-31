@@ -36,7 +36,11 @@ export default class SpendingsForm extends React.Component<Props> {
   };
 
   setAmount = (amount: number | null) => {
-    this.setState({ amount: amount });
+    if (amount === null) {
+      this.setState({ amount: 0 });
+    } else {
+      this.setState({ amount: amount });
+    }
   };
 
   setPlayer = (player: Player) => {
@@ -90,12 +94,14 @@ export default class SpendingsForm extends React.Component<Props> {
         <Text style={[globalStyles.text, { paddingTop: 10 }]}>Montant</Text>
         <CurrencyInput
           value={this.state.amount}
+          minValue={0}
           onChangeValue={(value) => this.setAmount(value)}
           style={globalStyles.inputStyle}
           suffix=" € "
           delimiter="."
           separator=","
           precision={2}
+          keyboardType={"numbers-and-punctuation"}
         />
         <Text style={[globalStyles.text, { paddingTop: 10 }]}>Payé par : </Text>
         <View style={globalStyles.editableRow}>
