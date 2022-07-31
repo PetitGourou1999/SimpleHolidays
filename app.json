@@ -29,7 +29,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "package": "com.megann.simpleholidays",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
