@@ -59,7 +59,7 @@ export default class MealsList extends React.Component {
           <Text style={globalStyles.bigButtonText}>Ajouter une Idée Repas</Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
-          <View style={globalStyles.modal}>
+          <View style={[globalStyles.modal, { flex: 0.8 }]}>
             <MealForm
               onCancel={() => this.toggleModal(false)}
               onSave={() => this.onSave()}

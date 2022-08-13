@@ -124,6 +124,7 @@ const globalStyles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     alignItems: "center",
+    marginBottom: 15,
   },
 
   cardTitle: {

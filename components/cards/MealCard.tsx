@@ -41,25 +41,23 @@ export default class MealCard extends React.Component<Props> {
           wrapperStyle={styles.cardWrapper}
           containerStyle={styles.cardContainer}
         >
-          <Card.Title>
-            <View style={globalStyles.cardHeader}>
-              <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
-                {this.props.mealIdea.title}
-              </Text>
-              <Pressable
-                style={{
-                  marginLeft: "auto",
-                }}
-                onPress={() => this.toggleModal(true)}
-              >
-                <FontAwesome
-                  name="trash"
-                  size={20}
-                  color={Colors.light.secondary}
-                />
-              </Pressable>
-            </View>
-          </Card.Title>
+          <View style={globalStyles.cardHeader}>
+            <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
+              {this.props.mealIdea.title}
+            </Text>
+            <Pressable
+              style={{
+                marginLeft: "auto",
+              }}
+              onPress={() => this.toggleModal(true)}
+            >
+              <FontAwesome
+                name="trash"
+                size={20}
+                color={Colors.light.secondary}
+              />
+            </Pressable>
+          </View>
           <Card.Divider color={Colors.light.secondary} />
           {this.props.mealIdea.ingredients.map((item, index) => {
             return (

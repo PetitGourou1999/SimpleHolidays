@@ -171,6 +171,6 @@ const styles = StyleSheet.create({
 
   buttonBar: {
     justifyContent: "space-evenly",
-    marginTop: "auto",
+    //marginTop: "auto",
   },
 });

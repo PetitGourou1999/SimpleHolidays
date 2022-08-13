@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
 import CurrencyInput from "react-native-currency-input";
+import { ScrollView } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
@@ -84,7 +85,12 @@ export default class SpendingsForm extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
+      <ScrollView
+        contentContainerStyle={[
+          globalStyles.container,
+          { borderRadius: 20, padding: 10 },
+        ]}
+      >
         <Text style={[globalStyles.formTitle]}>Nouvelle dépense :</Text>
         <Text style={[globalStyles.text, { paddingTop: 10 }]}>Nom / Type</Text>
         <TextInput
@@ -117,7 +123,7 @@ export default class SpendingsForm extends React.Component<Props> {
             globalStyles.editableRow,
             {
               justifyContent: "space-evenly",
-              marginTop: "auto",
+              //marginTop: "auto",
             },
           ]}
         >
@@ -136,7 +142,7 @@ export default class SpendingsForm extends React.Component<Props> {
             </View>
           </Pressable>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

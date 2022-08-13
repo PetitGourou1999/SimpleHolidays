@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TagInput from "react-native-tags-input";
 import Colors from "../../constants/Colors";
@@ -154,82 +155,96 @@ export default class HolidaysForm extends React.Component<Props> {
   render() {
     return (
       <KeyboardAwareScrollView
-        contentContainerStyle={globalStyles.container}
+        contentContainerStyle={{ borderRadius: 20 }}
         style={[{ borderRadius: 20 }]}
       >
-        <Text style={[globalStyles.formTitle]}>Détails des vacances</Text>
-        <Text style={globalStyles.text}>Lieu</Text>
-        <TextInput
-          onChangeText={(text) => this.setLocation(text)}
-          style={[globalStyles.inputStyle]}
-        />
-        <Text style={[globalStyles.text, { paddingTop: 10 }]}>
-          Date de début
-        </Text>
-        <CustomDatePicker
-          initialDate={this.state.selectedDateStart}
-          onChange={(date: Date) => this.setSelectedDateStart(date)}
-        />
-        <Text style={[globalStyles.text, { paddingTop: 20 }]}>Date de fin</Text>
-        <CustomDatePicker
-          initialDate={this.state.selectedDateEnd}
-          onChange={(date: Date) => this.setSelectedDateEnd(date)}
-        />
-        <Text style={[globalStyles.text, { paddingTop: 10 }]}>
-          Participants
-        </Text>
-        <View>
-          <TagInput
-            updateState={this.updateTagState}
-            tags={this.state.tags}
-            leftElement={
-              <FontAwesome
-                name="user"
-                size={25}
-                color={Colors.light.text}
-              ></FontAwesome>
-            }
-            leftElementContainerStyle={{ marginLeft: 3 }}
-            containerStyle={{ paddingTop: 5 }}
-            inputContainerStyle={[globalStyles.inputStyle, { paddingLeft: 10 }]}
-            inputStyle={[
-              globalStyles.inputText,
-              { color: Colors.light.primary },
-            ]}
-            onFocus={() =>
-              this.setState({
-                tagsColor: Colors.light.white,
-                tagsText: Colors.light.primary,
-              })
-            }
-            onBlur={() =>
-              this.setState({
-                tagsColor: Colors.light.primary,
-                tagsText: Colors.light.white,
-              })
-            }
-            autoCorrect={false}
-            tagStyle={styles.tag}
-            tagTextStyle={styles.tagText}
-            keysForTag={", "}
+        <ScrollView
+          contentContainerStyle={[globalStyles.container, { borderRadius: 20 }]}
+          style={[{ borderRadius: 20 }]}
+        >
+          <Text style={[globalStyles.formTitle]}>Détails des vacances</Text>
+          <Text style={globalStyles.text}>Lieu</Text>
+          <TextInput
+            onChangeText={(text) => this.setLocation(text)}
+            style={[globalStyles.inputStyle]}
           />
-        </View>
-        <View style={[globalStyles.editableRow, styles.buttonBar]}>
-          <Pressable onPress={() => this.props.onCancel()}>
-            <View style={[globalStyles.buttonPrimary]}>
-              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
-                Annuler
-              </Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => this.saveHolidays()}>
-            <View style={[globalStyles.buttonPrimary]}>
-              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
-                Ajouter
-              </Text>
-            </View>
-          </Pressable>
-        </View>
+          <Text style={[globalStyles.text, { paddingTop: 10 }]}>
+            Date de début
+          </Text>
+          <CustomDatePicker
+            initialDate={this.state.selectedDateStart}
+            onChange={(date: Date) => this.setSelectedDateStart(date)}
+          />
+          <Text style={[globalStyles.text, { paddingTop: 20 }]}>
+            Date de fin
+          </Text>
+          <CustomDatePicker
+            initialDate={this.state.selectedDateEnd}
+            onChange={(date: Date) => this.setSelectedDateEnd(date)}
+          />
+          <Text style={[globalStyles.text, { paddingTop: 10 }]}>
+            Participants
+          </Text>
+          <View>
+            <TagInput
+              updateState={this.updateTagState}
+              tags={this.state.tags}
+              leftElement={
+                <FontAwesome
+                  name="user"
+                  size={25}
+                  color={Colors.light.text}
+                ></FontAwesome>
+              }
+              leftElementContainerStyle={{ marginLeft: 3 }}
+              containerStyle={{ paddingTop: 5 }}
+              inputContainerStyle={[
+                globalStyles.inputStyle,
+                { paddingLeft: 10 },
+              ]}
+              inputStyle={[
+                globalStyles.inputText,
+                { color: Colors.light.primary },
+              ]}
+              onFocus={() =>
+                this.setState({
+                  tagsColor: Colors.light.white,
+                  tagsText: Colors.light.primary,
+                })
+              }
+              onBlur={() =>
+                this.setState({
+                  tagsColor: Colors.light.primary,
+                  tagsText: Colors.light.white,
+                })
+              }
+              autoCorrect={false}
+              tagStyle={styles.tag}
+              tagTextStyle={styles.tagText}
+              keysForTag={", "}
+            />
+          </View>
+          <View style={[globalStyles.editableRow, styles.buttonBar]}>
+            <Pressable onPress={() => this.props.onCancel()}>
+              <View style={[globalStyles.buttonPrimary]}>
+                <Text
+                  style={[globalStyles.text, { color: Colors.light.white }]}
+                >
+                  Annuler
+                </Text>
+              </View>
+            </Pressable>
+            <Pressable onPress={() => this.saveHolidays()}>
+              <View style={[globalStyles.buttonPrimary]}>
+                <Text
+                  style={[globalStyles.text, { color: Colors.light.white }]}
+                >
+                  Ajouter
+                </Text>
+              </View>
+            </Pressable>
+          </View>
+        </ScrollView>
       </KeyboardAwareScrollView>
     );
   }
@@ -238,6 +253,7 @@ export default class HolidaysForm extends React.Component<Props> {
 const styles = StyleSheet.create({
   tag: {
     backgroundColor: "#fff",
+    minHeight: 30,
   },
   tagText: {
     color: Colors.light.primary,

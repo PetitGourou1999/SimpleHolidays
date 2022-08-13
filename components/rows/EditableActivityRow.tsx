@@ -27,12 +27,17 @@ export default class EditableActivityRow extends React.Component<Props> {
     return (
       <View style={globalStyles.editableRow}>
         <Text style={styles.dateText}>
-          {new Date(this.props.holidaysActivity.date).toLocaleDateString([], {
-            weekday: "long",
-            day: "numeric",
-          })}
+          {new Date(this.props.holidaysActivity.date).toLocaleDateString(
+            "fr-FR",
+            {
+              weekday: "long",
+              day: "numeric",
+            }
+          )}
         </Text>
         <TextInput
+          removeClippedSubviews={false}
+          blurOnSubmit={true}
           value={this.state.activity}
           onChangeText={(text) => this.setActivity(text)}
           style={[globalStyles.inputStyle, { width: "66%" }]}

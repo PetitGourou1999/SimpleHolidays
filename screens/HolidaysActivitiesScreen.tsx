@@ -64,6 +64,7 @@ export default class HolidaysActivitiesScreen extends React.Component {
         </View>
 
         <KeyboardAwareFlatList
+          removeClippedSubviews={false}
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
           keyExtractor={(index: any) => index.toString()}

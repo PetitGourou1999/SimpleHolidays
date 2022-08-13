@@ -22,7 +22,8 @@
       "userInterfaceStyle": "automatic",
       "infoPlist": {
         "UIUserInterfaceStyle": "Light"
-      }
+      },
+      "bundleIdentifier": "com.megann.simpleholidays"
     },
     "android": {
       "adaptiveIcon": {
