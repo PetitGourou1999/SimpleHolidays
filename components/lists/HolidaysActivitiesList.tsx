@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import EditableActivityRow from "../../components/rows/EditableActivityRow";
 import globalStyles from "../../constants/Styles";
@@ -77,18 +77,9 @@ export default class HolidaysActivitiesList extends React.Component<Props> {
               onTextChange={(text) => this.onActivityChange(item, text)}
             ></EditableActivityRow>
           )}
-          style={styles.listStyles}
+          style={globalStyles.listStyleSreen}
         />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  listStyles: {
-    height: "0%",
-    width: "90%",
-    paddingHorizontal: 5,
-    marginBottom: 50,
-  },
-});

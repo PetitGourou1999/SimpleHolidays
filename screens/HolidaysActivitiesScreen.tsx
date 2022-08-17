@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import HolidaysActivitiesList from "../components/lists/HolidaysActivitiesList";
 import { Holidays } from "../types/Types";
 
@@ -13,12 +12,3 @@ export default class HolidaysActivitiesScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  listStyles: {
-    height: "0%",
-    width: "90%",
-    paddingHorizontal: 5,
-    marginBottom: 50,
-  },
-});

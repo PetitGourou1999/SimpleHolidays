@@ -184,6 +184,13 @@ const globalStyles = StyleSheet.create({
     paddingLeft: 5,
   },
 
+  listStyleSreen: {
+    height: "0%",
+    width: "90%",
+    paddingHorizontal: 5,
+    marginBottom: 50,
+  },
+
   /** DATE TEXT */
 
   dateText: {
