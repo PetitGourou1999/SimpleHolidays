@@ -14,6 +14,7 @@ import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Ingredient, MealIdea } from "../../types/Types";
+import ButtonBar from "./ButtonBar";
 
 interface Props {
   onCancel: any;
@@ -92,7 +93,7 @@ export default class MealForm extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[globalStyles.container, { borderRadius: 20, padding: 10 }]}>
+      <View style={[styles.contentContainer]}>
         <Text style={[globalStyles.formTitle]}>Nouvelle idée repas :</Text>
         <Text style={globalStyles.text}>Intitulé</Text>
         <TextInput
@@ -107,11 +108,7 @@ export default class MealForm extends React.Component<Props> {
             onChangeText={(text) => this.setIngredientName(text)}
           />
           <Pressable onPress={() => this.addIngredient()}>
-            <FontAwesome
-              name="plus"
-              size={20}
-              style={styles.icon}
-            ></FontAwesome>
+            <FontAwesome name="plus" size={20}></FontAwesome>
           </Pressable>
         </View>
         <FlatList
@@ -119,12 +116,7 @@ export default class MealForm extends React.Component<Props> {
           extraData={this.state.ingredients}
           keyExtractor={(index: any) => index.toString()}
           renderItem={({ item, index }) => (
-            <View
-              style={[
-                globalStyles.rowView,
-                { width: "100%", paddingVertical: 5 },
-              ]}
-            >
+            <View style={[styles.flatListItem]}>
               <Text style={globalStyles.inputText}>{item.title}</Text>
               <NumericInput
                 onChange={(value) => this.setIngredientQuantity(index, value)}
@@ -145,32 +137,25 @@ export default class MealForm extends React.Component<Props> {
             width: "90%",
           }}
         />
-        <View style={[globalStyles.editableRow, styles.buttonBar]}>
-          <Pressable onPress={() => this.props.onCancel()}>
-            <View style={[globalStyles.buttonPrimary]}>
-              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
-                Annuler
-              </Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => this.saveMealIdea()}>
-            <View style={[globalStyles.buttonPrimary]}>
-              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
-                Ajouter
-              </Text>
-            </View>
-          </Pressable>
-        </View>
+        <ButtonBar
+          onSave={() => this.saveMealIdea()}
+          onCancel={() => this.props.onCancel()}
+        ></ButtonBar>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  icon: {},
+  contentContainer: {
+    ...globalStyles.container,
+    borderRadius: 20,
+    padding: 10,
+  },
 
-  buttonBar: {
-    justifyContent: "space-evenly",
-    //marginTop: "auto",
+  flatListItem: {
+    ...globalStyles.rowView,
+    width: "100%",
+    paddingVertical: 5,
   },
 });

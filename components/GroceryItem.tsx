@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import NumericInput from "react-native-numeric-input";
 import Colors from "../constants/Colors";
@@ -72,7 +72,7 @@ export default class GroceryItem extends React.Component<Props> {
 
   render() {
     return (
-      <View style={styles.taskContainer}>
+      <View style={globalStyles.taskContainer}>
         <View style={[globalStyles.rowView, { justifyContent: "flex-start" }]}>
           <CheckBox
             title=""
@@ -106,20 +106,3 @@ export default class GroceryItem extends React.Component<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  taskContainer: {
-    ...globalStyles.rowView,
-    flex: 1,
-    width: "100%",
-    borderRadius: 10,
-    padding: 5,
-    paddingRight: 20,
-    marginVertical: 5,
-    minHeight: 40,
-    backgroundColor: Colors.light.white,
-  },
-  delete: {
-    marginLeft: 10,
-  },
-});

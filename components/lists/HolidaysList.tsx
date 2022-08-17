@@ -75,10 +75,7 @@ export default class HolidaysList extends React.Component<Props> {
               navigation={this.props.navigation}
             ></HolidaysCard>
           )}
-          style={{
-            paddingLeft: 5,
-            width: "100%",
-          }}
+          style={[globalStyles.listStyle, { width: "100%" }]}
           contentContainerStyle={{
             justifyContent: "center",
           }}

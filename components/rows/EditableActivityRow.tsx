@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import Colors from "../../constants/Colors";
+import { Text, TextInput, View } from "react-native";
 import globalStyles from "../../constants/Styles";
 import { Activity } from "../../types/Types";
 
@@ -26,7 +25,7 @@ export default class EditableActivityRow extends React.Component<Props> {
   render() {
     return (
       <View style={globalStyles.editableRow}>
-        <Text style={styles.dateText}>
+        <Text style={globalStyles.dateText}>
           {new Date(this.props.holidaysActivity.date).toLocaleDateString(
             "fr-FR",
             {
@@ -46,13 +45,3 @@ export default class EditableActivityRow extends React.Component<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  dateText: {
-    paddingRight: 10,
-    minWidth: "33%",
-    color: Colors.light.darkBlue,
-    fontWeight: "bold",
-    ...globalStyles.text,
-  },
-});

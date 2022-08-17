@@ -1,13 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import {
-  Alert,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TagInput from "react-native-tags-input";
@@ -17,6 +10,7 @@ import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Activity, Holidays, MealsOfTheDay, Player } from "../../types/Types";
 import CustomDatePicker from "../CustomDatePicker";
+import ButtonBar from "./ButtonBar";
 
 interface Props {
   onCancel: any;
@@ -155,12 +149,12 @@ export default class HolidaysForm extends React.Component<Props> {
   render() {
     return (
       <KeyboardAwareScrollView
-        contentContainerStyle={{ borderRadius: 20 }}
-        style={[{ borderRadius: 20 }]}
+        contentContainerStyle={styles.borderRadius}
+        style={[styles.borderRadius]}
       >
         <ScrollView
-          contentContainerStyle={[globalStyles.container, { borderRadius: 20 }]}
-          style={[{ borderRadius: 20 }]}
+          contentContainerStyle={[globalStyles.container, styles.borderRadius]}
+          style={[styles.borderRadius]}
         >
           <Text style={[globalStyles.formTitle]}>Détails des vacances</Text>
           <Text style={globalStyles.text}>Lieu</Text>
@@ -168,23 +162,17 @@ export default class HolidaysForm extends React.Component<Props> {
             onChangeText={(text) => this.setLocation(text)}
             style={[globalStyles.inputStyle]}
           />
-          <Text style={[globalStyles.text, { paddingTop: 10 }]}>
-            Date de début
-          </Text>
+          <Text style={[styles.textPadding10]}>Date de début</Text>
           <CustomDatePicker
             initialDate={this.state.selectedDateStart}
             onChange={(date: Date) => this.setSelectedDateStart(date)}
           />
-          <Text style={[globalStyles.text, { paddingTop: 20 }]}>
-            Date de fin
-          </Text>
+          <Text style={[styles.textPadding20]}>Date de fin</Text>
           <CustomDatePicker
             initialDate={this.state.selectedDateEnd}
             onChange={(date: Date) => this.setSelectedDateEnd(date)}
           />
-          <Text style={[globalStyles.text, { paddingTop: 10 }]}>
-            Participants
-          </Text>
+          <Text style={[styles.textPadding10]}>Participants</Text>
           <View>
             <TagInput
               updateState={this.updateTagState}
@@ -224,26 +212,10 @@ export default class HolidaysForm extends React.Component<Props> {
               keysForTag={", "}
             />
           </View>
-          <View style={[globalStyles.editableRow, styles.buttonBar]}>
-            <Pressable onPress={() => this.props.onCancel()}>
-              <View style={[globalStyles.buttonPrimary]}>
-                <Text
-                  style={[globalStyles.text, { color: Colors.light.white }]}
-                >
-                  Annuler
-                </Text>
-              </View>
-            </Pressable>
-            <Pressable onPress={() => this.saveHolidays()}>
-              <View style={[globalStyles.buttonPrimary]}>
-                <Text
-                  style={[globalStyles.text, { color: Colors.light.white }]}
-                >
-                  Ajouter
-                </Text>
-              </View>
-            </Pressable>
-          </View>
+          <ButtonBar
+            onSave={() => this.saveHolidays()}
+            onCancel={() => this.props.onCancel()}
+          ></ButtonBar>
         </ScrollView>
       </KeyboardAwareScrollView>
     );
@@ -251,16 +223,27 @@ export default class HolidaysForm extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  borderRadius: {
+    borderRadius: 20,
+  },
+
+  textPadding10: {
+    ...globalStyles.text,
+    paddingTop: 10,
+  },
+
+  textPadding20: {
+    ...globalStyles.text,
+    paddingTop: 20,
+  },
+
   tag: {
     backgroundColor: "#fff",
     minHeight: 30,
   },
+
   tagText: {
     color: Colors.light.primary,
     fontFamily: "WorkSansRegular",
-  },
-  buttonBar: {
-    justifyContent: "space-evenly",
-    marginTop: "auto",
   },
 });

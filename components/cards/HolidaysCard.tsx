@@ -48,8 +48,8 @@ export default class HolidaysCard extends React.Component<Props> {
     return (
       <React.Fragment>
         <Card
-          wrapperStyle={styles.cardWrapper}
-          containerStyle={styles.cardContainer}
+          wrapperStyle={globalStyles.cardWrapper}
+          containerStyle={globalStyles.cardContainer}
         >
           <View style={[globalStyles.cardHeader]}>
             <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
@@ -100,17 +100,6 @@ export default class HolidaysCard extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  cardWrapper: {
-    backgroundColor: Colors.light.quaternary,
-    width: "100%",
-  },
-
-  cardContainer: {
-    borderColor: Colors.light.secondary,
-    backgroundColor: Colors.light.quaternary,
-    width: "91%",
-  },
-
   pressable: {
     ...globalStyles.buttonSecondary,
     marginVertical: 5,

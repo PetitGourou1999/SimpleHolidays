@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
@@ -26,7 +26,7 @@ export default class MiscellaneousItem extends React.Component<Props> {
 
   render() {
     return (
-      <View style={styles.taskContainer}>
+      <View style={globalStyles.taskContainer}>
         <View style={[globalStyles.rowView, { justifyContent: "flex-start" }]}>
           <CheckBox
             title=""
@@ -44,7 +44,7 @@ export default class MiscellaneousItem extends React.Component<Props> {
         </View>
         <Pressable onPress={() => this.props.deleteTask()}>
           <FontAwesome
-            style={styles.delete}
+            style={globalStyles.taskDelete}
             name="trash"
             size={20}
             color={Colors.light.primary}
@@ -54,20 +54,3 @@ export default class MiscellaneousItem extends React.Component<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  taskContainer: {
-    ...globalStyles.rowView,
-    flex: 1,
-    width: "100%",
-    borderRadius: 10,
-    padding: 5,
-    paddingRight: 20,
-    marginVertical: 5,
-    minHeight: 40,
-    backgroundColor: Colors.light.white,
-  },
-  delete: {
-    marginLeft: 10,
-  },
-});

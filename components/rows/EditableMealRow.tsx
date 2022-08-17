@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Colors from "../../constants/Colors";
+import { Text, View } from "react-native";
 import { diner, lunch } from "../../constants/data/MealTimes";
 import globalStyles from "../../constants/Styles";
 import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
@@ -67,7 +66,7 @@ export default class EditableMealRow extends React.Component<Props> {
     this.props.onLunchChange(myLunch);
   };
 
-  setValuDinner = (item: MealIdea) => {
+  setValueDinner = (item: MealIdea) => {
     let myDiner: Meal = {
       meal: item,
       time: diner,
@@ -80,7 +79,7 @@ export default class EditableMealRow extends React.Component<Props> {
   render() {
     return (
       <View style={globalStyles.editableRow}>
-        <Text style={styles.dateText}>
+        <Text style={globalStyles.dateText}>
           {new Date(this.props.holidaysMeal.date).toLocaleDateString("fr-FR", {
             weekday: "long",
             day: "numeric",
@@ -99,20 +98,10 @@ export default class EditableMealRow extends React.Component<Props> {
             style={{}}
             label={this.state.valueDiner.meal.title}
             data={this.state.items}
-            onSelect={(item) => this.setValuDinner(item.value)}
+            onSelect={(item) => this.setValueDinner(item.value)}
           ></CustomDropdown>
         </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  dateText: {
-    paddingRight: 10,
-    minWidth: "33%",
-    color: Colors.light.darkBlue,
-    fontWeight: "bold",
-    ...globalStyles.text,
-  },
-});

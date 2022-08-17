@@ -63,7 +63,7 @@ export default class SpendingsList extends React.Component<Props> {
           renderItem={({ item }) => (
             <SpendingsCard spending={item}></SpendingsCard>
           )}
-          style={styles.listStyle}
+          style={globalStyles.listStyle}
         />
       </View>
     );
@@ -74,10 +74,5 @@ const styles = StyleSheet.create({
   buttonStyle: {
     marginVertical: 20,
     width: "90%",
-  },
-
-  listStyle: {
-    width: "90%",
-    paddingLeft: 5,
   },
 });

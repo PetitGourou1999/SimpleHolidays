@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
@@ -38,8 +38,8 @@ export default class MealCard extends React.Component<Props> {
     return (
       <React.Fragment>
         <Card
-          wrapperStyle={styles.cardWrapper}
-          containerStyle={styles.cardContainer}
+          wrapperStyle={globalStyles.cardWrapper}
+          containerStyle={globalStyles.cardContainer}
         >
           <View style={globalStyles.cardHeader}>
             <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
@@ -69,7 +69,7 @@ export default class MealCard extends React.Component<Props> {
                 }}
               >
                 <Text style={globalStyles.cardText}>{item.title + " : "}</Text>
-                <Text style={styles.itemRow}>{item.quantity}</Text>
+                <Text style={globalStyles.itemRow}>{item.quantity}</Text>
               </View>
             );
           })}
@@ -84,22 +84,3 @@ export default class MealCard extends React.Component<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  cardWrapper: {
-    backgroundColor: Colors.light.quaternary,
-    width: "100%",
-  },
-
-  cardContainer: {
-    borderColor: Colors.light.secondary,
-    backgroundColor: Colors.light.quaternary,
-    width: "91%",
-  },
-
-  itemRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 5,
-  },
-});

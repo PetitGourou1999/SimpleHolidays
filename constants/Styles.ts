@@ -2,6 +2,8 @@ import { StyleSheet } from "react-native";
 import Colors from "./Colors";
 
 const globalStyles = StyleSheet.create({
+  /** GLOBAL */
+
   container: {
     flex: 1,
     alignItems: "center",
@@ -16,21 +18,14 @@ const globalStyles = StyleSheet.create({
     fontFamily: "WorkSansRegular",
   },
 
+  /** FORM */
+
   formTitle: {
     fontFamily: "WorkSans",
     color: Colors.light.primary,
     fontSize: 17,
     paddingBottom: 20,
     paddingTop: 10,
-  },
-
-  editableRow: {
-    width: "100%",
-    flexDirection: "row",
-    padding: 10,
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: Colors.light.background,
   },
 
   inputStyle: {
@@ -43,11 +38,15 @@ const globalStyles = StyleSheet.create({
     backgroundColor: Colors.light.white,
   },
 
+  /** DATE PICKER */
+
   datePickerStyle: {
     width: 300,
     marginTop: 20,
     color: Colors.light.primary,
   },
+
+  /** BUTTON */
 
   buttonPrimary: {
     minWidth: 100,
@@ -75,6 +74,8 @@ const globalStyles = StyleSheet.create({
     padding: 10,
   },
 
+  /** MODAL */
+
   modal: {
     flex: 0.6,
     backgroundColor: "white",
@@ -86,6 +87,17 @@ const globalStyles = StyleSheet.create({
     shadowOffset: { height: 4, width: 0 },
     shadowOpacity: 0.5,
     shadowColor: Colors.light.black,
+  },
+
+  /** ROW */
+
+  editableRow: {
+    width: "100%",
+    flexDirection: "row",
+    padding: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: Colors.light.background,
   },
 
   rowView: {
@@ -118,6 +130,8 @@ const globalStyles = StyleSheet.create({
     paddingTop: 30,
   },
 
+  /** CARD */
+
   cardHeader: {
     flex: 1,
     flexDirection: "row",
@@ -138,6 +152,66 @@ const globalStyles = StyleSheet.create({
     fontFamily: "WorkSansRegular",
     fontSize: 16,
     color: Colors.light.grey,
+  },
+
+  cardWrapper: {
+    backgroundColor: Colors.light.quaternary,
+    width: "100%",
+  },
+
+  cardContainer: {
+    borderColor: Colors.light.secondary,
+    backgroundColor: Colors.light.quaternary,
+    width: "91%",
+  },
+
+  itemRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
+  },
+
+  pseudoStyle: {
+    minWidth: "10%",
+    justifyContent: "flex-end",
+    textAlign: "right",
+  },
+
+  /** LIST */
+
+  listStyle: {
+    width: "90%",
+    paddingLeft: 5,
+  },
+
+  /** DATE TEXT */
+
+  dateText: {
+    fontFamily: "WorkSans",
+    paddingRight: 10,
+    minWidth: "33%",
+    color: Colors.light.darkBlue,
+    fontWeight: "bold",
+  },
+
+  /** CHECK LIST ITEMS */
+
+  taskContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    borderRadius: 10,
+    padding: 5,
+    paddingRight: 20,
+    marginVertical: 5,
+    minHeight: 40,
+    backgroundColor: Colors.light.white,
+  },
+
+  taskDelete: {
+    marginLeft: 10,
   },
 });
 

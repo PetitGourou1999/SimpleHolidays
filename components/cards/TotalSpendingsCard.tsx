@@ -77,11 +77,11 @@ export default class TotalSpendingsCard extends React.Component<Props> {
         <Card.Divider color={Colors.light.darkBlue} />
         {theTotals.totalsForPlayers.map((item, index) => {
           return (
-            <View style={styles.itemRow}>
+            <View style={globalStyles.itemRow}>
               <Text style={globalStyles.cardText}>
                 {item.player.pseudo + " : "}
               </Text>
-              <Text style={[globalStyles.cardText, styles.pseudoStyle]}>
+              <Text style={[globalStyles.cardText, globalStyles.pseudoStyle]}>
                 {item.total + " €"}
               </Text>
             </View>
@@ -98,11 +98,11 @@ export default class TotalSpendingsCard extends React.Component<Props> {
         {theTotals.totalsForPlayersToPay.map((item, index) => {
           if (item.debt > 0) {
             return (
-              <View style={styles.itemRow}>
+              <View style={globalStyles.itemRow}>
                 <Text style={globalStyles.cardText}>
                   {item.player.pseudo + " doit " + item.debt + " €"}
                 </Text>
-                <Text style={[globalStyles.cardText, styles.pseudoStyle]}>
+                <Text style={[globalStyles.cardText, globalStyles.pseudoStyle]}>
                   {"à " + item.otherPlayer.pseudo}
                 </Text>
               </View>
@@ -121,25 +121,13 @@ const styles = StyleSheet.create({
   },
 
   cardWrapper: {
+    ...globalStyles.cardWrapper,
     backgroundColor: Colors.light.lightBlue,
-    width: "100%",
   },
 
   cardContainer: {
     borderColor: Colors.light.darkBlue,
     backgroundColor: Colors.light.lightBlue,
     width: "90%",
-  },
-
-  itemRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 5,
-  },
-
-  pseudoStyle: {
-    minWidth: "10%",
-    justifyContent: "flex-end",
-    textAlign: "right",
   },
 });

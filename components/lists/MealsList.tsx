@@ -76,7 +76,7 @@ export default class MealsList extends React.Component {
               mealIdea={item}
             ></MealCard>
           )}
-          style={styles.listStyle}
+          style={[globalStyles.listStyle, { width: "100%" }]}
         />
       </View>
     );
@@ -87,10 +87,5 @@ const styles = StyleSheet.create({
   buttonStyle: {
     marginVertical: 20,
     width: "90%",
-  },
-
-  listStyle: {
-    width: "100%",
-    paddingLeft: 5,
   },
 });

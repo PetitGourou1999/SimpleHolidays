@@ -138,9 +138,7 @@ export default class GroceriesList extends React.Component<Props> {
               deleteItem={() => this.handleDeleteTask(item)}
             ></GroceryItem>
           )}
-          style={{
-            width: "90%",
-          }}
+          style={[globalStyles.listStyle, { paddingLeft: 0 }]}
         />
       </KeyboardAvoidingView>
     );

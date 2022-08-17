@@ -137,9 +137,7 @@ export default class MiscellaneousList extends React.Component {
               deleteTask={() => this.handleDeleteTask(item)}
             ></MiscellaneousItem>
           )}
-          style={{
-            width: "90%",
-          }}
+          style={[globalStyles.listStyle, { paddingLeft: 0 }]}
         />
       </KeyboardAvoidingView>
     );

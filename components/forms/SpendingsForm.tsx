@@ -1,12 +1,12 @@
 import React from "react";
-import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import CurrencyInput from "react-native-currency-input";
 import { ScrollView } from "react-native-gesture-handler";
-import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Player, Spending } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
+import ButtonBar from "./ButtonBar";
 
 interface Props {
   holidays: Holidays;
@@ -85,19 +85,14 @@ export default class SpendingsForm extends React.Component<Props> {
 
   render() {
     return (
-      <ScrollView
-        contentContainerStyle={[
-          globalStyles.container,
-          { borderRadius: 20, padding: 10 },
-        ]}
-      >
+      <ScrollView contentContainerStyle={[styles.contentContainer]}>
         <Text style={[globalStyles.formTitle]}>Nouvelle dépense :</Text>
-        <Text style={[globalStyles.text, { paddingTop: 10 }]}>Nom / Type</Text>
+        <Text style={[styles.textPadding10]}>Nom / Type</Text>
         <TextInput
           style={globalStyles.inputStyle}
           onChangeText={(text) => this.setType(text)}
         />
-        <Text style={[globalStyles.text, { paddingTop: 10 }]}>Montant</Text>
+        <Text style={[styles.textPadding10]}>Montant</Text>
         <CurrencyInput
           value={this.state.amount}
           minValue={0}
@@ -109,7 +104,7 @@ export default class SpendingsForm extends React.Component<Props> {
           precision={2}
           keyboardType={"numbers-and-punctuation"}
         />
-        <Text style={[globalStyles.text, { paddingTop: 10 }]}>Payé par : </Text>
+        <Text style={[styles.textPadding10]}>Payé par : </Text>
         <View style={globalStyles.editableRow}>
           <CustomDropdown
             style={globalStyles.inputStyle}
@@ -118,31 +113,24 @@ export default class SpendingsForm extends React.Component<Props> {
             onSelect={(item) => this.setPlayer(item.value)}
           ></CustomDropdown>
         </View>
-        <View
-          style={[
-            globalStyles.editableRow,
-            {
-              justifyContent: "space-evenly",
-              //marginTop: "auto",
-            },
-          ]}
-        >
-          <Pressable onPress={() => this.props.onCancel()}>
-            <View style={[globalStyles.buttonPrimary]}>
-              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
-                Annuler
-              </Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => this.saveSpending()}>
-            <View style={[globalStyles.buttonPrimary]}>
-              <Text style={[globalStyles.text, { color: Colors.light.white }]}>
-                Ajouter
-              </Text>
-            </View>
-          </Pressable>
-        </View>
+        <ButtonBar
+          onSave={() => this.saveSpending()}
+          onCancel={() => this.props.onCancel()}
+        ></ButtonBar>
       </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    ...globalStyles.container,
+    borderRadius: 20,
+    padding: 10,
+  },
+
+  textPadding10: {
+    ...globalStyles.text,
+    paddingTop: 10,
+  },
+});
