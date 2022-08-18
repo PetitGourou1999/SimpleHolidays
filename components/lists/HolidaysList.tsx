@@ -70,9 +70,10 @@ export default class HolidaysList extends React.Component<Props> {
           keyExtractor={(index: any) => index.toString()}
           renderItem={({ item, index }) => (
             <HolidaysCard
-              onDelete={() => this.loadData()}
               holidays={item}
               navigation={this.props.navigation}
+              onDelete={() => this.loadData()}
+              onEdit={() => this.loadData()}
             ></HolidaysCard>
           )}
           style={[globalStyles.listStyle, { width: "100%" }]}

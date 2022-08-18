@@ -78,7 +78,7 @@ const globalStyles = StyleSheet.create({
 
   modal: {
     flex: 0.6,
-    backgroundColor: "white",
+    backgroundColor: Colors.light.background,
     borderRadius: 20,
   },
 

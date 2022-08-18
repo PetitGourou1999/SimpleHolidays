@@ -15,19 +15,10 @@ import ButtonBar from "./ButtonBar";
 interface Props {
   onCancel: any;
   onSave: any;
+  holidays?: Holidays;
 }
 
 export default class HolidaysForm extends React.Component<Props> {
-  state = {
-    location: "",
-    selectedDateStart: new Date(),
-    selectedDateEnd: new Date(),
-    tags: {
-      tag: "",
-      tagsArray: [],
-    },
-  };
-
   getDates(startDate: Date, stopDate: Date) {
     let dateArray = [];
     let currentDate = new Date(startDate);
@@ -39,6 +30,59 @@ export default class HolidaysForm extends React.Component<Props> {
     }
     return dateArray;
   }
+
+  state = {
+    location: "",
+    selectedDateStart: new Date(),
+    selectedDateEnd: new Date(),
+    tags: {
+      tag: "",
+      tagsArray: [],
+    },
+    holidays: {},
+  };
+
+  componentWillMount = () => {
+    this.setHolidays();
+  };
+
+  setLocation = (location: string) => {
+    this.setState({ location: location });
+  };
+
+  setSelectedDateStart = (date: any) => {
+    this.setState({ selectedDateStart: date });
+  };
+
+  setSelectedDateEnd = (date: any) => {
+    this.setState({ selectedDateEnd: date });
+  };
+
+  updateTagState = (tags: any) => {
+    this.setState({
+      tags: tags,
+    });
+  };
+
+  setHolidays = () => {
+    if (this.props.holidays !== undefined) {
+      this.setState({ holidays: this.props.holidays });
+      this.setLocation(this.props.holidays.title);
+
+      console.log(this.props.holidays.dateStart);
+      console.log(this.props.holidays.dateEnd);
+
+      this.setSelectedDateStart(new Date(this.props.holidays.dateStart));
+      this.setSelectedDateEnd(new Date(this.props.holidays.dateEnd));
+
+      let playersArray: string[] = [];
+      for (let index = 0; index < this.props.holidays.players.length; index++) {
+        const element = this.props.holidays.players[index];
+        playersArray.push(element.pseudo);
+      }
+      this.setState({ tags: { tag: "", tagsArray: playersArray } });
+    }
+  };
 
   saveHolidays = () => {
     if (this.state.location.trim() == "") {
@@ -65,17 +109,20 @@ export default class HolidaysForm extends React.Component<Props> {
     let defaultMeals: MealsOfTheDay[] = [];
     let defaultActivities: Activity[] = [];
 
-    let holidays: Holidays = {
-      storageKey: storageHelper.makeid(8),
-      title: this.state.location,
-      dateStart: this.state.selectedDateStart,
-      dateEnd: this.state.selectedDateEnd,
-      players: [],
-      activities: [],
-      meals: [],
-      groceries: [],
-      spendings: [],
-    };
+    let holidays: Holidays =
+      this.props.holidays === undefined
+        ? {
+            storageKey: storageHelper.makeid(8),
+            title: this.state.location,
+            dateStart: this.state.selectedDateStart,
+            dateEnd: this.state.selectedDateEnd,
+            players: [],
+            activities: [],
+            meals: [],
+            groceries: [],
+            spendings: [],
+          }
+        : this.props.holidays;
 
     // Fill player
     for (let index = 0; index < this.state.tags.tagsArray.length; index++) {
@@ -87,35 +134,37 @@ export default class HolidaysForm extends React.Component<Props> {
 
     holidays.players = players;
 
-    // Fill Meals
-    let allDates = this.getDates(
-      this.state.selectedDateStart,
-      this.state.selectedDateEnd
-    );
+    if (this.props.holidays === undefined) {
+      // Fill Meals
+      let allDates = this.getDates(
+        this.state.selectedDateStart,
+        this.state.selectedDateEnd
+      );
 
-    for (let index = 0; index < allDates.length; index++) {
-      const myDate = allDates[index];
-      let mealsOfTheDay: MealsOfTheDay = {
-        date: myDate,
-        meals: [defaultLunch, defaultDiner],
-      };
-      defaultMeals.push(mealsOfTheDay);
+      for (let index = 0; index < allDates.length; index++) {
+        const myDate = allDates[index];
+        let mealsOfTheDay: MealsOfTheDay = {
+          date: myDate,
+          meals: [defaultLunch, defaultDiner],
+        };
+        defaultMeals.push(mealsOfTheDay);
+      }
+
+      holidays.meals = defaultMeals;
+
+      // Fill Activities
+      for (let index = 0; index < allDates.length; index++) {
+        const myDate = allDates[index];
+        let activity: Activity = {
+          title: "",
+          date: myDate,
+          location: this.state.location,
+        };
+        defaultActivities.push(activity);
+      }
+
+      holidays.activities = defaultActivities;
     }
-
-    holidays.meals = defaultMeals;
-
-    // Fill Activities
-    for (let index = 0; index < allDates.length; index++) {
-      const myDate = allDates[index];
-      let activity: Activity = {
-        title: "",
-        date: myDate,
-        location: this.state.location,
-      };
-      defaultActivities.push(activity);
-    }
-
-    holidays.activities = defaultActivities;
 
     storageHelper.storeData(holidays.storageKey, holidays).then(
       () => {
@@ -126,24 +175,6 @@ export default class HolidaysForm extends React.Component<Props> {
         console.log(error);
       }
     );
-  };
-
-  setLocation = (location: string) => {
-    this.setState({ location: location });
-  };
-
-  setSelectedDateStart = (date: any) => {
-    this.setState({ selectedDateStart: date });
-  };
-
-  setSelectedDateEnd = (date: any) => {
-    this.setState({ selectedDateEnd: date });
-  };
-
-  updateTagState = (tags: any) => {
-    this.setState({
-      tags: tags,
-    });
   };
 
   render() {
@@ -161,6 +192,7 @@ export default class HolidaysForm extends React.Component<Props> {
           <TextInput
             onChangeText={(text) => this.setLocation(text)}
             style={[globalStyles.inputStyle]}
+            value={this.state.location}
           />
           <Text style={[styles.textPadding10]}>Date de début</Text>
           <CustomDatePicker

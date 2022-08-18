@@ -16,6 +16,10 @@ export default class CustomDatePicker extends React.Component<Props> {
     selectedDate: new Date(),
   };
 
+  componentDidMount = () => {
+    this.setState({ selectedDate: this.props.initialDate });
+  };
+
   showDatePicker = (visible: boolean) => {
     this.setState({ isDatePickerVisible: visible });
   };
