@@ -74,7 +74,6 @@ export default class SpendingsForm extends React.Component<Props> {
       .storeData(this.props.holidays.storageKey, this.props.holidays)
       .then(
         () => {
-          console.log(JSON.stringify(this.props.holidays));
           this.props.onSave();
         },
         (error) => {

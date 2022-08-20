@@ -2,9 +2,9 @@ import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
-import Colors from "../constants/Colors";
-import globalStyles from "../constants/Styles";
-import { Miscellaneous } from "../types/Types";
+import Colors from "../../constants/Colors";
+import globalStyles from "../../constants/Styles";
+import { Miscellaneous } from "../../types/Types";
 
 interface Props {
   item: Miscellaneous;

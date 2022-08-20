@@ -1,8 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { diner, lunch } from "../../constants/data/MealTimes";
+import {
+  defaultDiner,
+  defaultLunch,
+} from "../../constants/default/DefaultMeal";
 import globalStyles from "../../constants/Styles";
-import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Meal, MealIdea, MealsOfTheDay } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";

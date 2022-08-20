@@ -73,6 +73,23 @@ class AsyncStorageHelper {
       console.log(e);
     }
   };
+
+  public getSelectedTheme = async () => {
+    return this.getAllItems().then(
+      (value) => {
+        if (value !== undefined) {
+          value.forEach((element) => {
+            if (element.themeName !== undefined) {
+              return element;
+            }
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 }
 
 const storageHelper = new AsyncStorageHelper();

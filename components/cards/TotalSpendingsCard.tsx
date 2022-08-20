@@ -31,8 +31,7 @@ export default class TotalSpendingsCard extends React.Component<Props> {
           totalForPlayer.player.pseudo ===
           this.props.holidays.spendings[index].player.pseudo
       );
-      console.log(foundIndex);
-      console.log(totalsForPlayers[foundIndex]);
+
       if (foundIndex !== -1) {
         totalsForPlayers[foundIndex] = {
           player: totalsForPlayers[foundIndex].player,

@@ -13,7 +13,7 @@ import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Ingredient } from "../../types/Types";
-import GroceryItem from "../GroceryItem";
+import GroceryItem from "../items/GroceryItem";
 
 interface Props {
   holidays: Holidays;

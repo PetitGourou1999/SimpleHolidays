@@ -13,7 +13,7 @@ import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Miscellaneous } from "../../types/Types";
-import MiscellaneousItem from "../MiscellaneousItem";
+import MiscellaneousItem from "../items/MiscellaneousItem";
 
 export default class MiscellaneousList extends React.Component {
   state = {

@@ -1,5 +1,5 @@
-import { diner, lunch } from "../constants/data/MealTimes";
-import { Meal } from "../types/Types";
+import { Meal } from "../../types/Types";
+import { diner, lunch } from "../data/MealTimes";
 
 export const defaultLunch: Meal = {
   meal: {

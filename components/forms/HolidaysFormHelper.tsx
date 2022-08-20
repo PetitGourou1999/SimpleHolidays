@@ -1,5 +1,8 @@
 import { diner, lunch } from "../../constants/data/MealTimes";
-import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
+import {
+  defaultDiner,
+  defaultLunch,
+} from "../../constants/default/DefaultMeal";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Activity, Holidays, MealsOfTheDay, Player } from "../../types/Types";
 

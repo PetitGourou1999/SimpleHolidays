@@ -2,10 +2,10 @@ import React from "react";
 import { Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import NumericInput from "react-native-numeric-input";
-import Colors from "../constants/Colors";
-import globalStyles from "../constants/Styles";
-import storageHelper from "../storage/AsyncStorageHelper";
-import { Holidays, Ingredient } from "../types/Types";
+import Colors from "../../constants/Colors";
+import globalStyles from "../../constants/Styles";
+import storageHelper from "../../storage/AsyncStorageHelper";
+import { Holidays, Ingredient } from "../../types/Types";
 
 interface Props {
   holidays: Holidays;

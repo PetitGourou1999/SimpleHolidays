@@ -1,3 +1,8 @@
+export type SelectedTheme = {
+  storageKey: string;
+  themeName: string;
+};
+
 export type Player = {
   pseudo: string;
 };
