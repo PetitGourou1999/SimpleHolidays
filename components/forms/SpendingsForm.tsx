@@ -114,6 +114,8 @@ export default class SpendingsForm extends React.Component<Props> {
           ></CustomDropdown>
         </View>
         <ButtonBar
+          cancelLabel="Annuler"
+          saveLabel="Ajouter"
           onSave={() => this.saveSpending()}
           onCancel={() => this.props.onCancel()}
         ></ButtonBar>

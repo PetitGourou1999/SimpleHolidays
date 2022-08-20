@@ -6,11 +6,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import TagInput from "react-native-tags-input";
 import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
-import { defaultDiner, defaultLunch } from "../../default/DefaultMeal";
 import storageHelper from "../../storage/AsyncStorageHelper";
-import { Activity, Holidays, MealsOfTheDay, Player } from "../../types/Types";
+import { Holidays, Player } from "../../types/Types";
 import CustomDatePicker from "../CustomDatePicker";
 import ButtonBar from "./ButtonBar";
+import holidaysFormHelper from "./HolidaysFormHelper";
 
 interface Props {
   onCancel: any;
@@ -19,18 +19,6 @@ interface Props {
 }
 
 export default class HolidaysForm extends React.Component<Props> {
-  getDates(startDate: Date, stopDate: Date) {
-    let dateArray = [];
-    let currentDate = new Date(startDate);
-    while (currentDate <= stopDate) {
-      dateArray.push(new Date(currentDate));
-      currentDate = new Date(currentDate).setDate(
-        new Date(currentDate).getDate() + 1
-      );
-    }
-    return dateArray;
-  }
-
   state = {
     location: "",
     selectedDateStart: new Date(),
@@ -68,10 +56,6 @@ export default class HolidaysForm extends React.Component<Props> {
     if (this.props.holidays !== undefined) {
       this.setState({ holidays: this.props.holidays });
       this.setLocation(this.props.holidays.title);
-
-      console.log(this.props.holidays.dateStart);
-      console.log(this.props.holidays.dateEnd);
-
       this.setSelectedDateStart(new Date(this.props.holidays.dateStart));
       this.setSelectedDateEnd(new Date(this.props.holidays.dateEnd));
 
@@ -106,23 +90,6 @@ export default class HolidaysForm extends React.Component<Props> {
     }
 
     let players: Player[] = [];
-    let defaultMeals: MealsOfTheDay[] = [];
-    let defaultActivities: Activity[] = [];
-
-    let holidays: Holidays =
-      this.props.holidays === undefined
-        ? {
-            storageKey: storageHelper.makeid(8),
-            title: this.state.location,
-            dateStart: this.state.selectedDateStart,
-            dateEnd: this.state.selectedDateEnd,
-            players: [],
-            activities: [],
-            meals: [],
-            groceries: [],
-            spendings: [],
-          }
-        : this.props.holidays;
 
     // Fill player
     for (let index = 0; index < this.state.tags.tagsArray.length; index++) {
@@ -132,39 +99,13 @@ export default class HolidaysForm extends React.Component<Props> {
       });
     }
 
-    holidays.players = players;
-
-    if (this.props.holidays === undefined) {
-      // Fill Meals
-      let allDates = this.getDates(
-        this.state.selectedDateStart,
-        this.state.selectedDateEnd
-      );
-
-      for (let index = 0; index < allDates.length; index++) {
-        const myDate = allDates[index];
-        let mealsOfTheDay: MealsOfTheDay = {
-          date: myDate,
-          meals: [defaultLunch, defaultDiner],
-        };
-        defaultMeals.push(mealsOfTheDay);
-      }
-
-      holidays.meals = defaultMeals;
-
-      // Fill Activities
-      for (let index = 0; index < allDates.length; index++) {
-        const myDate = allDates[index];
-        let activity: Activity = {
-          title: "",
-          date: myDate,
-          location: this.state.location,
-        };
-        defaultActivities.push(activity);
-      }
-
-      holidays.activities = defaultActivities;
-    }
+    let holidays = holidaysFormHelper.getCorrespondingHolidays(
+      this.state.location,
+      new Date(this.state.selectedDateStart),
+      new Date(this.state.selectedDateEnd),
+      players,
+      this.props.holidays
+    );
 
     storageHelper.storeData(holidays.storageKey, holidays).then(
       () => {
@@ -245,6 +186,10 @@ export default class HolidaysForm extends React.Component<Props> {
             />
           </View>
           <ButtonBar
+            cancelLabel={"Annuler"}
+            saveLabel={
+              this.props.holidays === undefined ? "Ajouter" : "Modfier"
+            }
             onSave={() => this.saveHolidays()}
             onCancel={() => this.props.onCancel()}
           ></ButtonBar>

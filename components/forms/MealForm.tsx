@@ -138,6 +138,8 @@ export default class MealForm extends React.Component<Props> {
           }}
         />
         <ButtonBar
+          cancelLabel="Annuler"
+          saveLabel="Ajouter"
           onSave={() => this.saveMealIdea()}
           onCancel={() => this.props.onCancel()}
         ></ButtonBar>

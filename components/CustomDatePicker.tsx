@@ -38,7 +38,6 @@ export default class CustomDatePicker extends React.Component<Props> {
           mode="date"
           onConfirm={(date) => this.onDateChange(date)}
           onCancel={(date) => this.onDateChange(date)}
-          minimumDate={new Date()}
           locale="fr-FR"
         />
         <Text style={{ fontFamily: "WorkSansRegular" }}>

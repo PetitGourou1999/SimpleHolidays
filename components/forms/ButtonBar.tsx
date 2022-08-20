@@ -4,6 +4,8 @@ import Colors from "../../constants/Colors";
 import globalStyles from "../../constants/Styles";
 
 interface Props {
+  cancelLabel: string;
+  saveLabel: string;
   onCancel: any;
   onSave: any;
 }

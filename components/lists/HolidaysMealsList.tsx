@@ -53,10 +53,10 @@ export default class HolidaysMealsList extends React.Component<Props> {
           ) + 1;
 
     // Update Groceries : add Ingredients
-    for (let k = 0; k < meal.meal.ingredients.length; k++) {
+    for (let index = 0; index < meal.meal.ingredients.length; index++) {
       let foundIndex = holidaysGroceries.findIndex(
         (ingredient) =>
-          ingredient.title === meal.meal.ingredients[k].title &&
+          ingredient.title === meal.meal.ingredients[index].title &&
           ingredient.checked === false
       );
 
@@ -66,13 +66,13 @@ export default class HolidaysMealsList extends React.Component<Props> {
           title: holidaysGroceries[foundIndex].title,
           quantity:
             holidaysGroceries[foundIndex].quantity +
-            meal.meal.ingredients[k].quantity,
+            meal.meal.ingredients[index].quantity,
           checked: holidaysGroceries[foundIndex].checked,
           addedManually: false,
         };
       } else {
-        if (meal.meal.ingredients[k].title !== "") {
-          let ingredientToAdd = meal.meal.ingredients[k];
+        if (meal.meal.ingredients[index].title !== "") {
+          let ingredientToAdd = meal.meal.ingredients[index];
           ingredientToAdd.index = indexCount;
           holidaysGroceries.push(ingredientToAdd);
           indexCount++;
@@ -81,9 +81,10 @@ export default class HolidaysMealsList extends React.Component<Props> {
     }
 
     // Update Groceries : delete Ingredients
-    for (let k = 0; k < savedMeal.meal.ingredients.length; k++) {
+    for (let index = 0; index < savedMeal.meal.ingredients.length; index++) {
       let foundIndex = holidaysGroceries.findIndex(
-        (ingredient) => ingredient.title === savedMeal.meal.ingredients[k].title
+        (ingredient) =>
+          ingredient.title === savedMeal.meal.ingredients[index].title
       );
       if (foundIndex != -1) {
         holidaysGroceries[foundIndex] = {
@@ -91,7 +92,7 @@ export default class HolidaysMealsList extends React.Component<Props> {
           title: holidaysGroceries[foundIndex].title,
           quantity:
             holidaysGroceries[foundIndex].quantity -
-            savedMeal.meal.ingredients[k].quantity,
+            savedMeal.meal.ingredients[index].quantity,
           checked: holidaysGroceries[foundIndex].checked,
           addedManually: false,
         };
