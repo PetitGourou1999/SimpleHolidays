@@ -24,6 +24,13 @@ export default class SpendingsForm extends React.Component<Props> {
     items: [],
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   componentDidMount = () => {
     this.setState({
       items: this.props.holidays.players.map((item, index) => {
@@ -84,14 +91,14 @@ export default class SpendingsForm extends React.Component<Props> {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={[styles.contentContainer]}>
+      <ScrollView contentContainerStyle={[this.styles.contentContainer]}>
         <Text style={[MyStyles.styles().formTitle]}>Nouvelle dépense :</Text>
-        <Text style={[styles.textPadding10]}>Nom / Type</Text>
+        <Text style={[this.styles.textPadding10]}>Nom / Type</Text>
         <TextInput
           style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setType(text)}
         />
-        <Text style={[styles.textPadding10]}>Montant</Text>
+        <Text style={[this.styles.textPadding10]}>Montant</Text>
         <CurrencyInput
           value={this.state.amount}
           minValue={0}
@@ -103,7 +110,7 @@ export default class SpendingsForm extends React.Component<Props> {
           precision={2}
           keyboardType={"numbers-and-punctuation"}
         />
-        <Text style={[styles.textPadding10]}>Payé par : </Text>
+        <Text style={[this.styles.textPadding10]}>Payé par : </Text>
         <View style={MyStyles.styles().editableRow}>
           <CustomDropdown
             style={MyStyles.styles().inputStyle}
@@ -121,17 +128,17 @@ export default class SpendingsForm extends React.Component<Props> {
       </ScrollView>
     );
   }
+
+  private styles = StyleSheet.create({
+    contentContainer: {
+      ...MyStyles.styles().container,
+      borderRadius: 20,
+      padding: 10,
+    },
+
+    textPadding10: {
+      ...MyStyles.styles().text,
+      paddingTop: 10,
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    ...MyStyles.styles().container,
-    borderRadius: 20,
-    padding: 10,
-  },
-
-  textPadding10: {
-    ...MyStyles.styles().text,
-    paddingTop: 10,
-  },
-});

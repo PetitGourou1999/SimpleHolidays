@@ -1,7 +1,7 @@
 import { FontAwesome5, Fontisto } from "@expo/vector-icons";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
-import React from "react";
+import React, { useState } from "react";
 import Colors from "../constants/Colors";
 import { MyStyles } from "../constants/MyStyles";
 import MealsScreen from "../screens/MealsScreen";
@@ -11,7 +11,21 @@ import { MainStackNavigator } from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();
 
+const useConstructor = (callBack = () => {}) => {
+  const [hasBeenCalled, setHasBeenCalled] = useState(false);
+  if (hasBeenCalled) return;
+  callBack();
+  setHasBeenCalled(true);
+};
+
 const DrawerNavigator = () => {
+  useConstructor(() => {
+    MyStyles.loadTheme().finally(() => {
+      console.log("Navigator");
+      console.log(MyStyles.selectedTheme);
+    });
+  });
+
   const customFonts = {
     WorkSans: require("../assets/fonts/WorkSans-Bold.ttf"),
   };

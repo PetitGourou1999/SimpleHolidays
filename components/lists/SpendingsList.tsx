@@ -19,6 +19,13 @@ export default class SpendingsList extends React.Component<Props> {
     textInputHolderPlayer: "",
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   loadData = () => {
     this.setState({ arrayHolder: [...this.props.holidays.spendings] });
   };

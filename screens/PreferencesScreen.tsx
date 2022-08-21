@@ -1,4 +1,3 @@
-import * as Updates from "expo-updates";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { MyStyles } from "../constants/MyStyles";
@@ -43,10 +42,6 @@ export default class PreferencesScreen extends React.Component {
         console.log(error);
       }
     );
-  };
-
-  restartApp = () => {
-    Updates.reloadAsync();
   };
 
   render() {

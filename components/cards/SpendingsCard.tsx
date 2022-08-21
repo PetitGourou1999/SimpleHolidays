@@ -10,11 +10,18 @@ interface Props {
 }
 
 export default class SpendingsCard extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   render() {
     return (
       <Card
         wrapperStyle={MyStyles.styles().cardWrapper}
-        containerStyle={styles.cardContainer}
+        containerStyle={this.styles.cardContainer}
       >
         <Card.Title style={MyStyles.styles().cardTitle}>
           {this.props.spending.title}
@@ -29,7 +36,7 @@ export default class SpendingsCard extends React.Component<Props> {
           }}
         >
           <Text style={MyStyles.styles().cardText}>{"Montant : "}</Text>
-          <Text style={[MyStyles.styles().cardText, styles.amountStyle]}>
+          <Text style={[MyStyles.styles().cardText, this.styles.amountStyle]}>
             {this.props.spending.amount + " €"}
           </Text>
         </View>
@@ -44,22 +51,22 @@ export default class SpendingsCard extends React.Component<Props> {
       </Card>
     );
   }
+
+  private styles = StyleSheet.create({
+    text: {
+      ...MyStyles.styles().cardText,
+      marginBottom: 5,
+    },
+
+    cardContainer: {
+      ...MyStyles.styles().cardContainer,
+      width: "90%",
+    },
+
+    amountStyle: {
+      minWidth: "10%",
+      justifyContent: "flex-end",
+      textAlign: "right",
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  text: {
-    ...MyStyles.styles().cardText,
-    marginBottom: 5,
-  },
-
-  cardContainer: {
-    ...MyStyles.styles().cardContainer,
-    width: "90%",
-  },
-
-  amountStyle: {
-    minWidth: "10%",
-    justifyContent: "flex-end",
-    textAlign: "right",
-  },
-});

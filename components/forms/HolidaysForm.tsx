@@ -30,6 +30,13 @@ export default class HolidaysForm extends React.Component<Props> {
     holidays: {},
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   componentWillMount = () => {
     this.setHolidays();
   };
@@ -121,15 +128,15 @@ export default class HolidaysForm extends React.Component<Props> {
   render() {
     return (
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.borderRadius}
-        style={[styles.borderRadius]}
+        contentContainerStyle={this.styles.borderRadius}
+        style={[this.styles.borderRadius]}
       >
         <ScrollView
           contentContainerStyle={[
             MyStyles.styles().container,
-            styles.borderRadius,
+            this.styles.borderRadius,
           ]}
-          style={[styles.borderRadius]}
+          style={[this.styles.borderRadius]}
         >
           <Text style={[MyStyles.styles().formTitle]}>
             Détails des vacances
@@ -140,17 +147,17 @@ export default class HolidaysForm extends React.Component<Props> {
             style={[MyStyles.styles().inputStyle]}
             value={this.state.location}
           />
-          <Text style={[styles.textPadding10]}>Date de début</Text>
+          <Text style={[this.styles.textPadding10]}>Date de début</Text>
           <CustomDatePicker
             initialDate={this.state.selectedDateStart}
             onChange={(date: Date) => this.setSelectedDateStart(date)}
           />
-          <Text style={[styles.textPadding20]}>Date de fin</Text>
+          <Text style={[this.styles.textPadding20]}>Date de fin</Text>
           <CustomDatePicker
             initialDate={this.state.selectedDateEnd}
             onChange={(date: Date) => this.setSelectedDateEnd(date)}
           />
-          <Text style={[styles.textPadding10]}>Participants</Text>
+          <Text style={[this.styles.textPadding10]}>Participants</Text>
           <View>
             <TagInput
               updateState={this.updateTagState}
@@ -185,8 +192,8 @@ export default class HolidaysForm extends React.Component<Props> {
                 })
               }
               autoCorrect={false}
-              tagStyle={styles.tag}
-              tagTextStyle={styles.tagText}
+              tagStyle={this.styles.tag}
+              tagTextStyle={this.styles.tagText}
               keysForTag={", "}
             />
           </View>
@@ -202,29 +209,29 @@ export default class HolidaysForm extends React.Component<Props> {
       </KeyboardAwareScrollView>
     );
   }
+
+  private styles = StyleSheet.create({
+    borderRadius: {
+      borderRadius: 20,
+    },
+
+    textPadding10: {
+      ...MyStyles.styles().text,
+      paddingTop: 10,
+    },
+
+    textPadding20: {
+      paddingTop: 20,
+    },
+
+    tag: {
+      backgroundColor: "#fff",
+      minHeight: 30,
+    },
+
+    tagText: {
+      ...MyStyles.styles().text,
+      color: Colors[MyStyles.selectedTheme].primary,
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  borderRadius: {
-    borderRadius: 20,
-  },
-
-  textPadding10: {
-    ...MyStyles.styles().text,
-    paddingTop: 10,
-  },
-
-  textPadding20: {
-    paddingTop: 20,
-  },
-
-  tag: {
-    backgroundColor: "#fff",
-    minHeight: 30,
-  },
-
-  tagText: {
-    ...MyStyles.styles().text,
-    color: Colors[MyStyles.selectedTheme].primary,
-  },
-});

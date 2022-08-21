@@ -17,6 +17,13 @@ interface Props {
 }
 
 export default class EditableMealRow extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   findMealByTime = (time: string) => {
     let foundValue = this.props.holidaysMeal.meals.find((meal) => {
       return meal.time === time;

@@ -100,6 +100,43 @@ const CustomDropdown: FC<Props> = ({
     );
   };
 
+  const styles = StyleSheet.create({
+    button: {
+      zIndex: 1,
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "center",
+      height: 40,
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      backgroundColor: Colors[MyStyles.selectedTheme].white,
+    },
+    buttonText: {
+      flex: 1,
+      textAlign: "center",
+      fontFamily: "WorkSansRegular",
+    },
+    icon: {
+      color: Colors[MyStyles.selectedTheme].darkBlue,
+    },
+    dropdown: {
+      ...MyStyles.styles().overlayShadow,
+      flex: 1,
+      position: "absolute",
+      backgroundColor: Colors[MyStyles.selectedTheme].white,
+      borderRadius: 5,
+    },
+    overlay: {
+      width: "100%",
+      height: "100%",
+    },
+    item: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderColor: Colors[MyStyles.selectedTheme].grey,
+    },
+  });
+
   return (
     <TouchableOpacity
       ref={DropdownButton}
@@ -120,42 +157,5 @@ const CustomDropdown: FC<Props> = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    zIndex: 1,
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    height: 40,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    backgroundColor: Colors[MyStyles.selectedTheme].white,
-  },
-  buttonText: {
-    flex: 1,
-    textAlign: "center",
-    fontFamily: "WorkSansRegular",
-  },
-  icon: {
-    color: Colors[MyStyles.selectedTheme].darkBlue,
-  },
-  dropdown: {
-    ...MyStyles.styles().overlayShadow,
-    flex: 1,
-    position: "absolute",
-    backgroundColor: Colors[MyStyles.selectedTheme].white,
-    borderRadius: 5,
-  },
-  overlay: {
-    width: "100%",
-    height: "100%",
-  },
-  item: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: Colors[MyStyles.selectedTheme].grey,
-  },
-});
 
 export default CustomDropdown;

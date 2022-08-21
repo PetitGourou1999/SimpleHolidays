@@ -28,6 +28,13 @@ export default class MealForm extends React.Component<Props> {
     ingredients: [],
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   saveMealIdea = () => {
     if (this.state.title.trim() == "") {
       Alert.alert("Veuillez saisir un intitulé pour ce repas");

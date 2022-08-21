@@ -12,6 +12,12 @@ interface Props {
 }
 
 export default class DeletionModal extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
   onCancel = () => {
     this.props.onCancel();
   };
@@ -23,11 +29,11 @@ export default class DeletionModal extends React.Component<Props> {
   render() {
     return (
       <Modal isVisible={this.props.isVisible}>
-        <View style={[MyStyles.styles().modal, styles.modalStyle]}>
-          <Text style={[MyStyles.styles().cardText, styles.titleText]}>
+        <View style={[MyStyles.styles().modal, this.styles.modalStyle]}>
+          <Text style={[MyStyles.styles().cardText, this.styles.titleText]}>
             {this.props.label}
           </Text>
-          <View style={[MyStyles.styles().editableRow, styles.buttonBar]}>
+          <View style={[MyStyles.styles().editableRow, this.styles.buttonBar]}>
             <Pressable onPress={() => this.onCancel()}>
               <View style={[MyStyles.styles().buttonPrimary]}>
                 <Text
@@ -62,28 +68,28 @@ export default class DeletionModal extends React.Component<Props> {
       </Modal>
     );
   }
+
+  private styles = StyleSheet.create({
+    modalStyle: {
+      flex: 0.2,
+      alignContent: "center",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
+    titleText: {
+      width: "100%",
+      textAlign: "center",
+      marginTop: 40,
+      paddingHorizontal: 10,
+    },
+
+    buttonBar: {
+      justifyContent: "space-evenly",
+      marginTop: "auto",
+      backgroundColor: Colors[MyStyles.selectedTheme].white,
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  modalStyle: {
-    flex: 0.2,
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  titleText: {
-    width: "100%",
-    textAlign: "center",
-    marginTop: 40,
-    paddingHorizontal: 10,
-  },
-
-  buttonBar: {
-    justifyContent: "space-evenly",
-    marginTop: "auto",
-    backgroundColor: Colors[MyStyles.selectedTheme].white,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-});

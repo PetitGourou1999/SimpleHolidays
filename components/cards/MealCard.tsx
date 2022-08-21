@@ -18,6 +18,13 @@ export default class MealCard extends React.Component<Props> {
     isModalVisible: false,
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   toggleModal = (visible: boolean) => {
     this.setState({ isModalVisible: visible });
   };

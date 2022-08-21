@@ -14,6 +14,13 @@ export default class MealsList extends React.Component {
     textInputHolderPlayer: "",
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   loadData = () => {
     storageHelper.getAllItems().then(
       (value) => {

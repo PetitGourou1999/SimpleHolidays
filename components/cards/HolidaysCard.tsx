@@ -66,7 +66,7 @@ export default class HolidaysCard extends React.Component<Props> {
             <Text style={[MyStyles.styles().cardTitle, { margin: "auto" }]}>
               {this.props.holidays.title}
             </Text>
-            <View style={styles.iconsRow}>
+            <View style={this.styles.iconsRow}>
               <Pressable onPress={() => this.toggleEditModal(true)}>
                 <FontAwesome
                   name="pencil"
@@ -86,22 +86,22 @@ export default class HolidaysCard extends React.Component<Props> {
           </View>
           <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
           <Pressable
-            style={[styles.pressable]}
+            style={[this.styles.pressable]}
             onPress={() => this.onPressButton("Activités des Vacances")}
           >
-            <Text style={styles.pressableText}>Activités</Text>
+            <Text style={this.styles.pressableText}>Activités</Text>
           </Pressable>
           <Pressable
-            style={[styles.pressable]}
+            style={[this.styles.pressable]}
             onPress={() => this.onPressButton("Repas des Vacances")}
           >
-            <Text style={styles.pressableText}>Repas</Text>
+            <Text style={this.styles.pressableText}>Repas</Text>
           </Pressable>
           <Pressable
-            style={[styles.pressable]}
+            style={[this.styles.pressable]}
             onPress={() => this.onPressButton("Dépenses des Vacances")}
           >
-            <Text style={styles.pressableText}>Dépenses</Text>
+            <Text style={this.styles.pressableText}>Dépenses</Text>
           </Pressable>
         </Card>
         <Modal isVisible={this.state.isEditModalVisible}>
@@ -122,25 +122,25 @@ export default class HolidaysCard extends React.Component<Props> {
       </React.Fragment>
     );
   }
+
+  private styles = StyleSheet.create({
+    iconsRow: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      position: "absolute",
+      right: 0,
+    },
+
+    pressable: {
+      ...MyStyles.styles().buttonSecondary,
+      marginVertical: 5,
+    },
+
+    pressableText: {
+      color: Colors[MyStyles.selectedTheme].white,
+      fontWeight: "bold",
+      fontFamily: "WorkSans",
+      fontSize: 15,
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  iconsRow: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    position: "absolute",
-    right: 0,
-  },
-
-  pressable: {
-    ...MyStyles.styles().buttonSecondary,
-    marginVertical: 5,
-  },
-
-  pressableText: {
-    color: Colors[MyStyles.selectedTheme].white,
-    fontWeight: "bold",
-    fontFamily: "WorkSans",
-    fontSize: 15,
-  },
-});

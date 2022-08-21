@@ -16,6 +16,13 @@ export default class MiscellaneousItem extends React.Component<Props> {
     checked: false,
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   componentDidMount = () => {
     this.setState({ checked: this.props.item.checked });
   };

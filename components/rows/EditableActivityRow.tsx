@@ -13,6 +13,13 @@ export default class EditableActivityRow extends React.Component<Props> {
     activity: "",
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   componentDidMount = () => {
     this.setState({ activity: this.props.holidaysActivity.title });
   };
@@ -24,8 +31,8 @@ export default class EditableActivityRow extends React.Component<Props> {
 
   render() {
     return (
-      <View style={MyStyles.editableRow}>
-        <Text style={MyStyles.dateText}>
+      <View style={MyStyles.styles().editableRow}>
+        <Text style={MyStyles.styles().dateText}>
           {new Date(this.props.holidaysActivity.date).toLocaleDateString(
             "fr-FR",
             {
@@ -39,7 +46,7 @@ export default class EditableActivityRow extends React.Component<Props> {
           blurOnSubmit={true}
           value={this.state.activity}
           onChangeText={(text) => this.setActivity(text)}
-          style={[MyStyles.inputStyle, { width: "66%" }]}
+          style={[MyStyles.styles().inputStyle, { width: "66%" }]}
         />
       </View>
     );
