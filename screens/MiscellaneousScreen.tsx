@@ -8,13 +8,6 @@ export default class MiscellaneousScreen extends React.Component {
     currentItem: "",
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   render() {
     return (
       <View style={MyStyles.styles().container}>

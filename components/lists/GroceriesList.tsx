@@ -36,13 +36,6 @@ export default class GroceriesList extends React.Component<Props> {
     currentItem: "",
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentDidMount = () => {
     this.setState({ holidays: this.props.holidays });
     this.setState({ arrayHolder: [...this.props.holidays.groceries] });

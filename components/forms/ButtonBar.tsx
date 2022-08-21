@@ -11,13 +11,6 @@ interface Props {
 }
 
 export default class ButtonBar extends React.Component<Props> {
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   render() {
     return (
       <View style={[MyStyles.styles().editableRow, styles.buttonBar]}>

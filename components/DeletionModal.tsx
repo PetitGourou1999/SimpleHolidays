@@ -12,12 +12,6 @@ interface Props {
 }
 
 export default class DeletionModal extends React.Component<Props> {
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
   onCancel = () => {
     this.props.onCancel();
   };

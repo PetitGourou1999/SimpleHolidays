@@ -5,13 +5,6 @@ import storageHelper from "../storage/AsyncStorageHelper";
 import { SelectedTheme } from "../types/Types";
 
 export default class PreferencesScreen extends React.Component {
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   changeTheme = (themeName: string) => {
     let selectedTheme: SelectedTheme = {
       storageKey: storageHelper.SELECTED_THEME_KEY,

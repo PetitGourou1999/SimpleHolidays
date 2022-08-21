@@ -7,13 +7,6 @@ export default class ThemingItem extends React.Component {
     selectedTheme: {},
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   render() {
     return (
       <View style={MyStyles.styles().taskContainer}>

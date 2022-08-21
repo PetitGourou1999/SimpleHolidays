@@ -7,13 +7,6 @@ export default class HolidaysSpendingsScreen extends React.Component {
   private data = this.props.route;
   private holidays = this.data.params.data;
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   render() {
     return (
       <React.Fragment>

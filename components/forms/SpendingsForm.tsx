@@ -24,13 +24,6 @@ export default class SpendingsForm extends React.Component<Props> {
     items: [],
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentDidMount = () => {
     this.setState({
       items: this.props.holidays.players.map((item, index) => {

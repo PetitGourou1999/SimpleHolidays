@@ -9,13 +9,6 @@ export default class ThemingList extends React.Component {
     arrayHolder: [],
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   loadData = () => {
     storageHelper.getAllItems().then(
       (value) => {

@@ -16,13 +16,6 @@ export default class CustomDatePicker extends React.Component<Props> {
     selectedDate: new Date(),
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentDidMount = () => {
     this.setState({ selectedDate: this.props.initialDate });
   };

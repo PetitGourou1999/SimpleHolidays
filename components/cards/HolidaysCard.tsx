@@ -24,13 +24,6 @@ export default class HolidaysCard extends React.Component<Props> {
     isEditModalVisible: false,
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   toggleDeleteModal = (visible: boolean) => {
     this.setState({ isDeleteModalVisible: visible });
   };

@@ -13,13 +13,6 @@ export default class EditableActivityRow extends React.Component<Props> {
     activity: "",
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentDidMount = () => {
     this.setState({ activity: this.props.holidaysActivity.title });
   };

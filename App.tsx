@@ -5,11 +5,24 @@ import {
 } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import React from "react";
+import React, { useState } from "react";
 import { useColorScheme } from "react-native";
+import { MyStyles } from "./constants/MyStyles";
 import DrawerNavigator from "./navigation/DrawerNavigator";
 
+const useConstructor = (callBack = () => {}) => {
+  const [hasBeenCalled, setHasBeenCalled] = useState(false);
+  if (hasBeenCalled) return;
+  callBack();
+  setHasBeenCalled(true);
+};
+
 export default function App() {
+  MyStyles.loadTheme().finally(() => {
+    console.log("App");
+    console.log(MyStyles.selectedTheme);
+  });
+
   const colorScheme = useColorScheme();
 
   const customFonts = {

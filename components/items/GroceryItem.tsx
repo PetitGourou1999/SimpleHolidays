@@ -20,13 +20,6 @@ export default class GroceryItem extends React.Component<Props> {
     item: {},
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentWillMount = () => {
     this.setState({ checked: this.props.item.checked });
     this.setState({ holidays: this.props.holidays });

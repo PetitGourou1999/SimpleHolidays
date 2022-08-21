@@ -10,13 +10,6 @@ interface Props {
 }
 
 export default class SpendingsCard extends React.Component<Props> {
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   render() {
     return (
       <Card

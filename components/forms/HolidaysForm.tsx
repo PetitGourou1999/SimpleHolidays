@@ -30,13 +30,6 @@ export default class HolidaysForm extends React.Component<Props> {
     holidays: {},
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentWillMount = () => {
     this.setHolidays();
   };

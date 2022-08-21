@@ -17,13 +17,6 @@ export default class HolidaysMealsList extends React.Component<Props> {
     holidays: {},
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   componentDidMount() {
     this.setState({ arrayHolder: [...this.props.holidays.meals] });
     this.setState({ holidays: this.props.holidays });

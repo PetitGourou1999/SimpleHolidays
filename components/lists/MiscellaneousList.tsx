@@ -22,13 +22,6 @@ export default class MiscellaneousList extends React.Component {
     currentItem: "",
   };
 
-  constructor(props: any) {
-    super(props);
-    MyStyles.loadTheme().finally(() => {
-      console.log(MyStyles.selectedTheme);
-    });
-  }
-
   loadData = () => {
     storageHelper.getAllItems().then(
       (value) => {
