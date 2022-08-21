@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import CurrencyInput from "react-native-currency-input";
 import { ScrollView } from "react-native-gesture-handler";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Player, Spending } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
@@ -85,10 +85,10 @@ export default class SpendingsForm extends React.Component<Props> {
   render() {
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer]}>
-        <Text style={[globalStyles.formTitle]}>Nouvelle dépense :</Text>
+        <Text style={[MyStyles.styles().formTitle]}>Nouvelle dépense :</Text>
         <Text style={[styles.textPadding10]}>Nom / Type</Text>
         <TextInput
-          style={globalStyles.inputStyle}
+          style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setType(text)}
         />
         <Text style={[styles.textPadding10]}>Montant</Text>
@@ -96,7 +96,7 @@ export default class SpendingsForm extends React.Component<Props> {
           value={this.state.amount}
           minValue={0}
           onChangeValue={(value) => this.setAmount(value)}
-          style={globalStyles.inputStyle}
+          style={MyStyles.styles().inputStyle}
           suffix=" € "
           delimiter="."
           separator=","
@@ -104,9 +104,9 @@ export default class SpendingsForm extends React.Component<Props> {
           keyboardType={"numbers-and-punctuation"}
         />
         <Text style={[styles.textPadding10]}>Payé par : </Text>
-        <View style={globalStyles.editableRow}>
+        <View style={MyStyles.styles().editableRow}>
           <CustomDropdown
-            style={globalStyles.inputStyle}
+            style={MyStyles.styles().inputStyle}
             label={this.state.player.pseudo}
             data={this.state.items}
             onSelect={(item) => this.setPlayer(item.value)}
@@ -125,13 +125,13 @@ export default class SpendingsForm extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    ...globalStyles.container,
+    ...MyStyles.styles().container,
     borderRadius: 20,
     padding: 10,
   },
 
   textPadding10: {
-    ...globalStyles.text,
+    ...MyStyles.styles().text,
     paddingTop: 10,
   },
 });

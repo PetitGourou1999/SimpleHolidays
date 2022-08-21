@@ -1,6 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SelectedTheme } from "./../types/Types";
 
 class AsyncStorageHelper {
+  public SELECTED_THEME_KEY = "selectedTheme";
+
+  private selectedTheme: SelectedTheme = {
+    storageKey: this.SELECTED_THEME_KEY,
+    themeName: "light",
+  };
+
+  constructor() {
+    this.refreshTheme();
+  }
+
   public makeid(length: number) {
     var result = "";
     var characters =
@@ -74,21 +86,24 @@ class AsyncStorageHelper {
     }
   };
 
-  public getSelectedTheme = async () => {
-    return this.getAllItems().then(
+  public refreshTheme = async () => {
+    return this.getData(this.SELECTED_THEME_KEY).then(
       (value) => {
-        if (value !== undefined) {
-          value.forEach((element) => {
-            if (element.themeName !== undefined) {
-              return element;
-            }
-          });
+        if (value !== undefined && value !== null) {
+          console.log("Refresh Theme");
+          if (value.themeName !== undefined) {
+            this.selectedTheme = value;
+          }
         }
       },
       (error) => {
         console.log(error);
       }
     );
+  };
+
+  public getSelectedUserTheme = () => {
+    return this.selectedTheme;
   };
 }
 

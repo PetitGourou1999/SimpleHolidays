@@ -1,26 +1,33 @@
 import React from "react";
 import { Text, View } from "react-native";
 import MiscellaneousList from "../components/lists/MiscellaneousList";
-import globalStyles from "../constants/Styles";
+import { MyStyles } from "../constants/MyStyles";
 
 export default class MiscellaneousScreen extends React.Component {
   state = {
     currentItem: "",
   };
 
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
+
   render() {
     return (
-      <View style={globalStyles.container}>
+      <View style={MyStyles.styles().container}>
         <Text
           style={[
-            globalStyles.rowText,
-            globalStyles.rowHintText,
-            globalStyles.text,
+            MyStyles.styles().rowText,
+            MyStyles.styles().rowHintText,
+            MyStyles.styles().text,
           ]}
         >
           Ceci est la liste des choses utiles à emmener à chaque voyage.
         </Text>
-        <View style={globalStyles.rowBorderStyle}></View>
+        <View style={MyStyles.styles().rowBorderStyle}></View>
         <MiscellaneousList></MiscellaneousList>
       </View>
     );

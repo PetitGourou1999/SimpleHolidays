@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import NumericInput from "react-native-numeric-input";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Ingredient, MealIdea } from "../../types/Types";
 import ButtonBar from "./ButtonBar";
@@ -94,17 +94,17 @@ export default class MealForm extends React.Component<Props> {
   render() {
     return (
       <View style={[styles.contentContainer]}>
-        <Text style={[globalStyles.formTitle]}>Nouvelle idée repas :</Text>
-        <Text style={globalStyles.text}>Intitulé</Text>
+        <Text style={[MyStyles.styles().formTitle]}>Nouvelle idée repas :</Text>
+        <Text style={MyStyles.styles.text}>Intitulé</Text>
         <TextInput
-          style={globalStyles.inputStyle}
+          style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setTitle(text)}
         />
-        <Text style={globalStyles.text}>Ajouter des Ingrédients</Text>
-        <View style={globalStyles.rowView}>
+        <Text style={MyStyles.styles().text}>Ajouter des Ingrédients</Text>
+        <View style={MyStyles.styles().rowView}>
           <TextInput
             value={this.state.ingredientName}
-            style={[globalStyles.inputStyle, { width: "88%" }]}
+            style={[MyStyles.styles().inputStyle, { width: "88%" }]}
             onChangeText={(text) => this.setIngredientName(text)}
           />
           <Pressable onPress={() => this.addIngredient()}>
@@ -117,7 +117,7 @@ export default class MealForm extends React.Component<Props> {
           keyExtractor={(index: any) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={[styles.flatListItem]}>
-              <Text style={globalStyles.inputText}>{item.title}</Text>
+              <Text style={MyStyles.styles().inputText}>{item.title}</Text>
               <NumericInput
                 onChange={(value) => this.setIngredientQuantity(index, value)}
                 value={item.quantity}
@@ -125,10 +125,16 @@ export default class MealForm extends React.Component<Props> {
                 totalWidth={70}
                 minValue={1}
                 rounded
-                rightButtonBackgroundColor={Colors.light.mediumBlue}
-                leftButtonBackgroundColor={Colors.light.lightBlue}
+                rightButtonBackgroundColor={
+                  Colors[MyStyles.selectedTheme].mediumBlue
+                }
+                leftButtonBackgroundColor={
+                  Colors[MyStyles.selectedTheme].lightBlue
+                }
                 borderColor={"transparent"}
-                inputStyle={{ backgroundColor: Colors.light.white }}
+                inputStyle={{
+                  backgroundColor: Colors[MyStyles.selectedTheme].white,
+                }}
               />
             </View>
           )}
@@ -150,13 +156,13 @@ export default class MealForm extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    ...globalStyles.container,
+    ...MyStyles.styles().container,
     borderRadius: 20,
     padding: 10,
   },
 
   flatListItem: {
-    ...globalStyles.rowView,
+    ...MyStyles.styles().rowView,
     width: "100%",
     paddingVertical: 5,
   },

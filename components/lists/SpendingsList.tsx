@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import { Holidays } from "../../types/Types";
 import SpendingsCard from "../cards/SpendingsCard";
 import TotalSpendingsCard from "../cards/TotalSpendingsCard";
@@ -38,15 +38,17 @@ export default class SpendingsList extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[globalStyles.container, { width: "100%" }]}>
+      <View style={[MyStyles.styles().container, { width: "100%" }]}>
         <Pressable
-          style={[globalStyles.buttonPrimary, styles.buttonStyle]}
+          style={[MyStyles.styles().buttonPrimary, styles.buttonStyle]}
           onPress={() => this.toggleModal(true)}
         >
-          <Text style={globalStyles.bigButtonText}>Ajouter une dépense</Text>
+          <Text style={MyStyles.styles().bigButtonText}>
+            Ajouter une dépense
+          </Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>
-          <View style={globalStyles.modal}>
+          <View style={MyStyles.styles().modal}>
             <SpendingsForm
               holidays={this.props.holidays}
               onCancel={() => this.toggleModal(false)}
@@ -63,7 +65,7 @@ export default class SpendingsList extends React.Component<Props> {
           renderItem={({ item }) => (
             <SpendingsCard spending={item}></SpendingsCard>
           )}
-          style={globalStyles.listStyle}
+          style={MyStyles.styles().listStyle}
         />
       </View>
     );

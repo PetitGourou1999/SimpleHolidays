@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import { Spending } from "../../types/Types";
 
 interface Props {
@@ -13,13 +13,13 @@ export default class SpendingsCard extends React.Component<Props> {
   render() {
     return (
       <Card
-        wrapperStyle={globalStyles.cardWrapper}
+        wrapperStyle={MyStyles.styles().cardWrapper}
         containerStyle={styles.cardContainer}
       >
-        <Card.Title style={globalStyles.cardTitle}>
+        <Card.Title style={MyStyles.styles().cardTitle}>
           {this.props.spending.title}
         </Card.Title>
-        <Card.Divider color={Colors.light.secondary} />
+        <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
 
         <View
           style={{
@@ -28,14 +28,16 @@ export default class SpendingsCard extends React.Component<Props> {
             marginBottom: 5,
           }}
         >
-          <Text style={globalStyles.cardText}>{"Montant : "}</Text>
-          <Text style={[globalStyles.cardText, styles.amountStyle]}>
+          <Text style={MyStyles.styles().cardText}>{"Montant : "}</Text>
+          <Text style={[MyStyles.styles().cardText, styles.amountStyle]}>
             {this.props.spending.amount + " €"}
           </Text>
         </View>
-        <View style={globalStyles.itemRow}>
-          <Text style={globalStyles.cardText}>{"Payé par : "}</Text>
-          <Text style={[globalStyles.cardText, globalStyles.pseudoStyle]}>
+        <View style={MyStyles.styles().itemRow}>
+          <Text style={MyStyles.styles().cardText}>{"Payé par : "}</Text>
+          <Text
+            style={[MyStyles.styles().cardText, MyStyles.styles().pseudoStyle]}
+          >
             {this.props.spending.player.pseudo}
           </Text>
         </View>
@@ -46,12 +48,12 @@ export default class SpendingsCard extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   text: {
-    ...globalStyles.cardText,
+    ...MyStyles.styles().cardText,
     marginBottom: 5,
   },
 
   cardContainer: {
-    ...globalStyles.cardContainer,
+    ...MyStyles.styles().cardContainer,
     width: "90%",
   },
 

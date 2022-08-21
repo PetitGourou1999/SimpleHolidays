@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import EditableActivityRow from "../../components/rows/EditableActivityRow";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Activity, Holidays } from "../../types/Types";
 
@@ -48,22 +48,22 @@ export default class HolidaysActivitiesList extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[globalStyles.container]}>
+      <View style={[MyStyles.styles().container]}>
         <Text
           style={[
-            globalStyles.rowText,
-            globalStyles.rowHintText,
-            globalStyles.text,
+            MyStyles.styles().rowText,
+            MyStyles.styles().rowHintText,
+            MyStyles.styles().text,
           ]}
         >
           Ici sont centralisées les activités à faire pendant les vacances
         </Text>
-        <View style={globalStyles.rowBorderStyle}></View>
-        <View style={[globalStyles.editableRow]}>
-          <Text style={[globalStyles.rowText, { flex: 0, width: "33%" }]}>
+        <View style={MyStyles.styles().rowBorderStyle}></View>
+        <View style={[MyStyles.styles().editableRow]}>
+          <Text style={[MyStyles.styles().rowText, { flex: 0, width: "33%" }]}>
             Date
           </Text>
-          <Text style={[globalStyles.rowText, { flex: 1 }]}>Activité</Text>
+          <Text style={[MyStyles.styles().rowText, { flex: 1 }]}>Activité</Text>
         </View>
 
         <KeyboardAwareFlatList
@@ -77,7 +77,7 @@ export default class HolidaysActivitiesList extends React.Component<Props> {
               onTextChange={(text) => this.onActivityChange(item, text)}
             ></EditableActivityRow>
           )}
-          style={globalStyles.listStyleSreen}
+          style={MyStyles.styles().listStyleScreen}
         />
       </View>
     );

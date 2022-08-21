@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import { Holidays, PlayerDebt, PlayerSpendings } from "../../types/Types";
 
 interface Props {
@@ -69,39 +69,55 @@ export default class TotalSpendingsCard extends React.Component<Props> {
         containerStyle={styles.cardContainer}
       >
         <Card.Title
-          style={[globalStyles.cardTitle, { color: Colors.light.darkBlue }]}
+          style={[
+            MyStyles.styles().cardTitle,
+            { color: Colors[MyStyles.selectedTheme].darkBlue },
+          ]}
         >
           {"Total : " + theTotals.total.toString() + " €"}
         </Card.Title>
-        <Card.Divider color={Colors.light.darkBlue} />
+        <Card.Divider color={Colors[MyStyles.selectedTheme].darkBlue} />
         {theTotals.totalsForPlayers.map((item, index) => {
           return (
-            <View style={globalStyles.itemRow}>
-              <Text style={globalStyles.cardText}>
+            <View style={MyStyles.styles().itemRow}>
+              <Text style={MyStyles.styles().cardText}>
                 {item.player.pseudo + " : "}
               </Text>
-              <Text style={[globalStyles.cardText, globalStyles.pseudoStyle]}>
+              <Text
+                style={[
+                  MyStyles.styles().cardText,
+                  MyStyles.styles().pseudoStyle,
+                ]}
+              >
                 {item.total + " €"}
               </Text>
             </View>
           );
         })}
         <Text style={{ marginBottom: 5 }}>{""}</Text>
-        <Card.Divider color={Colors.light.darkBlue} />
+        <Card.Divider color={Colors[MyStyles.selectedTheme].darkBlue} />
         <Card.Title
-          style={[globalStyles.cardTitle, { color: Colors.light.darkBlue }]}
+          style={[
+            MyStyles.styles().cardTitle,
+            { color: Colors[MyStyles.selectedTheme].darkBlue },
+          ]}
         >
           {"Redevances"}
         </Card.Title>
-        <Card.Divider color={Colors.light.darkBlue} />
+        <Card.Divider color={Colors[MyStyles.selectedTheme].darkBlue} />
         {theTotals.totalsForPlayersToPay.map((item, index) => {
           if (item.debt > 0) {
             return (
-              <View style={globalStyles.itemRow}>
-                <Text style={globalStyles.cardText}>
+              <View style={MyStyles.styles().itemRow}>
+                <Text style={MyStyles.styles().cardText}>
                   {item.player.pseudo + " doit " + item.debt + " €"}
                 </Text>
-                <Text style={[globalStyles.cardText, globalStyles.pseudoStyle]}>
+                <Text
+                  style={[
+                    MyStyles.styles().cardText,
+                    MyStyles.styles().pseudoStyle,
+                  ]}
+                >
                   {"à " + item.otherPlayer.pseudo}
                 </Text>
               </View>
@@ -115,18 +131,18 @@ export default class TotalSpendingsCard extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   text: {
-    ...globalStyles.cardText,
+    ...MyStyles.styles().cardText,
     marginBottom: 5,
   },
 
   cardWrapper: {
-    ...globalStyles.cardWrapper,
-    backgroundColor: Colors.light.lightBlue,
+    ...MyStyles.styles().cardWrapper,
+    backgroundColor: Colors[MyStyles.selectedTheme].lightBlue,
   },
 
   cardContainer: {
-    borderColor: Colors.light.darkBlue,
-    backgroundColor: Colors.light.lightBlue,
+    borderColor: Colors[MyStyles.selectedTheme].darkBlue,
+    backgroundColor: Colors[MyStyles.selectedTheme].lightBlue,
     width: "90%",
   },
 });

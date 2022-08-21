@@ -5,7 +5,7 @@ import {
   defaultDiner,
   defaultLunch,
 } from "../../constants/default/DefaultMeal";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Meal, MealIdea, MealsOfTheDay } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
@@ -81,14 +81,14 @@ export default class EditableMealRow extends React.Component<Props> {
 
   render() {
     return (
-      <View style={globalStyles.editableRow}>
-        <Text style={globalStyles.dateText}>
+      <View style={MyStyles.styles().editableRow}>
+        <Text style={MyStyles.styles().dateText}>
           {new Date(this.props.holidaysMeal.date).toLocaleDateString("fr-FR", {
             weekday: "long",
             day: "numeric",
           })}
         </Text>
-        <View style={globalStyles.container}>
+        <View style={MyStyles.styles().container}>
           <CustomDropdown
             iconLeft="sun-o"
             style={{ marginBottom: 10 }}

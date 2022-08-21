@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 
 export default class ThemingItem extends React.Component {
   state = {
@@ -9,9 +9,9 @@ export default class ThemingItem extends React.Component {
 
   render() {
     return (
-      <View style={globalStyles.taskContainer}>
+      <View style={MyStyles.styles().taskContainer}>
         <View
-          style={[globalStyles.rowView, { justifyContent: "flex-start" }]}
+          style={[MyStyles.styles().rowView, { justifyContent: "flex-start" }]}
         ></View>
       </View>
     );

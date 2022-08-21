@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import MealCard from "../cards/MealCard";
 
@@ -37,7 +37,7 @@ export default class ThemingList extends React.Component {
 
   render() {
     return (
-      <View style={[globalStyles.container, { width: "100%" }]}>
+      <View style={[MyStyles.styles().container, { width: "100%" }]}>
         <FlatList
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
@@ -48,7 +48,7 @@ export default class ThemingList extends React.Component {
               mealIdea={item}
             ></MealCard>
           )}
-          style={[globalStyles.listStyle, { width: "100%" }]}
+          style={[MyStyles.styles().listStyle, { width: "100%" }]}
         />
       </View>
     );

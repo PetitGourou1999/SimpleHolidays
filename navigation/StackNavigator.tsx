@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Colors from "../constants/Colors";
+import { MyStyles } from "../constants/MyStyles";
 
 import HolidaysActivitiesScreen from "../screens/HolidaysActivitiesScreen";
 import HolidaysGroceriesScreen from "../screens/HolidaysGroceriesScreen";
@@ -16,9 +17,9 @@ const MainStackNavigator = () => {
       initialRouteName="Nos Vacances"
       screenOptions={{
         headerBackTitle: "Back",
-        headerTintColor: Colors.light.primary,
+        headerTintColor: Colors[MyStyles.selectedTheme].primary,
         headerStyle: {
-          backgroundColor: Colors.light.white,
+          backgroundColor: Colors[MyStyles.selectedTheme].white,
           shadowColor: "transparent",
         },
         headerTitleStyle: {

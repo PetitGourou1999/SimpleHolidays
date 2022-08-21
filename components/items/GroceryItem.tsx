@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import NumericInput from "react-native-numeric-input";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Ingredient } from "../../types/Types";
 
@@ -72,18 +72,20 @@ export default class GroceryItem extends React.Component<Props> {
 
   render() {
     return (
-      <View style={globalStyles.taskContainer}>
-        <View style={[globalStyles.rowView, { justifyContent: "flex-start" }]}>
+      <View style={MyStyles.styles().taskContainer}>
+        <View
+          style={[MyStyles.styles().rowView, { justifyContent: "flex-start" }]}
+        >
           <CheckBox
             title=""
             checked={this.state.checked}
             onPress={() => this.editItem(0, "checked")}
           />
-          <View style={[globalStyles.rowView]}>
+          <View style={[MyStyles.styles().rowView]}>
             <Text
               style={[
-                globalStyles.text,
-                { fontSize: 16, color: Colors.light.primary },
+                MyStyles.styles().text,
+                { fontSize: 16, color: Colors[MyStyles.selectedTheme].primary },
               ]}
             >
               {this.props.item.title}
@@ -95,10 +97,16 @@ export default class GroceryItem extends React.Component<Props> {
               totalWidth={70}
               minValue={0}
               rounded
-              rightButtonBackgroundColor={Colors.light.mediumBlue}
-              leftButtonBackgroundColor={Colors.light.lightBlue}
+              rightButtonBackgroundColor={
+                Colors[MyStyles.selectedTheme].mediumBlue
+              }
+              leftButtonBackgroundColor={
+                Colors[MyStyles.selectedTheme].lightBlue
+              }
               borderColor={"transparent"}
-              inputStyle={{ backgroundColor: Colors.light.white }}
+              inputStyle={{
+                backgroundColor: Colors[MyStyles.selectedTheme].white,
+              }}
             />
           </View>
         </View>

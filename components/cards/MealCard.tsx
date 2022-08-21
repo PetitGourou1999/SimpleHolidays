@@ -3,7 +3,7 @@ import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { MealIdea } from "../../types/Types";
 import DeletionModal from "../DeletionModal";
@@ -38,11 +38,11 @@ export default class MealCard extends React.Component<Props> {
     return (
       <React.Fragment>
         <Card
-          wrapperStyle={globalStyles.cardWrapper}
-          containerStyle={globalStyles.cardContainer}
+          wrapperStyle={MyStyles.styles().cardWrapper}
+          containerStyle={MyStyles.styles().cardContainer}
         >
-          <View style={globalStyles.cardHeader}>
-            <Text style={[globalStyles.cardTitle, { marginLeft: "auto" }]}>
+          <View style={MyStyles.styles().cardHeader}>
+            <Text style={[MyStyles.styles().cardTitle, { marginLeft: "auto" }]}>
               {this.props.mealIdea.title}
             </Text>
             <Pressable
@@ -54,11 +54,11 @@ export default class MealCard extends React.Component<Props> {
               <FontAwesome
                 name="trash"
                 size={20}
-                color={Colors.light.secondary}
+                color={Colors[MyStyles.selectedTheme].secondary}
               />
             </Pressable>
           </View>
-          <Card.Divider color={Colors.light.secondary} />
+          <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
           {this.props.mealIdea.ingredients.map((item, index) => {
             return (
               <View
@@ -68,8 +68,10 @@ export default class MealCard extends React.Component<Props> {
                   marginBottom: 5,
                 }}
               >
-                <Text style={globalStyles.cardText}>{item.title + " : "}</Text>
-                <Text style={globalStyles.itemRow}>{item.quantity}</Text>
+                <Text style={MyStyles.styles().cardText}>
+                  {item.title + " : "}
+                </Text>
+                <Text style={MyStyles.styles().itemRow}>{item.quantity}</Text>
               </View>
             );
           })}

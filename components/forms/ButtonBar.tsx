@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 
 interface Props {
   cancelLabel: string;
@@ -13,17 +13,27 @@ interface Props {
 export default class ButtonBar extends React.Component<Props> {
   render() {
     return (
-      <View style={[globalStyles.editableRow, styles.buttonBar]}>
+      <View style={[MyStyles.styles().editableRow, styles.buttonBar]}>
         <Pressable onPress={() => this.props.onCancel()}>
-          <View style={[globalStyles.buttonPrimary]}>
-            <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+          <View style={[MyStyles.styles().buttonPrimary]}>
+            <Text
+              style={[
+                MyStyles.styles().text,
+                { color: Colors[MyStyles.selectedTheme].white },
+              ]}
+            >
               Annuler
             </Text>
           </View>
         </Pressable>
         <Pressable onPress={() => this.props.onSave()}>
-          <View style={[globalStyles.buttonPrimary]}>
-            <Text style={[globalStyles.text, { color: Colors.light.white }]}>
+          <View style={[MyStyles.styles().buttonPrimary]}>
+            <Text
+              style={[
+                MyStyles.styles().text,
+                { color: Colors[MyStyles.selectedTheme].white },
+              ]}
+            >
               Ajouter
             </Text>
           </View>

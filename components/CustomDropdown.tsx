@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from "react-native";
 import Colors from "../constants/Colors";
-import globalStyles from "../constants/Styles";
+import { MyStyles } from "../constants/MyStyles";
 
 interface Props {
   iconLeft?: string;
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 5,
-    backgroundColor: Colors.light.white,
+    backgroundColor: Colors[MyStyles.selectedTheme].white,
   },
   buttonText: {
     flex: 1,
@@ -138,14 +138,14 @@ const styles = StyleSheet.create({
     fontFamily: "WorkSansRegular",
   },
   icon: {
-    color: Colors.light.darkBlue,
+    color: Colors[MyStyles.selectedTheme].darkBlue,
   },
   dropdown: {
+    ...MyStyles.styles().overlayShadow,
     flex: 1,
     position: "absolute",
-    backgroundColor: Colors.light.white,
+    backgroundColor: Colors[MyStyles.selectedTheme].white,
     borderRadius: 5,
-    ...globalStyles.overlayShadow,
   },
   overlay: {
     width: "100%",
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     borderBottomWidth: 1,
-    borderColor: Colors.light.grey,
+    borderColor: Colors[MyStyles.selectedTheme].grey,
   },
 });
 

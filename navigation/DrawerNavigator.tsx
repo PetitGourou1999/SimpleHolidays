@@ -3,8 +3,10 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
 import React from "react";
 import Colors from "../constants/Colors";
+import { MyStyles } from "../constants/MyStyles";
 import MealsScreen from "../screens/MealsScreen";
 import MiscellaneousScreen from "../screens/MiscellaneousScreen";
+import PreferencesScreen from "../screens/PreferencesScreen";
 import { MainStackNavigator } from "./StackNavigator";
 
 const Drawer = createDrawerNavigator();
@@ -19,19 +21,21 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerTintColor: Colors.light.white,
+        headerTintColor: Colors[MyStyles.selectedTheme].white,
         headerStyle: {
-          backgroundColor: Colors.light.primary,
+          backgroundColor: Colors[MyStyles.selectedTheme].primary,
           shadowColor: "transparent",
         },
         headerTitleStyle: {
           fontFamily: "WorkSans",
           fontSize: 18,
         },
-        drawerActiveBackgroundColor: Colors.light.tertiary,
-        drawerActiveTintColor: Colors.light.primary,
-        drawerInactiveTintColor: Colors.light.primary,
-        drawerContentStyle: { backgroundColor: Colors.light.white },
+        drawerActiveBackgroundColor: Colors[MyStyles.selectedTheme].tertiary,
+        drawerActiveTintColor: Colors[MyStyles.selectedTheme].primary,
+        drawerInactiveTintColor: Colors[MyStyles.selectedTheme].primary,
+        drawerContentStyle: {
+          backgroundColor: Colors[MyStyles.selectedTheme].white,
+        },
         drawerLabelStyle: { fontFamily: "WorkSans", fontSize: 18 },
       }}
     >
@@ -44,7 +48,7 @@ const DrawerNavigator = () => {
             <Fontisto
               name="holiday-village"
               size={size}
-              color={Colors.light.primary}
+              color={Colors[MyStyles.selectedTheme].primary}
             />
           ),
         }}
@@ -58,7 +62,7 @@ const DrawerNavigator = () => {
             <FontAwesome5
               name="pizza-slice"
               size={size}
-              color={Colors.light.primary}
+              color={Colors[MyStyles.selectedTheme].primary}
             />
           ),
         }}
@@ -72,7 +76,21 @@ const DrawerNavigator = () => {
             <FontAwesome5
               name="suitcase"
               size={size}
-              color={Colors.light.primary}
+              color={Colors[MyStyles.selectedTheme].primary}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Préférences"
+        component={PreferencesScreen}
+        options={{
+          title: "Préférences",
+          drawerIcon: ({ focused, size }) => (
+            <FontAwesome5
+              name="tools"
+              size={size}
+              color={Colors[MyStyles.selectedTheme].primary}
             />
           ),
         }}

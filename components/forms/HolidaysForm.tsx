@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TagInput from "react-native-tags-input";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Player } from "../../types/Types";
 import CustomDatePicker from "../CustomDatePicker";
@@ -125,14 +125,19 @@ export default class HolidaysForm extends React.Component<Props> {
         style={[styles.borderRadius]}
       >
         <ScrollView
-          contentContainerStyle={[globalStyles.container, styles.borderRadius]}
+          contentContainerStyle={[
+            MyStyles.styles().container,
+            styles.borderRadius,
+          ]}
           style={[styles.borderRadius]}
         >
-          <Text style={[globalStyles.formTitle]}>Détails des vacances</Text>
-          <Text style={globalStyles.text}>Lieu</Text>
+          <Text style={[MyStyles.styles().formTitle]}>
+            Détails des vacances
+          </Text>
+          <Text style={MyStyles.styles().text}>Lieu</Text>
           <TextInput
             onChangeText={(text) => this.setLocation(text)}
-            style={[globalStyles.inputStyle]}
+            style={[MyStyles.styles().inputStyle]}
             value={this.state.location}
           />
           <Text style={[styles.textPadding10]}>Date de début</Text>
@@ -154,29 +159,29 @@ export default class HolidaysForm extends React.Component<Props> {
                 <FontAwesome
                   name="user"
                   size={25}
-                  color={Colors.light.text}
+                  color={Colors[MyStyles.selectedTheme].text}
                 ></FontAwesome>
               }
               leftElementContainerStyle={{ marginLeft: 3 }}
               containerStyle={{ paddingTop: 5 }}
               inputContainerStyle={[
-                globalStyles.inputStyle,
+                MyStyles.styles().inputStyle,
                 { paddingLeft: 10 },
               ]}
               inputStyle={[
-                globalStyles.inputText,
-                { color: Colors.light.primary },
+                MyStyles.styles().inputText,
+                { color: Colors[MyStyles.selectedTheme].primary },
               ]}
               onFocus={() =>
                 this.setState({
-                  tagsColor: Colors.light.white,
-                  tagsText: Colors.light.primary,
+                  tagsColor: Colors[MyStyles.selectedTheme].white,
+                  tagsText: Colors[MyStyles.selectedTheme].primary,
                 })
               }
               onBlur={() =>
                 this.setState({
-                  tagsColor: Colors.light.primary,
-                  tagsText: Colors.light.white,
+                  tagsColor: Colors[MyStyles.selectedTheme].primary,
+                  tagsText: Colors[MyStyles.selectedTheme].white,
                 })
               }
               autoCorrect={false}
@@ -205,12 +210,11 @@ const styles = StyleSheet.create({
   },
 
   textPadding10: {
-    ...globalStyles.text,
+    ...MyStyles.styles().text,
     paddingTop: 10,
   },
 
   textPadding20: {
-    ...globalStyles.text,
     paddingTop: 20,
   },
 
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
   },
 
   tagText: {
-    color: Colors.light.primary,
-    fontFamily: "WorkSansRegular",
+    ...MyStyles.styles().text,
+    color: Colors[MyStyles.selectedTheme].primary,
   },
 });

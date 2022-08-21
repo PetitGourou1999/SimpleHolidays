@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays } from "../../types/Types";
 import DeletionModal from "../DeletionModal";
@@ -23,6 +23,13 @@ export default class HolidaysCard extends React.Component<Props> {
     isDeleteModalVisible: false,
     isEditModalVisible: false,
   };
+
+  constructor(props: any) {
+    super(props);
+    MyStyles.loadTheme().finally(() => {
+      console.log(MyStyles.selectedTheme);
+    });
+  }
 
   toggleDeleteModal = (visible: boolean) => {
     this.setState({ isDeleteModalVisible: visible });
@@ -52,11 +59,11 @@ export default class HolidaysCard extends React.Component<Props> {
     return (
       <React.Fragment>
         <Card
-          wrapperStyle={globalStyles.cardWrapper}
-          containerStyle={globalStyles.cardContainer}
+          wrapperStyle={MyStyles.styles().cardWrapper}
+          containerStyle={MyStyles.styles().cardContainer}
         >
-          <View style={[globalStyles.cardHeader]}>
-            <Text style={[globalStyles.cardTitle, { margin: "auto" }]}>
+          <View style={[MyStyles.styles().cardHeader]}>
+            <Text style={[MyStyles.styles().cardTitle, { margin: "auto" }]}>
               {this.props.holidays.title}
             </Text>
             <View style={styles.iconsRow}>
@@ -64,20 +71,20 @@ export default class HolidaysCard extends React.Component<Props> {
                 <FontAwesome
                   name="pencil"
                   size={20}
-                  color={Colors.light.secondary}
+                  color={Colors[MyStyles.selectedTheme].secondary}
                 />
               </Pressable>
               <Pressable onPress={() => this.toggleDeleteModal(true)}>
                 <FontAwesome
                   name="trash"
                   size={20}
-                  color={Colors.light.secondary}
+                  color={Colors[MyStyles.selectedTheme].secondary}
                   style={{ marginLeft: 15 }}
                 />
               </Pressable>
             </View>
           </View>
-          <Card.Divider color={Colors.light.secondary} />
+          <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
           <Pressable
             style={[styles.pressable]}
             onPress={() => this.onPressButton("Activités des Vacances")}
@@ -98,7 +105,7 @@ export default class HolidaysCard extends React.Component<Props> {
           </Pressable>
         </Card>
         <Modal isVisible={this.state.isEditModalVisible}>
-          <View style={[globalStyles.modal, { flex: 0.7 }]}>
+          <View style={[MyStyles.styles().modal, { flex: 0.7 }]}>
             <HolidaysForm
               onSave={() => this.toggleEditModal(false)}
               onCancel={() => this.toggleEditModal(false)}
@@ -126,12 +133,12 @@ const styles = StyleSheet.create({
   },
 
   pressable: {
-    ...globalStyles.buttonSecondary,
+    ...MyStyles.styles().buttonSecondary,
     marginVertical: 5,
   },
 
   pressableText: {
-    color: Colors.light.white,
+    color: Colors[MyStyles.selectedTheme].white,
     fontWeight: "bold",
     fontFamily: "WorkSans",
     fontSize: 15,

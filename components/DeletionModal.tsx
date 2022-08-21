@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
-import globalStyles from "../constants/Styles";
+import { MyStyles } from "../constants/MyStyles";
 
 interface Props {
   label: string;
@@ -23,15 +23,18 @@ export default class DeletionModal extends React.Component<Props> {
   render() {
     return (
       <Modal isVisible={this.props.isVisible}>
-        <View style={[globalStyles.modal, styles.modalStyle]}>
-          <Text style={[globalStyles.cardText, styles.titleText]}>
+        <View style={[MyStyles.styles().modal, styles.modalStyle]}>
+          <Text style={[MyStyles.styles().cardText, styles.titleText]}>
             {this.props.label}
           </Text>
-          <View style={[globalStyles.editableRow, styles.buttonBar]}>
+          <View style={[MyStyles.styles().editableRow, styles.buttonBar]}>
             <Pressable onPress={() => this.onCancel()}>
-              <View style={[globalStyles.buttonPrimary]}>
+              <View style={[MyStyles.styles().buttonPrimary]}>
                 <Text
-                  style={[globalStyles.text, { color: Colors.light.white }]}
+                  style={[
+                    MyStyles.styles().text,
+                    { color: Colors[MyStyles.selectedTheme].white },
+                  ]}
                 >
                   Annuler
                 </Text>
@@ -40,12 +43,15 @@ export default class DeletionModal extends React.Component<Props> {
             <Pressable onPress={() => this.onDelete()}>
               <View
                 style={[
-                  globalStyles.buttonPrimary,
-                  { backgroundColor: Colors.light.softRed },
+                  MyStyles.styles().buttonPrimary,
+                  { backgroundColor: Colors[MyStyles.selectedTheme].softRed },
                 ]}
               >
                 <Text
-                  style={[globalStyles.text, { color: Colors.light.white }]}
+                  style={[
+                    MyStyles.styles().text,
+                    { color: Colors[MyStyles.selectedTheme].white },
+                  ]}
                 >
                   Supprimer
                 </Text>
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
   buttonBar: {
     justifyContent: "space-evenly",
     marginTop: "auto",
-    backgroundColor: Colors.light.white,
+    backgroundColor: Colors[MyStyles.selectedTheme].white,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

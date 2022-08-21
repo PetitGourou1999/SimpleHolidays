@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import EditableMealRow from "../../components/rows/EditableMealRow";
 import { diner, lunch } from "../../constants/data/MealTimes";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Ingredient, Meal, MealsOfTheDay } from "../../types/Types";
 
@@ -120,24 +120,26 @@ export default class HolidaysMealsList extends React.Component<Props> {
   render() {
     return (
       <React.Fragment>
-        <View style={[globalStyles.container]}>
+        <View style={[MyStyles.styles().container]}>
           <Pressable
-            style={[globalStyles.buttonPrimary, styles.buttonStyle]}
+            style={[MyStyles.styles().buttonPrimary, styles.buttonStyle]}
             onPress={() =>
               this.props.navigation.navigate("Liste de Courses", {
                 data: this.state.holidays,
               })
             }
           >
-            <Text style={globalStyles.bigButtonText}>
+            <Text style={MyStyles.styles().bigButtonText}>
               Voir la liste de courses
             </Text>
           </Pressable>
-          <View style={[globalStyles.editableRow]}>
-            <Text style={[globalStyles.rowText, { flex: 0, width: "33%" }]}>
+          <View style={[MyStyles.styles().editableRow]}>
+            <Text
+              style={[MyStyles.styles().rowText, { flex: 0, width: "33%" }]}
+            >
               Date
             </Text>
-            <Text style={[globalStyles.rowText, { flex: 1 }]}>Repas</Text>
+            <Text style={[MyStyles.styles().rowText, { flex: 1 }]}>Repas</Text>
           </View>
 
           <FlatList
@@ -151,7 +153,7 @@ export default class HolidaysMealsList extends React.Component<Props> {
                 onDinerChange={(meal) => this.onMealChange(item, meal, diner)}
               ></EditableMealRow>
             )}
-            style={globalStyles.listStyleSreen}
+            style={MyStyles.styles().listStyleScreen}
           />
         </View>
       </React.Fragment>

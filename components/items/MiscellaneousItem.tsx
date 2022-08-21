@@ -3,7 +3,7 @@ import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import { Miscellaneous } from "../../types/Types";
 
 interface Props {
@@ -26,8 +26,10 @@ export default class MiscellaneousItem extends React.Component<Props> {
 
   render() {
     return (
-      <View style={globalStyles.taskContainer}>
-        <View style={[globalStyles.rowView, { justifyContent: "flex-start" }]}>
+      <View style={MyStyles.styles().taskContainer}>
+        <View
+          style={[MyStyles.styles().rowView, { justifyContent: "flex-start" }]}
+        >
           <CheckBox
             title=""
             checked={this.state.checked}
@@ -35,8 +37,8 @@ export default class MiscellaneousItem extends React.Component<Props> {
           />
           <Text
             style={[
-              globalStyles.text,
-              { fontSize: 16, color: Colors.light.primary },
+              MyStyles.styles().text,
+              { fontSize: 16, color: Colors[MyStyles.selectedTheme].primary },
             ]}
           >
             {this.props.item.title}
@@ -44,10 +46,10 @@ export default class MiscellaneousItem extends React.Component<Props> {
         </View>
         <Pressable onPress={() => this.props.deleteTask()}>
           <FontAwesome
-            style={globalStyles.taskDelete}
+            style={MyStyles.styles().taskDelete}
             name="trash"
             size={20}
-            color={Colors.light.primary}
+            color={Colors[MyStyles.selectedTheme].primary}
           />
         </Pressable>
       </View>

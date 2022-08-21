@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import Colors from "../../constants/Colors";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Ingredient } from "../../types/Types";
 import GroceryItem from "../items/GroceryItem";
@@ -104,20 +104,20 @@ export default class GroceriesList extends React.Component<Props> {
   render() {
     return (
       <KeyboardAvoidingView
-        style={globalStyles.container}
+        style={MyStyles.styles().container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <View style={[globalStyles.rowView]}>
+        <View style={[MyStyles.styles().rowView]}>
           <TextInput
             style={[
-              globalStyles.inputStyle,
-              globalStyles.inputText,
+              MyStyles.styles().inputStyle,
+              MyStyles.styles().inputText,
               { marginHorizontal: "auto" },
             ]}
             value={this.state.currentItem}
             onChangeText={(text) => this.setCurrentItem(text)}
             placeholder={"Ajouter quelque chose à acheter..."}
-            placeholderTextColor={Colors.light.primary}
+            placeholderTextColor={Colors[MyStyles.selectedTheme].primary}
           />
 
           <View style={[styles.buttonsContainer]}>
@@ -138,7 +138,7 @@ export default class GroceriesList extends React.Component<Props> {
               deleteItem={() => this.handleDeleteTask(item)}
             ></GroceryItem>
           )}
-          style={[globalStyles.listStyle, { paddingLeft: 0 }]}
+          style={[MyStyles.styles().listStyle, { paddingLeft: 0 }]}
         />
       </KeyboardAvoidingView>
     );

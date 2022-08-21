@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextInput, View } from "react-native";
-import globalStyles from "../../constants/Styles";
+import { MyStyles } from "../../constants/MyStyles";
 import { Activity } from "../../types/Types";
 
 interface Props {
@@ -24,8 +24,8 @@ export default class EditableActivityRow extends React.Component<Props> {
 
   render() {
     return (
-      <View style={globalStyles.editableRow}>
-        <Text style={globalStyles.dateText}>
+      <View style={MyStyles.editableRow}>
+        <Text style={MyStyles.dateText}>
           {new Date(this.props.holidaysActivity.date).toLocaleDateString(
             "fr-FR",
             {
@@ -39,7 +39,7 @@ export default class EditableActivityRow extends React.Component<Props> {
           blurOnSubmit={true}
           value={this.state.activity}
           onChangeText={(text) => this.setActivity(text)}
-          style={[globalStyles.inputStyle, { width: "66%" }]}
+          style={[MyStyles.inputStyle, { width: "66%" }]}
         />
       </View>
     );
