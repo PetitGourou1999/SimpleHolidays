@@ -1,5 +1,6 @@
+import * as Updates from "expo-updates";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { NativeModules, Pressable, StyleSheet, Text, View } from "react-native";
 import { MyStyles } from "../constants/MyStyles";
 import storageHelper from "../storage/AsyncStorageHelper";
 import { SelectedTheme } from "../types/Types";
@@ -18,7 +19,7 @@ export default class PreferencesScreen extends React.Component {
             storageHelper.refreshTheme().then(
               (value) => {
                 MyStyles.loadTheme().finally(() => {
-                  console.log(MyStyles.selectedTheme);
+                  this.reloadApp();
                 });
               },
               (error) => {
@@ -35,6 +36,16 @@ export default class PreferencesScreen extends React.Component {
         console.log(error);
       }
     );
+  };
+
+  reloadApp = () => {
+    if (__DEV__) {
+      console.log("DEV Mode");
+      NativeModules.DevSettings.reload();
+    } else {
+      console.log("PRODUCTION Mode");
+      Updates.reloadAsync();
+    }
   };
 
   render() {

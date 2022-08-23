@@ -18,10 +18,7 @@ const useConstructor = (callBack = () => {}) => {
 };
 
 export default function App() {
-  MyStyles.loadTheme().finally(() => {
-    console.log("App");
-    console.log(MyStyles.selectedTheme);
-  });
+  MyStyles.loadTheme().finally(() => {});
 
   const colorScheme = useColorScheme();
 

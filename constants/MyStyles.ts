@@ -9,8 +9,6 @@ export class MyStyles {
     return storageHelper.refreshTheme().then(
       (value) => {
         MyStyles.selectedTheme = storageHelper.getSelectedUserTheme().themeName;
-        console.log("MyStyles loadTheme");
-        console.log(MyStyles.selectedTheme);
       },
       (error) => {
         console.log(error);

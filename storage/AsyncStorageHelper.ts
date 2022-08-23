@@ -90,7 +90,6 @@ class AsyncStorageHelper {
     return this.getData(this.SELECTED_THEME_KEY).then(
       (value) => {
         if (value !== undefined && value !== null) {
-          console.log("Refresh Theme");
           if (value.themeName !== undefined) {
             this.selectedTheme = value;
           }

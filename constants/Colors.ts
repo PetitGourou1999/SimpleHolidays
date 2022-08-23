@@ -17,22 +17,22 @@ const mediumBlue = "#00B4D8";
 const lightBlue = "#90E0EF";
 const lighterBlue = "#CAF0F8";
 
-const softRed = "#e76f51";
+const softRed = "#E76F51";
 
 // alternateOne Colors
-const alternateTint = "#E63946";
-const alternateBackground = "#F1FAEE";
+const alternateTint = "#6D6875";
+const alternateBackground = "#FFF1E9";
 
-const alternatePrimary = "#E63946";
-const alternateTertiary = "#F39BA2";
-const alternateQuaternary = "#9CBED3";
-const alternateSecondary = "#457B9D";
+const alternatePrimary = "#B5838D";
+const alternateTertiary = "#DAC1C6";
+const alternateQuaternary = "#F2CCCD";
+const alternateSecondary = "#E5989B";
 
-const alternateDarkestBlue = "#03045E";
-const alternateDarkBlue = "#0077B6";
-const alternateMediumBlue = "#00B4D8";
-const alternateLightBlue = "#90E0EF";
-const alternateLighterBlue = "#CAF0F8";
+const alternateDarkestBlue = "#36343A";
+const alternateDarkBlue = "#6D6875";
+const alternateMediumBlue = "#817B8A";
+const alternateLightBlue = "#ABA7B1";
+const alternateLighterBlue = "#CAC8CE";
 
 export default {
   light: {
@@ -60,8 +60,8 @@ export default {
     white: white,
     black: black,
     grey: grey,
-    text: alternateBackground,
-    background: white,
+    text: alternatePrimary,
+    background: alternateBackground,
     tint: alternateTint,
     tabIconDefault: grey,
     tabIconSelected: alternatePrimary,
