@@ -3,7 +3,7 @@ import storageHelper from "../storage/AsyncStorageHelper";
 import Colors from "./Colors";
 
 export class MyStyles {
-  public static selectedTheme: string = "light";
+  public static selectedTheme: string = "Default";
 
   public static loadTheme = async () => {
     return storageHelper.refreshTheme().then(

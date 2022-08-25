@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Colors from "../constants/Colors";
 import { SelectedTheme } from "./../types/Types";
 
 class AsyncStorageHelper {
@@ -6,7 +7,7 @@ class AsyncStorageHelper {
 
   private selectedTheme: SelectedTheme = {
     storageKey: this.SELECTED_THEME_KEY,
-    themeName: "light",
+    themeName: "Default",
   };
 
   constructor() {
@@ -91,7 +92,13 @@ class AsyncStorageHelper {
       (value) => {
         if (value !== undefined && value !== null) {
           if (value.themeName !== undefined) {
-            this.selectedTheme = value;
+            if (
+              Object.keys(Colors).findIndex(
+                (theme) => theme === value.themeName
+              ) !== -1
+            ) {
+              this.selectedTheme = value;
+            }
           }
         }
       },

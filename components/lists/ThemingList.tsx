@@ -1,29 +1,52 @@
+import * as Updates from "expo-updates";
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, NativeModules, StyleSheet } from "react-native";
+import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
-import MealCard from "../cards/MealCard";
+import { SelectedTheme } from "../../types/Types";
+import ThemingItem from "../items/ThemingItem";
 
 export default class ThemingList extends React.Component {
   state = {
+    selectedTheme: {},
     arrayHolder: [],
   };
 
   loadData = () => {
-    storageHelper.getAllItems().then(
+    this.setState({ selectedTheme: MyStyles.selectedTheme });
+    this.setState({ arrayHolder: Object.keys(Colors) });
+  };
+
+  componentDidMount = () => {
+    this.loadData();
+  };
+
+  changeTheme = (themeName: string) => {
+    let selectedTheme: SelectedTheme = {
+      storageKey: storageHelper.SELECTED_THEME_KEY,
+      themeName: themeName,
+    };
+
+    storageHelper.removeData(storageHelper.SELECTED_THEME_KEY).then(
       (value) => {
-        if (value !== undefined) {
-          this.setState({
-            arrayHolder: [],
-          });
-          value.forEach((element) => {
-            if (element.themeName !== undefined) {
-              this.setState({
-                arrayHolder: [...this.state.arrayHolder, element],
-              });
-            }
-          });
-        }
+        storageHelper.storeData(selectedTheme.storageKey, selectedTheme).then(
+          (value) => {
+            storageHelper.refreshTheme().then(
+              (value) => {
+                MyStyles.loadTheme().finally(() => {
+                  this.reloadApp();
+                });
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       },
       (error) => {
         console.log(error);
@@ -31,26 +54,32 @@ export default class ThemingList extends React.Component {
     );
   };
 
-  componentDidMount = () => {
-    this.loadData();
+  reloadApp = () => {
+    if (__DEV__) {
+      console.log("DEV Mode");
+      NativeModules.DevSettings.reload();
+    } else {
+      console.log("PRODUCTION Mode");
+      Updates.reloadAsync();
+    }
   };
 
   render() {
     return (
-      <View style={[MyStyles.styles().container, { width: "100%" }]}>
-        <FlatList
-          data={this.state.arrayHolder}
-          extraData={this.state.arrayHolder}
-          keyExtractor={(index: any) => index.toString()}
-          renderItem={({ item }) => (
-            <MealCard
-              onDelete={() => this.loadData()}
-              mealIdea={item}
-            ></MealCard>
-          )}
-          style={[MyStyles.styles().listStyle, { width: "100%" }]}
-        />
-      </View>
+      <FlatList
+        data={this.state.arrayHolder}
+        extraData={this.state.arrayHolder}
+        keyExtractor={(index: any) => index.toString()}
+        renderItem={({ item }) => (
+          <ThemingItem
+            themeName={item}
+            selected={item === this.state.selectedTheme}
+            onPressTheme={() => this.changeTheme(item)}
+          ></ThemingItem>
+        )}
+        contentContainerStyle={{ alignItems: "center" }}
+        style={[{ width: "100%" }]}
+      />
     );
   }
 }

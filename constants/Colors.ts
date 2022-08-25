@@ -2,7 +2,7 @@ const white = "#fff";
 const black = "#000";
 const grey = "#555";
 
-// light Colors
+// Default Colors
 const tint = "#006D77";
 const background = "#EDF6F9";
 
@@ -19,7 +19,7 @@ const lighterBlue = "#CAF0F8";
 
 const softRed = "#E76F51";
 
-// alternateOne Colors
+// Pastel Colors
 const alternateTint = "#6D6875";
 const alternateBackground = "#FFF1E9";
 
@@ -34,8 +34,23 @@ const alternateMediumBlue = "#817B8A";
 const alternateLightBlue = "#ABA7B1";
 const alternateLighterBlue = "#CAC8CE";
 
+// Pastel Colors
+const otherTint = "#0081A7";
+const otherBackground = "#FFF7F0";
+
+const otherPrimary = "#0081A7";
+const otherTertiary = "#00AFB9";
+const otherQuaternary = "#FFE0DB";
+const otherSecondary = "#FFB8BA";
+
+const otherDarkestBlue = "#36343A";
+const otherDarkBlue = "#6D6875";
+const otherMediumBlue = "#817B8A";
+const otherLightBlue = "#ABA7B1";
+const otherLighterBlue = "#CAC8CE";
+
 export default {
-  light: {
+  Default: {
     white: white,
     black: black,
     grey: grey,
@@ -56,7 +71,7 @@ export default {
     softRed: softRed,
   },
 
-  alternateOne: {
+  Pastel: {
     white: white,
     black: black,
     grey: grey,
@@ -74,6 +89,27 @@ export default {
     mediumBlue: alternateMediumBlue,
     lightBlue: alternateLightBlue,
     lighterBlue: alternateLighterBlue,
+    softRed: softRed,
+  },
+
+  Turquoise: {
+    white: white,
+    black: black,
+    grey: grey,
+    text: otherPrimary,
+    background: otherBackground,
+    tint: otherTint,
+    tabIconDefault: grey,
+    tabIconSelected: otherPrimary,
+    primary: otherPrimary,
+    secondary: otherSecondary,
+    tertiary: otherTertiary,
+    quaternary: otherQuaternary,
+    darkestBlue: otherDarkestBlue,
+    darkBlue: otherDarkBlue,
+    mediumBlue: otherMediumBlue,
+    lightBlue: otherLightBlue,
+    lighterBlue: otherLighterBlue,
     softRed: softRed,
   },
 };
