@@ -1,4 +1,3 @@
-import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
@@ -9,6 +8,7 @@ import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays } from "../../types/Types";
 import DeletionModal from "../DeletionModal";
 import HolidaysForm from "../forms/HolidaysForm";
+import ActionIcons from "./ActionIcons";
 
 interface Props {
   holidays: Holidays;
@@ -59,23 +59,10 @@ export default class HolidaysCard extends React.Component<Props> {
             <Text style={[MyStyles.styles().cardTitle, { margin: "auto" }]}>
               {this.props.holidays.title}
             </Text>
-            <View style={this.styles.iconsRow}>
-              <Pressable onPress={() => this.toggleEditModal(true)}>
-                <FontAwesome
-                  name="pencil"
-                  size={20}
-                  color={Colors[MyStyles.selectedTheme].secondary}
-                />
-              </Pressable>
-              <Pressable onPress={() => this.toggleDeleteModal(true)}>
-                <FontAwesome
-                  name="trash"
-                  size={20}
-                  color={Colors[MyStyles.selectedTheme].secondary}
-                  style={{ marginLeft: 15 }}
-                />
-              </Pressable>
-            </View>
+            <ActionIcons
+              onEdit={() => this.toggleEditModal(true)}
+              onDelete={() => this.toggleDeleteModal(true)}
+            ></ActionIcons>
           </View>
           <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
           <Pressable
@@ -117,13 +104,6 @@ export default class HolidaysCard extends React.Component<Props> {
   }
 
   private styles = StyleSheet.create({
-    iconsRow: {
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      position: "absolute",
-      right: 0,
-    },
-
     pressable: {
       ...MyStyles.styles().buttonSecondary,
       marginVertical: 5,

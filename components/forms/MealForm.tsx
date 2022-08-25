@@ -19,6 +19,7 @@ import ButtonBar from "./ButtonBar";
 interface Props {
   onCancel: any;
   onSave: any;
+  mealIdea?: MealIdea;
 }
 
 export default class MealForm extends React.Component<Props> {
@@ -26,6 +27,11 @@ export default class MealForm extends React.Component<Props> {
     title: "",
     ingredientName: "",
     ingredients: [],
+    mealIdea: {},
+  };
+
+  componentWillMount = () => {
+    this.setMealIdea();
   };
 
   saveMealIdea = () => {
@@ -39,10 +45,19 @@ export default class MealForm extends React.Component<Props> {
     }
 
     let newMealIdea: MealIdea = {
-      storageKey: storageHelper.makeid(8),
+      storageKey:
+        this.props.mealIdea !== undefined
+          ? this.props.mealIdea.storageKey
+          : storageHelper.makeid(8),
       ingredients: [...this.state.ingredients],
       title: this.state.title,
     };
+
+    //TODO : parcourir la liste des vacances,
+    //la liste de courses de chaque vacances,
+    //pour chaque ingrédient s'il n'est pas checked,
+    //supprimer l'ancienne quantité de l'ingrédient ( trouvable dans this.props.mealIdea.ingredients)
+    //et ajouter la nouvelle (dans le state)
 
     storageHelper.storeData(newMealIdea.storageKey, newMealIdea).then(
       () => {
@@ -53,6 +68,14 @@ export default class MealForm extends React.Component<Props> {
         console.log(error);
       }
     );
+  };
+
+  setMealIdea = () => {
+    if (this.props.mealIdea !== undefined) {
+      this.setState({ mealIdea: this.props.mealIdea });
+      this.setTitle(this.props.mealIdea.title);
+      this.setState({ ingredients: [...this.props.mealIdea.ingredients] });
+    }
   };
 
   setTitle = (title: string) => {
@@ -66,7 +89,12 @@ export default class MealForm extends React.Component<Props> {
   addIngredient = () => {
     if (this.state.ingredientName.trim() !== "") {
       let newIngredient: Ingredient = {
-        index: this.state.ingredients.length,
+        index:
+          Math.max(
+            ...this.state.ingredients.map(
+              (ingredient: Ingredient) => ingredient.index
+            )
+          ) + 1,
         title: this.state.ingredientName,
         quantity: 1,
         checked: false,
@@ -75,8 +103,14 @@ export default class MealForm extends React.Component<Props> {
       this.setState({
         ingredients: [...this.state.ingredients, newIngredient],
       });
-      this.setState({ ingredientName: "" });
+      this.setIngredientName("");
     }
+  };
+
+  removeIngredient = (index: number) => {
+    let tmpArray = this.state.ingredients;
+    tmpArray.splice(index, 1);
+    this.setState({ ingredients: [...tmpArray] });
   };
 
   setIngredientQuantity = (index: number, quantity: number) => {
@@ -94,17 +128,20 @@ export default class MealForm extends React.Component<Props> {
   render() {
     return (
       <View style={[styles.contentContainer]}>
-        <Text style={[MyStyles.styles().formTitle]}>Nouvelle idée repas :</Text>
+        <Text style={[MyStyles.styles().formTitle]}>
+          Détails de l'idée de repas :
+        </Text>
         <Text style={MyStyles.styles.text}>Intitulé</Text>
         <TextInput
           style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setTitle(text)}
+          value={this.state.title}
         />
         <Text style={MyStyles.styles().text}>Ajouter des Ingrédients</Text>
         <View style={MyStyles.styles().rowView}>
           <TextInput
             value={this.state.ingredientName}
-            style={[MyStyles.styles().inputStyle, { width: "88%" }]}
+            style={[MyStyles.styles().inputStyle, { width: "89%" }]}
             onChangeText={(text) => this.setIngredientName(text)}
           />
           <Pressable onPress={() => this.addIngredient()}>
@@ -118,34 +155,41 @@ export default class MealForm extends React.Component<Props> {
           renderItem={({ item, index }) => (
             <View style={[styles.flatListItem]}>
               <Text style={MyStyles.styles().inputText}>{item.title}</Text>
-              <NumericInput
-                onChange={(value) => this.setIngredientQuantity(index, value)}
-                value={item.quantity}
-                totalHeight={35}
-                totalWidth={70}
-                minValue={1}
-                rounded
-                rightButtonBackgroundColor={
-                  Colors[MyStyles.selectedTheme].mediumBlue
-                }
-                leftButtonBackgroundColor={
-                  Colors[MyStyles.selectedTheme].lightBlue
-                }
-                borderColor={"transparent"}
-                inputStyle={{
-                  backgroundColor: Colors[MyStyles.selectedTheme].white,
-                }}
-              />
+              <View style={styles.ingredientActions}>
+                <NumericInput
+                  onChange={(value) => this.setIngredientQuantity(index, value)}
+                  value={item.quantity}
+                  totalHeight={35}
+                  totalWidth={70}
+                  minValue={1}
+                  rounded
+                  rightButtonBackgroundColor={
+                    Colors[MyStyles.selectedTheme].mediumBlue
+                  }
+                  leftButtonBackgroundColor={
+                    Colors[MyStyles.selectedTheme].lightBlue
+                  }
+                  borderColor={"transparent"}
+                  inputStyle={{
+                    backgroundColor: Colors[MyStyles.selectedTheme].white,
+                  }}
+                />
+                <Pressable onPress={() => this.removeIngredient(index)}>
+                  <FontAwesome
+                    name="trash"
+                    size={20}
+                    color={Colors[MyStyles.selectedTheme].secondary}
+                    style={{ marginLeft: 15 }}
+                  />
+                </Pressable>
+              </View>
             </View>
           )}
-          style={{
-            paddingLeft: 3,
-            width: "90%",
-          }}
+          style={MyStyles.styles().listStyle}
         />
         <ButtonBar
           cancelLabel="Annuler"
-          saveLabel="Ajouter"
+          saveLabel={this.props.mealIdea !== undefined ? "Modifier" : "Ajouter"}
           onSave={() => this.saveMealIdea()}
           onCancel={() => this.props.onCancel()}
         ></ButtonBar>
@@ -164,6 +208,12 @@ const styles = StyleSheet.create({
   flatListItem: {
     ...MyStyles.styles().rowView,
     width: "100%",
-    paddingVertical: 5,
+    minHeight: 35,
+    marginVertical: 5,
+  },
+
+  ingredientActions: {
+    ...MyStyles.styles().iconsRow,
+    alignItems: "center",
   },
 });

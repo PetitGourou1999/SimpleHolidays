@@ -237,6 +237,13 @@ export class MyStyles {
       taskDelete: {
         marginLeft: 10,
       },
+
+      iconsRow: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        position: "absolute",
+        right: 0,
+      },
     });
   };
 }

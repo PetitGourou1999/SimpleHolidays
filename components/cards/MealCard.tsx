@@ -1,32 +1,40 @@
-import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
+import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { MealIdea } from "../../types/Types";
 import DeletionModal from "../DeletionModal";
+import MealForm from "../forms/MealForm";
+import ActionIcons from "./ActionIcons";
 
 interface Props {
   mealIdea: MealIdea;
   onDelete: any;
+  onEdit: any;
 }
 
 export default class MealCard extends React.Component<Props> {
   state = {
-    isModalVisible: false,
+    isDeletionModalVisible: false,
+    isEditModalVisible: false,
   };
 
-  toggleModal = (visible: boolean) => {
-    this.setState({ isModalVisible: visible });
+  toggleEditModal = (visible: boolean) => {
+    this.setState({ isEditModalVisible: visible });
+  };
+
+  toggleDeleteModal = (visible: boolean) => {
+    this.setState({ isDeletionModalVisible: visible });
   };
 
   onDelete = () => {
     storageHelper.removeData(this.props.mealIdea.storageKey).then(
       () => {
         this.props.onDelete();
-        this.toggleModal(false);
+        this.toggleDeleteModal(false);
       },
       (error) => {
         console.log(error);
@@ -42,32 +50,18 @@ export default class MealCard extends React.Component<Props> {
           containerStyle={MyStyles.styles().cardContainer}
         >
           <View style={MyStyles.styles().cardHeader}>
-            <Text style={[MyStyles.styles().cardTitle, { marginLeft: "auto" }]}>
+            <Text style={[MyStyles.styles().cardTitle, { margin: "auto" }]}>
               {this.props.mealIdea.title}
             </Text>
-            <Pressable
-              style={{
-                marginLeft: "auto",
-              }}
-              onPress={() => this.toggleModal(true)}
-            >
-              <FontAwesome
-                name="trash"
-                size={20}
-                color={Colors[MyStyles.selectedTheme].secondary}
-              />
-            </Pressable>
+            <ActionIcons
+              onEdit={() => this.toggleEditModal(true)}
+              onDelete={() => this.toggleDeleteModal(true)}
+            ></ActionIcons>
           </View>
           <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
           {this.props.mealIdea.ingredients.map((item, index) => {
             return (
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 5,
-                }}
-              >
+              <View style={styles.ingredientsList}>
                 <Text style={MyStyles.styles().cardText}>
                   {item.title + " : "}
                 </Text>
@@ -76,13 +70,30 @@ export default class MealCard extends React.Component<Props> {
             );
           })}
         </Card>
+        <Modal isVisible={this.state.isEditModalVisible}>
+          <View style={[MyStyles.styles().modal, { flex: 0.8 }]}>
+            <MealForm
+              onCancel={() => this.toggleEditModal(false)}
+              onSave={() => this.toggleEditModal(false)}
+              mealIdea={this.props.mealIdea}
+            />
+          </View>
+        </Modal>
         <DeletionModal
-          isVisible={this.state.isModalVisible}
+          isVisible={this.state.isDeletionModalVisible}
           label={"Voulez-vous vraiment supprimer cette idée repas ?"}
           onDelete={() => this.onDelete()}
-          onCancel={() => this.toggleModal(false)}
+          onCancel={() => this.toggleDeleteModal(false)}
         ></DeletionModal>
       </React.Fragment>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  ingredientsList: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
+  },
+});
