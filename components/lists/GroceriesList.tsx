@@ -130,7 +130,7 @@ export default class GroceriesList extends React.Component<Props> {
         <FlatList
           data={this.state.arrayHolder}
           extraData={this.state.arrayHolder}
-          keyExtractor={(index: any) => index.toString()}
+          keyExtractor={(item: any, index: any) => index.toString()}
           renderItem={({ item }) => (
             <GroceryItem
               holidays={this.state.holidays}

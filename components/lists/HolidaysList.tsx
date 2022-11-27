@@ -69,7 +69,7 @@ export default class HolidaysList extends React.Component<Props> {
         <FlatList
           data={this.state.allHolidays}
           extraData={this.state.allHolidays}
-          keyExtractor={(index: any) => index.toString()}
+          keyExtractor={(item: any, index: any) => index.toString()}
           renderItem={({ item, index }) => (
             <HolidaysCard
               holidays={item}

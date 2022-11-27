@@ -1,3 +1,5 @@
+import moment from "moment";
+import "moment/locale/fr";
 import React from "react";
 import { Text, View } from "react-native";
 import { diner, lunch } from "../../constants/data/MealTimes";
@@ -83,10 +85,7 @@ export default class EditableMealRow extends React.Component<Props> {
     return (
       <View style={MyStyles.styles().editableRow}>
         <Text style={MyStyles.styles().dateText}>
-          {new Date(this.props.holidaysMeal.date).toLocaleDateString("fr-FR", {
-            weekday: "long",
-            day: "numeric",
-          })}
+          {moment(new Date(this.props.holidaysMeal.date)).format("dddd Do")}
         </Text>
         <View style={MyStyles.styles().container}>
           <CustomDropdown

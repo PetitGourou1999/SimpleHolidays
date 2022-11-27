@@ -1,3 +1,5 @@
+import moment from "moment";
+import "moment/locale/fr";
 import React from "react";
 import { Text, TextInput, View } from "react-native";
 import { MyStyles } from "../../constants/MyStyles";
@@ -26,13 +28,7 @@ export default class EditableActivityRow extends React.Component<Props> {
     return (
       <View style={MyStyles.styles().editableRow}>
         <Text style={MyStyles.styles().dateText}>
-          {new Date(this.props.holidaysActivity.date).toLocaleDateString(
-            "fr-FR",
-            {
-              weekday: "long",
-              day: "numeric",
-            }
-          )}
+          {moment(new Date(this.props.holidaysActivity.date)).format("dddd Do")}
         </Text>
         <TextInput
           removeClippedSubviews={false}

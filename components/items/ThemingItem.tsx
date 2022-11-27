@@ -51,9 +51,10 @@ export default class ThemingItem extends React.Component<Props> {
   private styles = StyleSheet.create({
     componentWrapper: {
       ...MyStyles.styles().overlayShadow,
-      flex: 0.4,
+      elevation: 3,
+      height: 120,
       borderRadius: 10,
-      marginTop: 5,
+      marginVertical: 15,
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",

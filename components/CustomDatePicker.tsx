@@ -1,4 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
+import moment from "moment";
+import "moment/locale/fr";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -41,12 +43,7 @@ export default class CustomDatePicker extends React.Component<Props> {
           locale="fr-FR"
         />
         <Text style={{ fontFamily: "WorkSansRegular" }}>
-          {this.state.selectedDate.toLocaleDateString("fr-FR", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          {moment(this.state.selectedDate).format("LL")}
         </Text>
         <TouchableOpacity
           onPress={() => {

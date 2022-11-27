@@ -131,7 +131,7 @@ export default class MealForm extends React.Component<Props> {
         <Text style={[MyStyles.styles().formTitle]}>
           Détails de l'idée de repas :
         </Text>
-        <Text style={MyStyles.styles.text}>Intitulé du repas</Text>
+        <Text style={MyStyles.styles().text}>Intitulé</Text>
         <TextInput
           style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setTitle(text)}
@@ -151,7 +151,7 @@ export default class MealForm extends React.Component<Props> {
         <FlatList
           data={this.state.ingredients}
           extraData={this.state.ingredients}
-          keyExtractor={(index: any) => index.toString()}
+          keyExtractor={(item: any, index: any) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={[styles.flatListItem]}>
               <Text style={MyStyles.styles().inputText}>{item.title}</Text>

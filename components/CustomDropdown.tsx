@@ -133,7 +133,10 @@ const CustomDropdown: FC<Props> = ({
     item: {
       padding: 10,
       borderBottomWidth: 1,
-      borderColor: Colors[MyStyles.selectedTheme].grey,
+      borderTopWidth: 1,
+      borderBottomLeftRadius: 100,
+      borderBottomRightRadius: 100,
+      borderColor: "#EEE",
     },
   });
 
