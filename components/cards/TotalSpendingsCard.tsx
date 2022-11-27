@@ -110,7 +110,10 @@ export default class TotalSpendingsCard extends React.Component<Props> {
             return (
               <View style={MyStyles.styles().itemRow}>
                 <Text style={MyStyles.styles().cardText}>
-                  {item.player.pseudo + " doit " + item.debt + " €"}
+                  {item.player.pseudo +
+                    " doit " +
+                    Number(item.debt).toFixed(2) +
+                    " €"}
                 </Text>
                 <Text
                   style={[
