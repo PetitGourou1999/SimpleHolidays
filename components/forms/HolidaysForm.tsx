@@ -214,6 +214,7 @@ export default class HolidaysForm extends React.Component<Props> {
     },
 
     textPadding20: {
+      ...MyStyles.styles().text,
       paddingTop: 20,
     },
 

@@ -131,13 +131,13 @@ export default class MealForm extends React.Component<Props> {
         <Text style={[MyStyles.styles().formTitle]}>
           Détails de l'idée de repas :
         </Text>
-        <Text style={MyStyles.styles.text}>Intitulé</Text>
+        <Text style={MyStyles.styles.text}>Intitulé du repas</Text>
         <TextInput
           style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setTitle(text)}
           value={this.state.title}
         />
-        <Text style={MyStyles.styles().text}>Ajouter des Ingrédients</Text>
+        <Text style={MyStyles.styles().text}>Ajouter des ingrédients</Text>
         <View style={MyStyles.styles().rowView}>
           <TextInput
             value={this.state.ingredientName}
