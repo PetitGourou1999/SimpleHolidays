@@ -108,6 +108,7 @@ export default class SpendingsForm extends React.Component<Props> {
           <CustomDropdown
             style={MyStyles.styles().inputStyle}
             label={this.state.player.pseudo}
+            isModal={true}
             data={this.state.items}
             onSelect={(item) => this.setPlayer(item.value)}
           ></CustomDropdown>

@@ -92,6 +92,7 @@ export default class EditableMealRow extends React.Component<Props> {
             iconLeft="sun-o"
             style={{ marginBottom: 10 }}
             label={this.state.valueLunch.meal.title}
+            isModal={false}
             data={this.state.items}
             onSelect={(item) => this.setValueLunch(item.value)}
           ></CustomDropdown>
@@ -99,6 +100,7 @@ export default class EditableMealRow extends React.Component<Props> {
             iconLeft="moon-o"
             style={{}}
             label={this.state.valueDiner.meal.title}
+            isModal={false}
             data={this.state.items}
             onSelect={(item) => this.setValueDinner(item.value)}
           ></CustomDropdown>

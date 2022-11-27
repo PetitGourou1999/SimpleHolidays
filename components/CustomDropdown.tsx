@@ -3,6 +3,8 @@ import React, { FC, ReactElement, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
+  Platform,
+  StatusBar,
   StyleProp,
   StyleSheet,
   Text,
@@ -18,6 +20,7 @@ interface Props {
   style: StyleProp<ViewStyle> | undefined;
   label: string;
   data: Array<{ label: string; value: any }>;
+  isModal: boolean;
   onSelect: (item: { label: string; value: any }) => void;
 }
 
@@ -26,6 +29,7 @@ const CustomDropdown: FC<Props> = ({
   style,
   label,
   data,
+  isModal,
   onSelect,
 }) => {
   const DropdownButton = useRef();
@@ -42,7 +46,11 @@ const CustomDropdown: FC<Props> = ({
   const openDropdown = (): void => {
     DropdownButton.current.measure(
       (fx: any, fy: any, w: any, h: any, px: any, py: any) => {
-        setDropdownTop(py + h);
+        let statusBarHeight =
+          Platform.OS === "android" && !isModal ? StatusBar.currentHeight : 0;
+        setDropdownTop(
+          py + h - (statusBarHeight !== undefined ? statusBarHeight : 0)
+        );
         setDropdownLeft(px);
         setDropdownWidth(w);
       }
@@ -86,12 +94,13 @@ const CustomDropdown: FC<Props> = ({
           <View
             style={[
               styles.dropdown,
+              { elevation: 1 },
               { top: dropdownTop, left: dropdownLeft, width: dropdownWidth },
             ]}
           >
             <FlatList
               data={data}
-              renderItem={renderItem}
+              renderItem={(item) => renderItem(item)}
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
@@ -132,10 +141,9 @@ const CustomDropdown: FC<Props> = ({
     },
     item: {
       padding: 10,
-      borderBottomWidth: 1,
       borderTopWidth: 1,
-      borderBottomLeftRadius: 100,
-      borderBottomRightRadius: 100,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
       borderColor: "#EEE",
     },
   });

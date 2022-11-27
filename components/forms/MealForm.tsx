@@ -127,7 +127,12 @@ export default class MealForm extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[styles.contentContainer]}>
+      <View
+        style={[
+          { ...MyStyles.styles().container },
+          { borderRadius: 20, padding: 10 },
+        ]}
+      >
         <Text style={[MyStyles.styles().formTitle]}>
           Détails de l'idée de repas :
         </Text>
@@ -199,12 +204,6 @@ export default class MealForm extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    ...MyStyles.styles().container,
-    borderRadius: 20,
-    padding: 10,
-  },
-
   flatListItem: {
     ...MyStyles.styles().rowView,
     width: "100%",
