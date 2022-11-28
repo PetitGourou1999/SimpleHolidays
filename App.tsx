@@ -6,7 +6,8 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
-import { useColorScheme } from "react-native";
+import { StatusBar, useColorScheme } from "react-native";
+import Colors from "./constants/Colors";
 import { MyStyles } from "./constants/MyStyles";
 import DrawerNavigator from "./navigation/DrawerNavigator";
 
@@ -37,6 +38,10 @@ export default function App() {
     <NavigationContainer
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
+      <StatusBar
+        backgroundColor={Colors[MyStyles.selectedTheme].primary}
+        barStyle="light-content"
+      />
       <DrawerNavigator />
     </NavigationContainer>
   );

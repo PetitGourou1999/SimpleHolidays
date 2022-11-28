@@ -3,7 +3,6 @@ import React, { FC, ReactElement, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
-  Platform,
   StyleProp,
   StyleSheet,
   Text,
@@ -11,7 +10,6 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
 import Colors from "../constants/Colors";
 import { MyStyles } from "../constants/MyStyles";
 
@@ -46,11 +44,7 @@ const CustomDropdown: FC<Props> = ({
   const openDropdown = (): void => {
     DropdownButton.current.measure(
       (fx: any, fy: any, w: any, h: any, px: any, py: any) => {
-        let statusBarHeight =
-          Platform.OS === "android" && !isModal ? getStatusBarHeight() : 0;
-        setDropdownTop(
-          py + h - (statusBarHeight !== undefined ? statusBarHeight : 0)
-        );
+        setDropdownTop(py + h);
         setDropdownLeft(px);
         setDropdownWidth(w);
       }
@@ -94,11 +88,22 @@ const CustomDropdown: FC<Props> = ({
           <View
             style={[
               styles.dropdown,
-              { elevation: 1 },
               { top: dropdownTop, left: dropdownLeft, width: dropdownWidth },
             ]}
           >
             <FlatList
+              ItemSeparatorComponent={(props) => {
+                return (
+                  <View
+                    style={{
+                      width: "80%",
+                      alignSelf: "center",
+                      borderWidth: 0.5,
+                      borderColor: "#EEE",
+                    }}
+                  />
+                );
+              }}
               data={data}
               renderItem={(item) => renderItem(item)}
               keyExtractor={(item, index) => index.toString()}
@@ -133,7 +138,9 @@ const CustomDropdown: FC<Props> = ({
       flex: 1,
       position: "absolute",
       backgroundColor: Colors[MyStyles.selectedTheme].white,
+      borderWidth: 1,
       borderRadius: 5,
+      borderColor: "#EEE",
     },
     overlay: {
       width: "100%",
@@ -141,10 +148,6 @@ const CustomDropdown: FC<Props> = ({
     },
     item: {
       padding: 10,
-      borderTopWidth: 1,
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5,
-      borderColor: "#EEE",
     },
   });
 
