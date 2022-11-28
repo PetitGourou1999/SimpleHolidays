@@ -4,7 +4,6 @@ import {
   FlatList,
   Modal,
   Platform,
-  StatusBar,
   StyleProp,
   StyleSheet,
   Text,
@@ -12,6 +11,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 import Colors from "../constants/Colors";
 import { MyStyles } from "../constants/MyStyles";
 
@@ -47,7 +47,7 @@ const CustomDropdown: FC<Props> = ({
     DropdownButton.current.measure(
       (fx: any, fy: any, w: any, h: any, px: any, py: any) => {
         let statusBarHeight =
-          Platform.OS === "android" && !isModal ? StatusBar.currentHeight : 0;
+          Platform.OS === "android" && !isModal ? getStatusBarHeight() : 0;
         setDropdownTop(
           py + h - (statusBarHeight !== undefined ? statusBarHeight : 0)
         );

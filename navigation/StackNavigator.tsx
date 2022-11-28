@@ -38,7 +38,7 @@ const MainStackNavigator = () => {
         component={HolidaysMealsScreen}
       />
       <Stack.Screen
-        name={MyStrings.constants.repasVacancesTitle}
+        name={MyStrings.constants.activitesVacancesTitle}
         component={HolidaysActivitiesScreen}
       />
       <Stack.Screen

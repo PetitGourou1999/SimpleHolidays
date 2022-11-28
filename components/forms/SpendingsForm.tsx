@@ -1,7 +1,14 @@
 import React from "react";
-import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import CurrencyInput from "react-native-currency-input";
-import { ScrollView } from "react-native-gesture-handler";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { MyStyles } from "../../constants/MyStyles";
 import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
@@ -85,58 +92,67 @@ export default class SpendingsForm extends React.Component<Props> {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={[this.styles.contentContainer]}>
-        <Text style={[MyStyles.styles().formTitle]}>
-          {MyStrings.constants.newDepenseLabel}
-        </Text>
-        <Text style={[this.styles.textPadding10]}>
-          {MyStrings.constants.typeDepenseLabel}
-        </Text>
-        <TextInput
-          style={MyStyles.styles().inputStyle}
-          onChangeText={(text) => this.setType(text)}
-        />
-        <Text style={[this.styles.textPadding10]}>
-          {MyStrings.constants.montantLabel}
-        </Text>
-        <CurrencyInput
-          value={this.state.amount}
-          minValue={0}
-          onChangeValue={(value) => this.setAmount(value)}
-          style={MyStyles.styles().inputStyle}
-          suffix=" € "
-          delimiter="."
-          separator=","
-          precision={2}
-          keyboardType={"numbers-and-punctuation"}
-        />
-        <Text style={[this.styles.textPadding10]}>
-          {MyStrings.constants.paidLabel}
-        </Text>
-        <View style={MyStyles.styles().editableRow}>
-          <CustomDropdown
+      <KeyboardAwareScrollView
+        contentContainerStyle={this.styles.borderRadius}
+        style={[this.styles.borderRadius]}
+      >
+        <ScrollView
+          contentContainerStyle={[
+            MyStyles.styles().container,
+            this.styles.borderRadius,
+          ]}
+          style={[this.styles.borderRadius]}
+        >
+          <Text style={[MyStyles.styles().formTitle]}>
+            {MyStrings.constants.newDepenseLabel}
+          </Text>
+          <Text style={[this.styles.textPadding10]}>
+            {MyStrings.constants.typeDepenseLabel}
+          </Text>
+          <TextInput
             style={MyStyles.styles().inputStyle}
-            label={this.state.player.pseudo}
-            isModal={true}
-            data={this.state.items}
-            onSelect={(item) => this.setPlayer(item.value)}
-          ></CustomDropdown>
-        </View>
-        <ButtonBar
-          cancelLabel={MyStrings.constants.cancel}
-          saveLabel={MyStrings.constants.add}
-          onSave={() => this.saveSpending()}
-          onCancel={() => this.props.onCancel()}
-        ></ButtonBar>
-      </ScrollView>
+            onChangeText={(text) => this.setType(text)}
+          />
+          <Text style={[this.styles.textPadding10]}>
+            {MyStrings.constants.montantLabel}
+          </Text>
+          <CurrencyInput
+            value={this.state.amount}
+            minValue={0}
+            onChangeValue={(value) => this.setAmount(value)}
+            style={MyStyles.styles().inputStyle}
+            suffix=" € "
+            delimiter="."
+            separator=","
+            precision={2}
+            keyboardType={"numbers-and-punctuation"}
+          />
+          <Text style={[this.styles.textPadding10]}>
+            {MyStrings.constants.paidLabel}
+          </Text>
+          <View style={[MyStyles.styles().editableRow, { width: 320 }]}>
+            <CustomDropdown
+              style={MyStyles.styles().inputStyle}
+              label={this.state.player.pseudo}
+              isModal={true}
+              data={this.state.items}
+              onSelect={(item) => this.setPlayer(item.value)}
+            ></CustomDropdown>
+          </View>
+          <ButtonBar
+            cancelLabel={MyStrings.constants.cancel}
+            saveLabel={MyStrings.constants.add}
+            onSave={() => this.saveSpending()}
+            onCancel={() => this.props.onCancel()}
+          ></ButtonBar>
+        </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 
   private styles = StyleSheet.create({
-    contentContainer: {
-      ...MyStyles.styles().container,
+    borderRadius: {
       borderRadius: 20,
-      padding: 10,
     },
 
     textPadding10: {
