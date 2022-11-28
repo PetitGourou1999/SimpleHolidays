@@ -4,6 +4,7 @@ import { Card } from "react-native-elements";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays } from "../../types/Types";
 import DeletionModal from "../DeletionModal";
@@ -67,21 +68,33 @@ export default class HolidaysCard extends React.Component<Props> {
           <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
           <Pressable
             style={[this.styles.pressable]}
-            onPress={() => this.onPressButton("Activités des Vacances")}
+            onPress={() =>
+              this.onPressButton(MyStrings.constants.activitesVacancesTitle)
+            }
           >
-            <Text style={this.styles.pressableText}>Activités</Text>
+            <Text style={this.styles.pressableText}>
+              {MyStrings.constants.activitesLabel}
+            </Text>
           </Pressable>
           <Pressable
             style={[this.styles.pressable]}
-            onPress={() => this.onPressButton("Repas des Vacances")}
+            onPress={() =>
+              this.onPressButton(MyStrings.constants.repasVacancesTitle)
+            }
           >
-            <Text style={this.styles.pressableText}>Repas</Text>
+            <Text style={this.styles.pressableText}>
+              {MyStrings.constants.repasLabel}
+            </Text>
           </Pressable>
           <Pressable
             style={[this.styles.pressable]}
-            onPress={() => this.onPressButton("Dépenses des Vacances")}
+            onPress={() =>
+              this.onPressButton(MyStrings.constants.depensesVacancesTitle)
+            }
           >
-            <Text style={this.styles.pressableText}>Dépenses</Text>
+            <Text style={this.styles.pressableText}>
+              {MyStrings.constants.depensesLabel}
+            </Text>
           </Pressable>
         </Card>
         <Modal isVisible={this.state.isEditModalVisible}>
@@ -95,7 +108,7 @@ export default class HolidaysCard extends React.Component<Props> {
         </Modal>
         <DeletionModal
           isVisible={this.state.isDeleteModalVisible}
-          label={"Voulez-vous vraiment supprimer ces vacances ?"}
+          label={MyStrings.constants.promptSupprimerVacances}
           onDelete={() => this.onDelete()}
           onCancel={() => this.toggleDeleteModal(false)}
         ></DeletionModal>

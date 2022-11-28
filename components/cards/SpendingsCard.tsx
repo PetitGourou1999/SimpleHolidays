@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import { Spending } from "../../types/Types";
 
 interface Props {
@@ -21,20 +22,18 @@ export default class SpendingsCard extends React.Component<Props> {
         </Card.Title>
         <Card.Divider color={Colors[MyStyles.selectedTheme].secondary} />
 
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 5,
-          }}
-        >
-          <Text style={MyStyles.styles().cardText}>{"Montant : "}</Text>
+        <View style={this.styles.row}>
+          <Text style={MyStyles.styles().cardText}>
+            {MyStrings.constants.montantLabel + " : "}
+          </Text>
           <Text style={[MyStyles.styles().cardText, this.styles.amountStyle]}>
             {this.props.spending.amount + " €"}
           </Text>
         </View>
         <View style={MyStyles.styles().itemRow}>
-          <Text style={MyStyles.styles().cardText}>{"Payé par : "}</Text>
+          <Text style={MyStyles.styles().cardText}>
+            {MyStrings.constants.paidLabel + ":"}
+          </Text>
           <Text
             style={[MyStyles.styles().cardText, MyStyles.styles().pseudoStyle]}
           >
@@ -46,6 +45,11 @@ export default class SpendingsCard extends React.Component<Props> {
   }
 
   private styles = StyleSheet.create({
+    row: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginBottom: 5,
+    },
     text: {
       ...MyStyles.styles().cardText,
       marginBottom: 5,

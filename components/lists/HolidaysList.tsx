@@ -4,6 +4,7 @@ import Modal from "react-native-modal";
 import HolidaysCard from "../../components/cards/HolidaysCard";
 import HolidaysForm from "../../components/forms/HolidaysForm";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 
 interface Props {
@@ -55,7 +56,7 @@ export default class HolidaysList extends React.Component<Props> {
           onPress={() => this.toggleModal(true)}
         >
           <Text style={MyStyles.styles().bigButtonText}>
-            Nouvelles Vacances !
+            {MyStrings.constants.newVacancesLabel}
           </Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>

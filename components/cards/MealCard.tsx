@@ -4,6 +4,7 @@ import { Card } from "react-native-elements";
 import Modal from "react-native-modal";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { MealIdea } from "../../types/Types";
 import DeletionModal from "../DeletionModal";
@@ -81,7 +82,7 @@ export default class MealCard extends React.Component<Props> {
         </Modal>
         <DeletionModal
           isVisible={this.state.isDeletionModalVisible}
-          label={"Voulez-vous vraiment supprimer cette idée repas ?"}
+          label={MyStrings.constants.promptSupprimerRepas}
           onDelete={() => this.onDelete()}
           onCancel={() => this.toggleDeleteModal(false)}
         ></DeletionModal>

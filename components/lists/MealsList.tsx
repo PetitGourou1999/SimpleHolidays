@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import MealCard from "../cards/MealCard";
 import MealForm from "../forms/MealForm";
@@ -57,7 +58,7 @@ export default class MealsList extends React.Component {
           onPress={() => this.toggleModal(true)}
         >
           <Text style={MyStyles.styles().bigButtonText}>
-            Ajouter une Idée Repas
+            {MyStrings.constants.addRepasLabel}
           </Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>

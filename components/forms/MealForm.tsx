@@ -12,6 +12,7 @@ import {
 import NumericInput from "react-native-numeric-input";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Ingredient, MealIdea } from "../../types/Types";
 import ButtonBar from "./ButtonBar";
@@ -134,15 +135,19 @@ export default class MealForm extends React.Component<Props> {
         ]}
       >
         <Text style={[MyStyles.styles().formTitle]}>
-          Détails de l'idée de repas :
+          {MyStrings.constants.detailsRepasLabel}
         </Text>
-        <Text style={MyStyles.styles().text}>Intitulé</Text>
+        <Text style={MyStyles.styles().text}>
+          {MyStrings.constants.intituleRepasLabel}
+        </Text>
         <TextInput
           style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setTitle(text)}
           value={this.state.title}
         />
-        <Text style={MyStyles.styles().text}>Ajouter des ingrédients</Text>
+        <Text style={MyStyles.styles().text}>
+          {MyStrings.constants.addIngredientsLabel}
+        </Text>
         <View style={MyStyles.styles().rowView}>
           <TextInput
             value={this.state.ingredientName}
@@ -193,8 +198,12 @@ export default class MealForm extends React.Component<Props> {
           style={MyStyles.styles().listStyle}
         />
         <ButtonBar
-          cancelLabel="Annuler"
-          saveLabel={this.props.mealIdea !== undefined ? "Modifier" : "Ajouter"}
+          cancelLabel={MyStrings.constants.cancel}
+          saveLabel={
+            this.props.mealIdea !== undefined
+              ? MyStrings.constants.update
+              : MyStrings.constants.add
+          }
           onSave={() => this.saveMealIdea()}
           onCancel={() => this.props.onCancel()}
         ></ButtonBar>

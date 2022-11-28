@@ -56,10 +56,8 @@ export default class ThemingList extends React.Component {
 
   reloadApp = () => {
     if (__DEV__) {
-      console.log("DEV Mode");
       NativeModules.DevSettings.reload();
     } else {
-      console.log("PRODUCTION Mode");
       Updates.reloadAsync();
     }
   };

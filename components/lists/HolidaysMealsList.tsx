@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import EditableMealRow from "../../components/rows/EditableMealRow";
 import { diner, lunch } from "../../constants/data/MealTimes";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Ingredient, Meal, MealsOfTheDay } from "../../types/Types";
 
@@ -124,22 +125,27 @@ export default class HolidaysMealsList extends React.Component<Props> {
           <Pressable
             style={[MyStyles.styles().buttonPrimary, styles.buttonStyle]}
             onPress={() =>
-              this.props.navigation.navigate("Liste de Courses", {
-                data: this.state.holidays,
-              })
+              this.props.navigation.navigate(
+                MyStrings.constants.listeCoursesTitle,
+                {
+                  data: this.state.holidays,
+                }
+              )
             }
           >
             <Text style={MyStyles.styles().bigButtonText}>
-              Voir la liste de courses
+              {MyStrings.constants.voirListeLabel}
             </Text>
           </Pressable>
           <View style={[MyStyles.styles().editableRow]}>
             <Text
               style={[MyStyles.styles().rowText, { flex: 0, width: "33%" }]}
             >
-              Date
+              {MyStrings.constants.date}
             </Text>
-            <Text style={[MyStyles.styles().rowText, { flex: 1 }]}>Repas</Text>
+            <Text style={[MyStyles.styles().rowText, { flex: 1 }]}>
+              {MyStrings.constants.repasLabel}
+            </Text>
           </View>
 
           <FlatList

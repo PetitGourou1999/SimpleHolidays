@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import { Holidays } from "../../types/Types";
 import SpendingsCard from "../cards/SpendingsCard";
 import TotalSpendingsCard from "../cards/TotalSpendingsCard";
@@ -44,7 +45,7 @@ export default class SpendingsList extends React.Component<Props> {
           onPress={() => this.toggleModal(true)}
         >
           <Text style={MyStyles.styles().bigButtonText}>
-            Ajouter une dépense
+            {MyStrings.constants.addDepenseLabel}
           </Text>
         </Pressable>
         <Modal isVisible={this.state.isModalVisible}>

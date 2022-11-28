@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import MiscellaneousList from "../components/lists/MiscellaneousList";
 import { MyStyles } from "../constants/MyStyles";
+import MyStrings from "../constants/text/MyStrings";
 
 export default class MiscellaneousScreen extends React.Component {
   state = {
@@ -18,7 +19,7 @@ export default class MiscellaneousScreen extends React.Component {
             MyStyles.styles().text,
           ]}
         >
-          Ceci est la liste des choses utiles à emmener à chaque voyage.
+          {MyStrings.constants.miscellaneousDescriptionLabel}
         </Text>
         <View style={MyStyles.styles().rowBorderStyle}></View>
         <MiscellaneousList></MiscellaneousList>

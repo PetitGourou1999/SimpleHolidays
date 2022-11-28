@@ -2,6 +2,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 
 interface Props {
   cancelLabel: string;
@@ -22,7 +23,7 @@ export default class ButtonBar extends React.Component<Props> {
                 { color: Colors[MyStyles.selectedTheme].white },
               ]}
             >
-              Annuler
+              {MyStrings.constants.cancel}
             </Text>
           </View>
         </Pressable>
@@ -34,7 +35,7 @@ export default class ButtonBar extends React.Component<Props> {
                 { color: Colors[MyStyles.selectedTheme].white },
               ]}
             >
-              Ajouter
+              {MyStrings.constants.add}
             </Text>
           </View>
         </Pressable>

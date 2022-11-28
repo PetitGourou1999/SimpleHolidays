@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import Colors from "../constants/Colors";
 import { MyStyles } from "../constants/MyStyles";
+import MyStrings from "../constants/text/MyStrings";
 
 interface Props {
   label: string;
@@ -36,7 +37,7 @@ export default class DeletionModal extends React.Component<Props> {
                     { color: Colors[MyStyles.selectedTheme].white },
                   ]}
                 >
-                  Annuler
+                  {MyStrings.constants.cancel}
                 </Text>
               </View>
             </Pressable>
@@ -53,7 +54,7 @@ export default class DeletionModal extends React.Component<Props> {
                     { color: Colors[MyStyles.selectedTheme].white },
                   ]}
                 >
-                  Supprimer
+                  {MyStrings.constants.delete}
                 </Text>
               </View>
             </Pressable>

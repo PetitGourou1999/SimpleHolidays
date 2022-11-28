@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Colors from "../constants/Colors";
 import { MyStyles } from "../constants/MyStyles";
+import MyStrings from "../constants/text/MyStrings";
 
 import HolidaysActivitiesScreen from "../screens/HolidaysActivitiesScreen";
 import HolidaysGroceriesScreen from "../screens/HolidaysGroceriesScreen";
@@ -14,9 +15,9 @@ const Stack = createStackNavigator();
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Nos Vacances"
+      initialRouteName={MyStrings.constants.nosVacancesTitle}
       screenOptions={{
-        headerBackTitle: "Back",
+        headerBackTitle: MyStrings.constants.back,
         headerTintColor: Colors[MyStyles.selectedTheme].primary,
         headerStyle: {
           backgroundColor: Colors[MyStyles.selectedTheme].white,
@@ -28,18 +29,24 @@ const MainStackNavigator = () => {
         },
       }}
     >
-      <Stack.Screen name="Nos Vacances" component={HolidaysScreen} />
-      <Stack.Screen name="Repas des Vacances" component={HolidaysMealsScreen} />
       <Stack.Screen
-        name="Activités des Vacances"
+        name={MyStrings.constants.nosVacancesTitle}
+        component={HolidaysScreen}
+      />
+      <Stack.Screen
+        name={MyStrings.constants.repasVacancesTitle}
+        component={HolidaysMealsScreen}
+      />
+      <Stack.Screen
+        name={MyStrings.constants.repasVacancesTitle}
         component={HolidaysActivitiesScreen}
       />
       <Stack.Screen
-        name="Dépenses des Vacances"
+        name={MyStrings.constants.depensesVacancesTitle}
         component={HolidaysSpendingsScreen}
       />
       <Stack.Screen
-        name="Liste de Courses"
+        name={MyStrings.constants.listeCoursesTitle}
         component={HolidaysGroceriesScreen}
       />
     </Stack.Navigator>

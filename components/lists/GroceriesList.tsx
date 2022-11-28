@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Ingredient } from "../../types/Types";
 import GroceryItem from "../items/GroceryItem";
@@ -116,7 +117,7 @@ export default class GroceriesList extends React.Component<Props> {
             ]}
             value={this.state.currentItem}
             onChangeText={(text) => this.setCurrentItem(text)}
-            placeholder={"Ajouter quelque chose à acheter..."}
+            placeholder={MyStrings.constants.addSomethingPlaceholder}
             placeholderTextColor={Colors[MyStyles.selectedTheme].primary}
           />
 

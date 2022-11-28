@@ -3,6 +3,7 @@ import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import CurrencyInput from "react-native-currency-input";
 import { ScrollView } from "react-native-gesture-handler";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Player, Spending } from "../../types/Types";
 import CustomDropdown from "../CustomDropdown";
@@ -85,13 +86,19 @@ export default class SpendingsForm extends React.Component<Props> {
   render() {
     return (
       <ScrollView contentContainerStyle={[this.styles.contentContainer]}>
-        <Text style={[MyStyles.styles().formTitle]}>Nouvelle dépense :</Text>
-        <Text style={[this.styles.textPadding10]}>Nom / Type</Text>
+        <Text style={[MyStyles.styles().formTitle]}>
+          {MyStrings.constants.newDepenseLabel}
+        </Text>
+        <Text style={[this.styles.textPadding10]}>
+          {MyStrings.constants.typeDepenseLabel}
+        </Text>
         <TextInput
           style={MyStyles.styles().inputStyle}
           onChangeText={(text) => this.setType(text)}
         />
-        <Text style={[this.styles.textPadding10]}>Montant</Text>
+        <Text style={[this.styles.textPadding10]}>
+          {MyStrings.constants.montantLabel}
+        </Text>
         <CurrencyInput
           value={this.state.amount}
           minValue={0}
@@ -103,7 +110,9 @@ export default class SpendingsForm extends React.Component<Props> {
           precision={2}
           keyboardType={"numbers-and-punctuation"}
         />
-        <Text style={[this.styles.textPadding10]}>Payé par : </Text>
+        <Text style={[this.styles.textPadding10]}>
+          {MyStrings.constants.paidLabel}
+        </Text>
         <View style={MyStyles.styles().editableRow}>
           <CustomDropdown
             style={MyStyles.styles().inputStyle}
@@ -114,8 +123,8 @@ export default class SpendingsForm extends React.Component<Props> {
           ></CustomDropdown>
         </View>
         <ButtonBar
-          cancelLabel="Annuler"
-          saveLabel="Ajouter"
+          cancelLabel={MyStrings.constants.cancel}
+          saveLabel={MyStrings.constants.add}
           onSave={() => this.saveSpending()}
           onCancel={() => this.props.onCancel()}
         ></ButtonBar>

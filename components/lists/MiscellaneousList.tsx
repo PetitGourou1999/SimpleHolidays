@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Miscellaneous } from "../../types/Types";
 import MiscellaneousItem from "../items/MiscellaneousItem";
@@ -114,7 +115,7 @@ export default class MiscellaneousList extends React.Component {
             ]}
             value={this.state.currentItem}
             onChangeText={(text) => this.setCurrentItem(text)}
-            placeholder={"Ajouter un truc utile..."}
+            placeholder={MyStrings.constants.addMiscellaneousPlaceholder}
             placeholderTextColor={Colors[MyStyles.selectedTheme].primary}
           />
 

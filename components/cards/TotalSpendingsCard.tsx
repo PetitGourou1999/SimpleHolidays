@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import { Holidays, PlayerDebt, PlayerSpendings } from "../../types/Types";
 
 interface Props {
@@ -74,7 +75,7 @@ export default class TotalSpendingsCard extends React.Component<Props> {
             { color: Colors[MyStyles.selectedTheme].darkBlue },
           ]}
         >
-          {"Total : " + theTotals.total.toString() + " €"}
+          {MyStrings.constants.totalLabel + theTotals.total.toString() + " €"}
         </Card.Title>
         <Card.Divider color={Colors[MyStyles.selectedTheme].darkBlue} />
         {theTotals.totalsForPlayers.map((item, index) => {
@@ -102,7 +103,7 @@ export default class TotalSpendingsCard extends React.Component<Props> {
             { color: Colors[MyStyles.selectedTheme].darkBlue },
           ]}
         >
-          {"Redevances"}
+          {MyStrings.constants.redevancesLabel}
         </Card.Title>
         <Card.Divider color={Colors[MyStyles.selectedTheme].darkBlue} />
         {theTotals.totalsForPlayersToPay.map((item, index) => {

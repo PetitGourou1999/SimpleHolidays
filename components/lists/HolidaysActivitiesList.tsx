@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import EditableActivityRow from "../../components/rows/EditableActivityRow";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Activity, Holidays } from "../../types/Types";
 
@@ -56,14 +57,16 @@ export default class HolidaysActivitiesList extends React.Component<Props> {
             MyStyles.styles().text,
           ]}
         >
-          Ici sont centralisées les activités à faire pendant les vacances
+          {MyStrings.constants.activitiesDescriptionLabel}
         </Text>
         <View style={MyStyles.styles().rowBorderStyle}></View>
         <View style={[MyStyles.styles().editableRow]}>
           <Text style={[MyStyles.styles().rowText, { flex: 0, width: "33%" }]}>
-            Date
+            {MyStrings.constants.date}
           </Text>
-          <Text style={[MyStyles.styles().rowText, { flex: 1 }]}>Activité</Text>
+          <Text style={[MyStyles.styles().rowText, { flex: 1 }]}>
+            {MyStrings.constants.activiteLabel}
+          </Text>
         </View>
 
         <KeyboardAwareFlatList

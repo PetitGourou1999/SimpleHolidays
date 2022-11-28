@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import React from "react";
 import Colors from "../constants/Colors";
 import { MyStyles } from "../constants/MyStyles";
+import MyStrings from "../constants/text/MyStrings";
 import MealsScreen from "../screens/MealsScreen";
 import MiscellaneousScreen from "../screens/MiscellaneousScreen";
 import PreferencesScreen from "../screens/PreferencesScreen";
@@ -40,10 +41,10 @@ const DrawerNavigator = () => {
       }}
     >
       <Drawer.Screen
-        name="Vacances"
+        name={MyStrings.constants.vacancesTitle}
         component={MainStackNavigator}
         options={{
-          title: "Vacances",
+          title: MyStrings.constants.vacancesTitle,
           drawerIcon: ({ focused, size }) => (
             <Fontisto
               name="holiday-village"
@@ -54,10 +55,10 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Idées Repas"
+        name={MyStrings.constants.repasTitle}
         component={MealsScreen}
         options={{
-          title: "Idées Repas",
+          title: MyStrings.constants.repasTitle,
           drawerIcon: ({ focused, size }) => (
             <FontAwesome5
               name="pizza-slice"
@@ -68,10 +69,10 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Trucs Utiles"
+        name={MyStrings.constants.miscellaneousTitle}
         component={MiscellaneousScreen}
         options={{
-          title: "Trucs Utiles",
+          title: MyStrings.constants.miscellaneousTitle,
           drawerIcon: ({ focused, size }) => (
             <FontAwesome5
               name="suitcase"
@@ -82,10 +83,10 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Préférences"
+        name={MyStrings.constants.preferencesTitle}
         component={PreferencesScreen}
         options={{
-          title: "Préférences",
+          title: MyStrings.constants.preferencesTitle,
           drawerIcon: ({ focused, size }) => (
             <FontAwesome5
               name="tools"

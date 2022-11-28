@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import TagInput from "react-native-tags-input";
 import Colors from "../../constants/Colors";
 import { MyStyles } from "../../constants/MyStyles";
+import MyStrings from "../../constants/text/MyStrings";
 import storageHelper from "../../storage/AsyncStorageHelper";
 import { Holidays, Player } from "../../types/Types";
 import CustomDatePicker from "../CustomDatePicker";
@@ -132,25 +133,33 @@ export default class HolidaysForm extends React.Component<Props> {
           style={[this.styles.borderRadius]}
         >
           <Text style={[MyStyles.styles().formTitle]}>
-            Détails des vacances
+            {MyStrings.constants.detailsVacancesLabel}
           </Text>
-          <Text style={MyStyles.styles().text}>Lieu</Text>
+          <Text style={MyStyles.styles().text}>
+            {MyStrings.constants.lieuLabel}
+          </Text>
           <TextInput
             onChangeText={(text) => this.setLocation(text)}
             style={[MyStyles.styles().inputStyle]}
             value={this.state.location}
           />
-          <Text style={[this.styles.textPadding10]}>Date de début</Text>
+          <Text style={[this.styles.textPadding10]}>
+            {MyStrings.constants.dateDebutLabel}
+          </Text>
           <CustomDatePicker
             initialDate={this.state.selectedDateStart}
             onChange={(date: Date) => this.setSelectedDateStart(date)}
           />
-          <Text style={[this.styles.textPadding20]}>Date de fin</Text>
+          <Text style={[this.styles.textPadding20]}>
+            {MyStrings.constants.dateFinLabel}
+          </Text>
           <CustomDatePicker
             initialDate={this.state.selectedDateEnd}
             onChange={(date: Date) => this.setSelectedDateEnd(date)}
           />
-          <Text style={[this.styles.textPadding10]}>Participants</Text>
+          <Text style={[this.styles.textPadding10]}>
+            {MyStrings.constants.participantsLabel}
+          </Text>
           <View>
             <TagInput
               updateState={this.updateTagState}
@@ -191,9 +200,11 @@ export default class HolidaysForm extends React.Component<Props> {
             />
           </View>
           <ButtonBar
-            cancelLabel={"Annuler"}
+            cancelLabel={MyStrings.constants.cancel}
             saveLabel={
-              this.props.holidays === undefined ? "Ajouter" : "Modfier"
+              this.props.holidays === undefined
+                ? MyStrings.constants.add
+                : MyStrings.constants.update
             }
             onSave={() => this.saveHolidays()}
             onCancel={() => this.props.onCancel()}
