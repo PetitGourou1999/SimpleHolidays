@@ -27,7 +27,7 @@ export default class SpendingsCard extends React.Component<Props> {
             {MyStrings.constants.montantLabel + " : "}
           </Text>
           <Text style={[MyStyles.styles().cardText, this.styles.amountStyle]}>
-            {this.props.spending.amount + " €"}
+            {Number(this.props.spending.amount).toFixed(2) + " €"}
           </Text>
         </View>
         <View style={MyStyles.styles().itemRow}>

@@ -75,7 +75,9 @@ export default class TotalSpendingsCard extends React.Component<Props> {
             { color: Colors[MyStyles.selectedTheme].darkBlue },
           ]}
         >
-          {MyStrings.constants.totalLabel + theTotals.total.toString() + " €"}
+          {MyStrings.constants.totalLabel +
+            Number(theTotals.total).toFixed(2).toString() +
+            " €"}
         </Card.Title>
         <Card.Divider color={Colors[MyStyles.selectedTheme].darkBlue} />
         {theTotals.totalsForPlayers.map((item, index) => {
@@ -90,7 +92,7 @@ export default class TotalSpendingsCard extends React.Component<Props> {
                   MyStyles.styles().pseudoStyle,
                 ]}
               >
-                {item.total + " €"}
+                {Number(item.total).toFixed(2) + " €"}
               </Text>
             </View>
           );
